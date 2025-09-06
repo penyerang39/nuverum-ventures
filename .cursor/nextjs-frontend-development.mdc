@@ -1,0 +1,85 @@
+---
+alwaysApply: true
+---
+
+## Framework & Dependencies:
+1. This app uses Next.js 15.5.0 **with the app router** and **turbopack**. Always use the optimal Next.js solution for any implementation (i.e. Next.js specific next/font/google global font imports)
+2. This app uses React 19.1.0/React DOM 19.1.0
+3. This app uses Tailwind v4 and Tailwind templates, which may be adjusted **if requested** to fit the existing design system
+4. This app is hosted on Vercel
+5. Use TypeScript by default for all new components and pages
+
+## General Rules:
+1. You will only make the changes explicitly requested by the user. If you notice any suboptimal elements that don't follow the rules, you will first **mention it** to the user in the summary, and then if the user explicitly mentions to change it, you will change those elements
+2. Always prioritize performance, accessibility, and user experience in implementations
+3. Follow the principle of least privilege - only add dependencies and complexity when necessary
+4. Write self-documenting code with clear, descriptive variable and function names
+
+## Component Architecture:
+1. Create reusable components in `/components` directory with proper TypeScript interfaces
+2. Use composition over inheritance - prefer composable components over large monolithic ones
+3. Implement proper prop validation with TypeScript interfaces
+4. Follow the single responsibility principle - each component should have one clear purpose
+5. Use React.memo() for expensive components that don't need frequent re-renders
+6. Implement proper error boundaries for component isolation
+
+## State Management:
+1. Use React's built-in state management (useState, useReducer) for component-level state
+2. Lift state up only when necessary - keep state as local as possible
+3. Use Context API sparingly and only for truly global state
+4. Implement proper loading and error states for all async operations
+
+## CSS & Styling:
+1. When writing text, you will NEVER set custom sizes **unless explicitly requested to**. You will follow global scaling rules set in globals.css
+2. If a certain custom text component (or any component like a button is being reused), it must be defined globally in globals.css or in `/components` as a .tsx file
+3. When creating pages, ensure they follow consistent padding and margin styling. The gaps between children will be consistent, and global page padding must be universal across all pages
+4. The color system defined in globals.css must be followed. If it's incomplete, it must be added following **user requests**
+5. Backgrounds must follow the background color or the alternate theme color where either a second theme is toggleable or is part of the default styling of a certain part of a page
+6. Use CSS custom properties (variables) for consistent theming
+7. Avoid inline styles unless absolutely necessary - prefer Tailwind classes or CSS modules
+8. Implement dark mode support using CSS custom properties and Tailwind's dark mode utilities
+
+## Responsive Design:
+1. You will create scaling elements mobile-first, prioritizing first and foremost optimizing scaling for mobile, and only then adding **Tailwind className breakpoints** to guarantee optimal scaling
+2. You will ONLY use inline scaling elements where **ABSOLUTELY NECESSARY** and you must justify each usage
+3. You will not add excessive scaling systems or container divs which may inadvertently cut off parts of the content
+4. If the user's request is minimal - implement minimal changes. If the user's request is large in scope, use a todo list and complete each part of the user's request thoroughly
+5. Test responsive behavior at common breakpoints (mobile: 375px, tablet: 768px, desktop: 1024px+)
+6. Ensure touch targets are at least 44px for mobile accessibility
+
+## Performance Optimization:
+1. Implement proper image optimization using Next.js Image component
+2. Use dynamic imports for code splitting when appropriate
+3. Implement proper caching strategies with Next.js built-in caching
+4. Minimize bundle size by avoiding unnecessary dependencies, if dependencies are very large (over 500kb), propose calling them through a server side api instead where possible.
+5. Use Suspense boundaries for async components
+6. Implement proper preloading for critical resources
+
+## Data Fetching & API:
+1. Use Next.js App Router data fetching patterns (fetch with caching)
+2. Implement proper error handling for all API calls
+3. Use TypeScript interfaces for all API responses
+4. Implement proper loading states and optimistic updates where appropriate
+5. Cache API responses appropriately using Next.js built-in caching
+
+## Security:
+1. Sanitize all user inputs
+2. Use environment variables for sensitive configuration
+3. Implement proper CORS policies
+4. Use HTTPS everywhere and secure headers
+5. Validate and sanitize any user-generated content
+
+## Code Quality:
+1. Follow consistent naming conventions (camelCase for variables, PascalCase for components)
+2. Implement proper error logging and monitoring **when requested**
+3. Document complex logic with clear comments
+
+## File Organization:
+1. Follow Next.js App Router file structure conventions
+2. Group related files together (components, hooks, utilities)
+3. Use index files for clean imports
+4. Separate concerns: UI components, business logic, data fetching
+5. Keep file sizes reasonable (under 300 lines when possible)
+
+## Version Control:
+1. Don't make commits, don't run development servers, don't merge, don't touch git.

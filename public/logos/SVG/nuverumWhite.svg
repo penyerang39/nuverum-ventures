@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .16em;
+      }
+
+      .cls-2 {
+        letter-spacing: .18em;
+      }
+
+      .cls-3 {
+        fill: #fff;
+        font-family: FONTSPRINGDEMO-AllRoundGothicLigRegular, 'FONTSPRING DEMO - All Round Gothic Lig';
+        font-size: 48px;
+      }
+
+      .cls-4 {
+        letter-spacing: .18em;
+      }
+    </style>
+  </defs>
+  <text/>
+  <text class="cls-3" transform="translate(-1.51 89.47)"><tspan class="cls-2" x="0" y="0">nu</tspan><tspan class="cls-1" x="73.54" y="0">v</tspan><tspan class="cls-4" x="108.24" y="0">erum</tspan></text>
+</svg>
