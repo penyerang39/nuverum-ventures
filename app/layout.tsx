@@ -151,7 +151,6 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" />
         
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -167,13 +166,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
       </head>
-      <body className={`${roboto.variable} antialiased`}>
+      <body className={`${roboto.variable} antialiased bg-background text-foreground`}>
         <Navbar />
-        <main>{children}</main>
-        <footer className="section" style={{borderTop:"1px solid var(--border)"}}>
-          <div className="container" style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:16}}>
-            <p className="text-muted" style={{margin:0}}>© {new Date().getFullYear()} Nuverum Ventures</p>
-            <div style={{display:"flex",gap:12}}>
+        <main className="bg-background">{children}</main>
+        <footer className="section border-t border-border">
+          <div className="container flex justify-between items-center gap-4">
+            <p className="text-muted m-0">© {new Date().getFullYear()} Nuverum Ventures</p>
+            <div className="flex gap-3">
               <a className="btn-ghost btn" href="#contact">Contact</a>
             </div>
           </div>
