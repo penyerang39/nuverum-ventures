@@ -42,11 +42,11 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      className={`site-header fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+      className={`site-header fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-transform duration-300 w-11/12 max-w-4xl ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 container"
+      <div className="w-full px-2 sm:px-6 lg:px-8 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-lg"
             >
         <div className="relative flex h-24 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -58,41 +58,42 @@ export default function Navbar() {
               <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
             </DisclosureButton>
           </div>
-          <div className="flex items-center justify-center">
-            <div className="flex items-center px-5 max-sm:justify-end">
-              <Image
-                src="/logos/SVG/nuverumBlack.svg"
-                alt="Nuverum Logo"
-                width={220}
-                height={80}
-
-              />
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex items-center space-x-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current 
-                        ? 'bg-surface text-foreground' 
-                        : 'text-foreground hover:bg-surface hover:text-accent-strong',
-                      'rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
+          
+          {/* Logo on the left */}
+          <div className="flex items-center">
+            <Image
+              src="/logos/SVG/nuverumBlack.svg"
+              alt="Nuverum Logo"
+              width={220}
+              height={80}
+            />
+          </div>
+          
+          {/* Navigation links on the right */}
+          <div className="hidden sm:block">
+            <div className="flex items-center space-x-4">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  aria-current={item.current ? 'page' : undefined}
+                  className={classNames(
+                    item.current 
+                      ? 'bg-surface text-foreground' 
+                      : 'text-foreground hover:bg-surface hover:text-accent-strong',
+                    'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                  )}
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
       <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pt-2 pb-3">
+        <div className="space-y-1 p-2">
           {navigation.map((item) => (
             <DisclosureButton
               key={item.name}
