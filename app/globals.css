@@ -50,10 +50,10 @@ main {
 
 /* Typography */
 .heading-xl {
-  font-size: clamp(2rem, 4vw + 1rem, 3rem);
+  font-size: clamp(2rem, 4vw, 5rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  font-weight: 600;
+  font-weight: 300;
 }
 
 .heading-lg {

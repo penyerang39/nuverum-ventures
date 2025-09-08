@@ -17,35 +17,32 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
-        <div className="hero-inner container">
-          <h1 id="hero-heading" className="heading-xl mb-4">
+        <div className="hero-inner container items-top justify-start">
+          <h1 id="hero-heading" className="font-light heading-xl mb-10">
             Bridging vision with opportunity.
           </h1>
-          <form className="container flex gap-3 justify-center max-w-[520px]" action="#contact" aria-label="Contact form">
+          <form className="container flex gap-3 justify-center" action="#contact" aria-label="Contact form">
             <label htmlFor="email" className="visually-hidden">Email</label>
-            <input className="input flex-1" id="email" type="email" placeholder="Enter your email" required aria-required="true" />
-            <button className="btn" type="submit">Contact</button>
+            <input className="input flex w-[30ch]" id="email" type="email" placeholder="Enter your email" required aria-required="true" />
+            <button className="bg-transparent" type="submit">Contact</button>
           </form>
         </div>
       </section>
 
       {/* Mission */}
       <section id="approach" className="section bg-background" aria-labelledby="mission-eyebrow">
-        <div className="container grid gap-7 grid-cols-1 items-start">
-          <div>
+        <div className="container grid gap-7 grid-cols-1 items-start lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-white/20">
+          <div className="lg:pr-8">
             <p id="mission-eyebrow" className="eyebrow mb-3">Our Mission</p>
             <h2 className="heading-lg m-0">Bridging vision to capital with selectivity and discretion</h2>
           </div>
-          <div className="grid gap-4">
+          <div className="grid gap-4 lg:pl-8">
             <p className="text-muted">
               The landscape of venture is changing. How opportunities are found and connected must evolve too.
             </p>
             <p className="text-muted">
               Startups and investors move faster than ever. To keep pace, Nuverum Ventures puts curated introductions ahead of noise and builds bridges that bring founders and investors closer to the connections that truly matter.
             </p>
-            <a className="btn btn-ghost self-start" href="#about">
-              Learn more about our mission
-            </a>
           </div>
         </div>
       </section>
@@ -59,8 +56,8 @@ export default function Home() {
             <div className="card">
               <div className="card-icon" aria-hidden>
                 <span className="text-[22px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
-  </svg>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                    </svg>
               </span>
               </div>
               <div className="card-title">Investor Introduction</div>
