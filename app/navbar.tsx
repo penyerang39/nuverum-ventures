@@ -1,6 +1,6 @@
 'use client'
 
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
+import { Disclosure, DisclosureButton, DisclosurePanel, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon, ArrowUpRightIcon, } from '@heroicons/react/24/outline'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
@@ -105,37 +105,46 @@ export default function Navbar() {
               </div>
             </div>
 
-            <DisclosurePanel className="sm:hidden bg-transparent border border-white border-t-0 rounded-b-2xl">
-              <div className="space-y-1 p-0">
-                {navigation.map((item) => (
-                  <DisclosureButton
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current 
-                        ? 'bg-surface text-white' 
-                        : 'text-white hover:bg-surface hover:text-accent-strong',
-                      'block rounded-md pl-7 pr-4 py-2 text-base font-medium transition-colors sm:hidden',
-                    )}
+            <Transition
+              enter="transition-transform transition-opacity duration-300 ease-out"
+              enterFrom="-translate-y-2 opacity-0"
+              enterTo="translate-y-0 opacity-100"
+              leave="transition-transform transition-opacity duration-200 ease-in"
+              leaveFrom="translate-y-0 opacity-100"
+              leaveTo="-translate-y-2 opacity-0"
+            >
+              <DisclosurePanel className="sm:hidden bg-transparent backdrop-blur-sm border border-white border-t-0 rounded-b-2xl origin-top">
+                <div className="space-y-1 p-0">
+                  {navigation.map((item) => (
+                    <DisclosureButton
+                      key={item.name}
+                      as="a"
+                      href={item.href}
+                      aria-current={item.current ? 'page' : undefined}
+                      className={classNames(
+                        item.current 
+                          ? 'bg-surface text-white' 
+                          : 'text-white hover:bg-surface hover:text-accent-strong',
+                        'block rounded-md pl-7 pr-4 py-2 text-base font-medium transition-colors sm:hidden',
+                      )}
+                    >
+                      {item.name}
+                    </DisclosureButton>
+                  ))}
+                  {/* Contact Us button for mobile */}
+                  <button
+                    onClick={() => {
+                      const contactSection = document.querySelector('#contact');
+                      contactSection?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="block w-full text-nowrap text-left pl-7 py-3 text-base font-medium transition-all duration-200 bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden"
                   >
-                    {item.name}
-                  </DisclosureButton>
-                ))}
-                {/* Contact Us button for mobile */}
-                <button
-                  onClick={() => {
-                    const contactSection = document.querySelector('#contact');
-                    contactSection?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="block w-full text-nowrap text-left pl-7 py-3 text-base font-medium transition-all duration-200 bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden"
-                >
-                  Contact Us
-                  <ArrowUpRightIcon className='inline px-2 h-[2ch]'/>
-                </button>
-              </div>
-            </DisclosurePanel>
+                    Contact Us
+                    <ArrowUpRightIcon className='inline px-2 h-[2ch]'/>
+                  </button>
+                </div>
+              </DisclosurePanel>
+            </Transition>
           </div>
       )}
     </Disclosure>

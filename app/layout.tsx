@@ -170,7 +170,7 @@ export default function RootLayout({
         <Navbar />
         <main className="bg-background">{children}</main>
         <footer className="section border-t border-white">
-          <div className="container flex justify-start items-top gap-flex-1">
+          <div className="container flex flex-col md:flex-row justify-start items-start gap-4 md:gap-[30px]">
             <p className="text-muted text-italic">Legal Disclaimer: We are not a licensed broker, dealer, or financial intermediary. Our role is limited to providing introductory and strategic consulting services. We do not execute, facilitate, or guarantee any transactions. All decisions and actions taken based on our services are at your sole discretion and risk.</p>
             <p className="text-muted text-nowrap">© {new Date().getFullYear()} Nuverum Ventures</p>
           </div>

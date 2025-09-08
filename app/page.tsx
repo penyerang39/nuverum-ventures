@@ -21,10 +21,24 @@ export default function Home() {
           <h1 id="hero-heading" className="font-light heading-xl mb-10">
             Bridging vision with opportunity.
           </h1>
-          <form className="container flex gap-3 justify-center" action="#contact" aria-label="Contact form">
+          <form className="container flex gap-0 justify-center items-center" action="#contact" aria-label="Contact form">
             <label htmlFor="email" className="visually-hidden">Email</label>
-            <input className="input flex w-[30ch]" id="email" type="email" placeholder="Enter your email" required aria-required="true" />
-            <button className="bg-transparent" type="submit">Contact</button>
+            <div className="inline-flex items-stretch h-10 rounded-0 overflow-hidden align-middle">
+              <input
+                className="input w-[30ch] bg-transparent h-full py-0 rounded-none border-0 focus:outline-none leading-none"
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                required
+                aria-required="true"
+              />
+              <button
+                className="bg-white text-black h-full px-3 rounded-none flex items-center leading-none"
+                type="submit"
+              >
+                Contact
+              </button>
+            </div>
           </form>
         </div>
       </section>
