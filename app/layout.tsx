@@ -172,9 +172,6 @@ export default function RootLayout({
         <footer className="section border-t border-border">
           <div className="container flex justify-between items-center gap-4">
             <p className="text-muted m-0">© {new Date().getFullYear()} Nuverum Ventures</p>
-            <div className="flex gap-3">
-              <a className="btn-ghost btn" href="#contact">Contact</a>
-            </div>
           </div>
         </footer>
       </body>

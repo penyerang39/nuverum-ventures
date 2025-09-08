@@ -1,4 +1,5 @@
 // import Image from "next/image";
+import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   return (
@@ -71,7 +72,7 @@ export default function Home() {
             {/* Card 2 */}
             <div className="card">
               <div className="card-icon" aria-hidden>
-                <span className="text-[22px]">🔍</span>
+                <MagnifyingGlassIcon className="size-6" aria-hidden />
               </div>
               <div className="card-title">Pitch Material Evaluation</div>
               <p className="card-body">
@@ -82,7 +83,7 @@ export default function Home() {
             {/* Card 3 */}
             <div className="card">
               <div className="card-icon" aria-hidden>
-                <span className="text-[22px]">🧭</span>
+                <BriefcaseIcon className="size-6" aria-hidden />
               </div>
               <div className="card-title">Venture Capital Consultation</div>
               <p className="card-body">

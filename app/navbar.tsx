@@ -42,15 +42,15 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-transform duration-300 w-11/12 max-w-4xl ${
+      className={`group fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-transform duration-300 w-11/12 max-w-4xl ${
         isVisible ? 'translate-y-2' : '-translate-y-100'
       }`}
     >
-      <div className="w-full px-4 bg-surface/90 backdrop-blur-sm border border-white rounded-2xl relative"
+      <div className="w-full px-4 bg-surface/90 backdrop-blur-sm border border-white rounded-2xl group-data-open:rounded-b-none group-data-open:border-b-0 sm:rounded-2xl sm:group-data-open:rounded-b-2xl relative"
             >
-        <div className="relative flex h-24 items-center justify-between">
+        <div className="relative flex h-15 items-center justify-between">
           {/* Logo on the left */}
-          <div className="flex items-center h-24">
+          <div className="flex items-center h-15">
             <Image
               src="/logos/SVG/nuverumBlack.svg"
               alt="Nuverum Logo"
@@ -63,7 +63,7 @@ export default function Navbar() {
           
           {/* Navigation links on the right */}
           <div className="hidden sm:block">
-            <div className="flex items-center h-24">
+            <div className="flex items-center h-15">
               {navigation.map((item) => (
                 <a
                   key={item.name}
@@ -85,17 +85,17 @@ export default function Navbar() {
                   const contactSection = document.querySelector('#contact');
                   contactSection?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="bg-white text-nowrap text-accent-foreground hover:bg-accent/90 border border-white hover:border-white rounded-r-2xl px-6 text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md h-full flex items-center -mr-4 -mt-2 -mb-2"
+                className="bg-white whitespace-nowrap text-accent-foreground hover:bg-accent/90 border border-white hover:border-white rounded-r-2xl px-6 text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md h-full flex items-center gap-2 -mr-4 -mt-2 -mb-2"
               >
                 Contact Us
-              <ArrowUpRightIcon/>
+              <ArrowUpRightIcon className="size-4 shrink-0"/>
               </button>
             </div>
           </div>
 
           {/* Mobile menu button on the right */}
           <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
-            <DisclosureButton className="group relative inline-flex items-end justify-end rounded-md p-2 text-white hover:bg-surface hover:text-accent-strong focus:outline-2 focus:-outline-offset-1 focus:outline-ring">
+            <DisclosureButton className="group relative inline-flex items-end justify-end rounded-md p-2 text-white hover:bg-surface hover:text-accent-strong">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
@@ -105,8 +105,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      <DisclosurePanel className="sm:hidden bg-white/20">
-        <div className="space-y-1 p-2">
+      <DisclosurePanel className="sm:hidden bg-transparent border border-white border-t-0 rounded-b-2xl">
+        <div className="space-y-1 px-4">
           {navigation.map((item) => (
             <DisclosureButton
               key={item.name}
@@ -129,7 +129,7 @@ export default function Navbar() {
               const contactSection = document.querySelector('#contact');
               contactSection?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="block bg-white w-full text-nowrap text-left rounded-b-2xl px-3 py-2 text-base font-medium transition-all duration-200 bg-background text-black hover:bg-accent/90 border border-white hover:border-white shadow-sm hover:shadow-md sm:hidden -mx-2 -mb-2 -mt-1"
+            className="block bg-white w-full text-nowrap text-left px-3 py-2 text-base font-medium transition-all duration-200 bg-background text-black shadow-sm hover:shadow-md sm:hidden"
           >
             Contact Us
             <ArrowUpRightIcon className='inline h-[2ch]'/>
