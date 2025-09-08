@@ -4,6 +4,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Transition } from '@head
 import { Bars3Icon, XMarkIcon, ArrowUpRightIcon, } from '@heroicons/react/24/outline'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import AnimatedArrowIcon from './components/AnimatedArrowIcon'
 
 
 const navigation = [
@@ -42,7 +43,6 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      className="group"
     >
       {({ open }) => (
         <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-4xl transition-transform duration-300 ${open || isVisible ? 'translate-y-2' : '-translate-y-100'}`}>
@@ -73,7 +73,7 @@ export default function Navbar() {
                           item.current 
                             ? 'bg-surface text-white' 
                             : 'text-white hover:bg-surface hover:text-accent-strong',
-                          'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                          'rounded-md px-3 py-2 text-md font-medium transition-colors',
                         )}
                       >
                         {item.name}
@@ -85,10 +85,10 @@ export default function Navbar() {
                         const contactSection = document.querySelector('#contact');
                         contactSection?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="bg-white whitespace-nowrap text-accent-foreground border border-white px-6 text-sm font-medium transition-all duration-200 h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2"
+                      className="bg-white group whitespace-nowrap text-black px-6 text-md font-medium transition-all duration-300 ease-out h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2"
                     >
                       Contact Us
-                    <ArrowUpRightIcon className="size-4 shrink-0"/>
+                      <AnimatedArrowIcon />
                     </button>
                   </div>
                 </div>
@@ -106,12 +106,12 @@ export default function Navbar() {
             </div>
 
             <Transition
-              enter="transition-transform transition-opacity duration-300 ease-out"
-              enterFrom="-translate-y-2 opacity-0"
-              enterTo="translate-y-0 opacity-100"
-              leave="transition-transform transition-opacity duration-200 ease-in"
-              leaveFrom="translate-y-0 opacity-100"
-              leaveTo="-translate-y-2 opacity-0"
+              enter="transition-all duration-300 ease-out"
+              enterFrom="-translate-y-4 opacity-0 scale-95"
+              enterTo="translate-y-0 opacity-100 scale-100"
+              leave="transition-all duration-250 ease-in"
+              leaveFrom="translate-y-0 opacity-100 scale-100"
+              leaveTo="-translate-y-4 opacity-0 scale-95"
             >
               <DisclosurePanel className="sm:hidden bg-transparent backdrop-blur-sm border border-white border-t-0 rounded-b-2xl origin-top">
                 <div className="space-y-1 p-0">
@@ -137,10 +137,10 @@ export default function Navbar() {
                       const contactSection = document.querySelector('#contact');
                       contactSection?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="block w-full text-nowrap text-left pl-7 py-3 text-base font-medium transition-all duration-200 bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden"
+                    className="group block w-full text-nowrap text-left pl-7 py-3 text-base font-medium transition-all duration-300 ease-out bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden flex items-center gap-2"
                   >
                     Contact Us
-                    <ArrowUpRightIcon className='inline px-2 h-[2ch]'/>
+                    <AnimatedArrowIcon size="sm" />
                   </button>
                 </div>
               </DisclosurePanel>

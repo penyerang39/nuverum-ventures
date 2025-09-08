@@ -1,5 +1,6 @@
 // import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
+import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 
 export default function Home() {
   return (
@@ -23,21 +24,22 @@ export default function Home() {
           </h1>
           <form className="container flex gap-0 justify-center items-center" action="#contact" aria-label="Contact form">
             <label htmlFor="email" className="visually-hidden">Email</label>
-            <div className="inline-flex items-stretch h-10 rounded-0 overflow-hidden align-middle">
+            <div className="inline-flex border border-white bg-transparent items-stretch h-10 rounded-xl overflow-hidden align-middle">
               <input
-                className="input w-[30ch] bg-transparent h-full py-0 rounded-none border-0 focus:outline-none leading-none"
+                className="w-[30ch] bg-white/20 pl-4 backdrop-blur-sm text-white h-full py-0 rounded-none border-0 focus:outline-none leading-none"
                 id="email"
                 type="email"
                 placeholder="Enter your email"
                 required
                 aria-required="true"
               />
-              <button
-                className="bg-white text-black h-full px-3 rounded-none flex items-center leading-none"
-                type="submit"
-              >
-                Contact
-              </button>
+               <button
+                 className="bg-white group text-black h-full px-3 rounded-none flex items-center leading-none gap-2 transition-all duration-300 ease-out"
+                 type="submit"
+               >
+                 Contact Us
+                 <AnimatedArrowIcon size="sm" />
+               </button>
             </div>
           </form>
         </div>
