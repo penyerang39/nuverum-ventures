@@ -1,19 +1,20 @@
 ---
 alwaysApply: true
 ---
-
 ## Framework & Dependencies:
 1. This app uses Next.js 15.5.0 **with the app router** and **turbopack**. Always use the optimal Next.js solution for any implementation (i.e. Next.js specific next/font/google global font imports)
 2. This app uses React 19.1.0/React DOM 19.1.0
 3. This app uses Tailwind v4 and Tailwind templates, which may be adjusted **if requested** to fit the existing design system
 4. This app is hosted on Vercel
 5. Use TypeScript by default for all new components and pages
+6. Package manager is pnpm, always use pnpm when installing something.
 
 ## General Rules:
 1. You will only make the changes explicitly requested by the user. If you notice any suboptimal elements that don't follow the rules, you will first **mention it** to the user in the summary, and then if the user explicitly mentions to change it, you will change those elements
 2. Always prioritize performance, accessibility, and user experience in implementations
 3. Follow the principle of least privilege - only add dependencies and complexity when necessary
 4. Write self-documenting code with clear, descriptive variable and function names
+5. Use consistent styling, ' over " unless necessary, camelCase for components, kebab-case for images, etc. 
 
 ## Component Architecture:
 1. Create reusable components in `/components` directory with proper TypeScript interfaces
@@ -38,6 +39,7 @@ alwaysApply: true
 6. Use CSS custom properties (variables) for consistent theming
 7. Avoid inline styles unless absolutely necessary - prefer Tailwind classes or CSS modules
 8. Implement dark mode support using CSS custom properties and Tailwind's dark mode utilities
+9. NEVER create overly convoluted tailwind or inline values where a simple p- tailwind value can suffice. NEVER do redundant things like pt-3 pb-3 when you can use py-3, NEVER use inline classes when tailwind works.
 
 ## Responsive Design:
 1. You will create scaling elements mobile-first, prioritizing first and foremost optimizing scaling for mobile, and only then adding **Tailwind className breakpoints** to guarantee optimal scaling
@@ -82,4 +84,4 @@ alwaysApply: true
 5. Keep file sizes reasonable (under 300 lines when possible)
 
 ## Version Control:
-1. Don't make commits, don't run development servers, don't merge, don't touch git.
+1. Don't make commits, don't run development servers, don't merge, don't touch git.  DO NOT RUN BUILD, DO NOT RUN DEV
