@@ -1,8 +1,14 @@
+'use client'
+
 // import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
+import ContactModal from "./components/ContactModal";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [prefilledEmail, setPrefilledEmail] = useState('');
   return (
     <>
       {/* Hero */}
@@ -18,16 +24,27 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
-        <div className="hero-inner container items-top justify-start">
+        <div className="hero-inner container flex flex-col items-center justify-center text-center">
           <h1 id="hero-heading" className="font-light heading-xl mb-10">
             Bridging vision with opportunity.
           </h1>
-          <form className="container flex gap-0 justify-center items-center" action="#contact" aria-label="Contact form">
+          <form 
+            className="w-full flex justify-center items-center" 
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              const email = formData.get('email') as string;
+              setPrefilledEmail(email || '');
+              setIsModalOpen(true);
+            }}
+            aria-label="Contact form"
+          >
             <label htmlFor="email" className="visually-hidden">Email</label>
             <div className="inline-flex border border-white bg-transparent items-stretch h-10 rounded-xl overflow-hidden align-middle">
               <input
                 className="w-[30ch] bg-white/20 pl-4 backdrop-blur-sm text-white h-full py-0 rounded-none border-0 focus:outline-none leading-none"
                 id="email"
+                name="email"
                 type="email"
                 placeholder="Enter your email"
                 required
@@ -106,6 +123,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        prefilledEmail={prefilledEmail} // Email from hero form
+      />
     </>
   );
 }

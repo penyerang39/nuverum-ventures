@@ -1,11 +1,11 @@
 'use client'
 
 import { Disclosure, DisclosureButton, DisclosurePanel, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon, ArrowUpRightIcon, } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, } from '@heroicons/react/24/outline'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import ContactModal from './components/ContactModal'
-
+import AnimatedArrowIcon from './components/AnimatedArrowIcon'
 
 const navigation = [
   { name: 'Approach', href: '#approach', current: false },
@@ -84,7 +84,7 @@ export default function Navbar() {
                     {/* Contact Us button - full height in normal flow */}
                     <button
                       onClick={() => setIsContactModalOpen(true)}
-                      className="bg-white whitespace-nowrap text-accent-foreground border border-white px-6 text-sm font-medium transition-all duration-200 h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2"
+                      className="bg-white group whitespace-nowrap text-accent-foreground border border-white px-6 text-sm font-medium transition-all duration-200 h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2"
                     >
                       Contact Us
                       <AnimatedArrowIcon />

@@ -20,7 +20,7 @@ export default function AnimatedArrowIcon({
   return (
     <div className={`overflow-hidden transition-all duration-300 ease-out w-0 group-hover:w-auto ${className}`.trim()}>
       <ArrowUpRightIcon 
-        className={`shrink-0 transition-all duration-300 ease-out opacity-0 translate-x-1 -translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 ${sizeClasses[size]}`}
+        className={`shrink-0 transition-all duration-300 ease-out opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 ${sizeClasses[size]}`}
       />
     </div>
   )

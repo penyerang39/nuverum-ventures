@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon, PaperAirplaneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
 import { useForm } from 'react-hook-form'
@@ -18,9 +18,10 @@ type EmailFormData = z.infer<typeof emailSchema>
 interface ContactModalProps {
   isOpen: boolean
   onClose: () => void
+  prefilledEmail?: string // Optional prefilled email from hero form
 }
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, prefilledEmail = '' }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
@@ -29,9 +30,20 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<EmailFormData>({
     resolver: zodResolver(emailSchema),
+    defaultValues: {
+      from: prefilledEmail,
+    },
   })
+
+  // Update the email field when prefilledEmail changes
+  useEffect(() => {
+    if (prefilledEmail) {
+      setValue('from', prefilledEmail)
+    }
+  }, [prefilledEmail, setValue])
 
   const onSubmit = async (data: EmailFormData) => {
     setIsSubmitting(true)
@@ -75,7 +87,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
+          <div className="fixed inset-0 bg-white backdrop-blur-sm" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -209,13 +221,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                     {/* Mailto Link */}
                     <div className="pt-4 border-t border-border">
-                      <p className="text-sm text-muted mb-2">Prefer to use your own email client?</p>
                       <a
-                        href="mailto:thomas@nuverum.com?subject=Inquiry from website"
+                        href="mailto:thomas@nuverum.com?subject=Nuverum Ventures Inquiry"
                         className="inline-flex items-center gap-2 text-sm text-accent-strong hover:underline"
                       >
                         <EnvelopeIcon className="h-4 w-4" />
-                        thomas@nuverum.com
+                        Open in your email client
                       </a>
                     </div>
                   </div>
