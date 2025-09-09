@@ -140,6 +140,8 @@ main {
   height: 64px;
   display: grid;
   place-items: center;
+  aspect-ratio: 1/1;
+  padding: 20%;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.966), transparent);

@@ -1,11 +1,12 @@
 'use client'
 
 import Image from "next/image";
-import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, BriefcaseIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
+import ShinyText from "./components/ShinyText";
 import { usePerformanceTracking } from "./hooks/usePerformanceTracking";
 
 export default function Home() {
@@ -22,6 +23,14 @@ export default function Home() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailValue.trim() !== '' && emailRegex.test(emailValue));
   }, [emailValue]);
+
+  // Scroll to next section function
+  const scrollToNextSection = () => {
+    const nextSection = document.getElementById('approach');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // Track visibility of important sections
   useEffect(() => {
@@ -64,7 +73,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
-        <div className="hero-inner max-md:mb-[20vh] container flex flex-col items-center justify-center text-center">
+        <div className="hero-inner max-md:mb-[20vh] container flex flex-col items-center justify-center text-center relative">
           <h1 id="hero-heading" className="font-light heading-xl mb-10">
             Bridging vision with opportunity.
           </h1>
@@ -98,6 +107,16 @@ export default function Home() {
                  <AnimatedArrowIcon size="sm" isActive={isEmailValid} />
                </button>
             </div>
+          </div>
+          
+          {/* Scroll Call to Action */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group" onClick={scrollToNextSection}>
+            <ShinyText 
+              text="Discover More" 
+              speed={3}
+              className="text-sm font-medium text-white/80 group-hover:text-white transition-colors duration-300"
+            />
+            <ChevronDownIcon className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-y-1 transition-all duration-300" />
           </div>
         </div>
       </section>
@@ -184,7 +203,7 @@ export default function Home() {
               {/* Card 1 */}
             <div className="card">
               <div className="card-icon" aria-hidden>
-                <span className="text-[22px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <span className="text-[22px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-full">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
                     </svg>
               </span>
@@ -198,7 +217,7 @@ export default function Home() {
             {/* Card 2 */}
             <div className="card">
               <div className="card-icon" aria-hidden>
-                <MagnifyingGlassIcon className="size-6" aria-hidden />
+                <MagnifyingGlassIcon className="size-full" aria-hidden />
               </div>
               <div className="card-title">Pitch Material Evaluation</div>
               <p className="card-body">
@@ -209,7 +228,7 @@ export default function Home() {
             {/* Card 3 */}
             <div className="card">
               <div className="card-icon" aria-hidden>
-                <BriefcaseIcon className="size-6" aria-hidden />
+                <BriefcaseIcon className="size-full" aria-hidden />
               </div>
               <div className="card-title">Venture Capital Consultation</div>
               <p className="card-body">

@@ -48,7 +48,7 @@ export default function LoadingSplash() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
       <div className="animate-pulse">
         <Image
           src="/logos/SVG/nuverumBlack.svg"
