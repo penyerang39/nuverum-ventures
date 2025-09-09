@@ -2,12 +2,9 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 
-interface PerformanceMetrics {
-  name: string;
+interface LayoutShiftEntry extends PerformanceEntry {
   value: number;
-  delta: number;
-  id: string;
-  navigationType?: string;
+  hadRecentInput: boolean;
 }
 
 interface CustomMetric {
@@ -77,11 +74,6 @@ export const usePerformanceTracking = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Track Core Web Vitals
-    const handleWebVitals = (metric: PerformanceMetrics) => {
-      trackCustomMetric(metric.name, metric.value);
-    };
-
     // Set up Performance Observer for Web Vitals
     if ('PerformanceObserver' in window) {
       try {
@@ -93,7 +85,7 @@ export const usePerformanceTracking = () => {
               const firstInput = entry as PerformanceEventTiming;
               trackCustomMetric('FID', firstInput.processingStart - firstInput.startTime);
             } else if (entry.entryType === 'layout-shift') {
-              const layoutShift = entry as PerformanceEntry & { value: number };
+              const layoutShift = entry as LayoutShiftEntry;
               if (!layoutShift.hadRecentInput) {
                 trackCustomMetric('CLS', layoutShift.value);
               }

@@ -134,9 +134,9 @@ export default function Navbar() {
                   {/* Contact Us button for mobile */}
                   <button
                     onClick={() => setIsContactModalOpen(true)}
-                    className="block w-full text-nowrap text-left pl-7 py-3 text-base font-medium transition-all duration-200 bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden"
+                    className="flex w-full items-center justify-between text-left pl-7 pr-4 py-3 text-base font-medium transition-all duration-200 bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden"
                   >
-                    Contact Us
+                    <span>Contact Us</span>
                     <AnimatedArrowIcon size="sm" />
                   </button>
                 </div>

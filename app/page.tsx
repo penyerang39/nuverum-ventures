@@ -104,7 +104,7 @@ export default function Home() {
         <div className="container">
           <h2 id="services-heading" className="heading-lg mb-6">Services</h2>
           <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
-            <p className="text-muted lg:max-w-md lg:flex-shrink-0 mb-6 lg:mb-0">Nuverum Ventures is a finder firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.</p>
+            <p className="text-muted lg:max-w-[300px] lg:flex-shrink-0 mb-6 lg:mb-0">Nuverum Ventures is a finder firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.</p>
             <div className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
               {/* Card 1 */}
             <div className="card">
