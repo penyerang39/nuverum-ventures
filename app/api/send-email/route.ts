@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const emailSchema = z.object({
   from: z.string().email(),
   subject: z.string().min(1),
@@ -12,6 +10,19 @@ const emailSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if API key is available
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.error('RESEND_API_KEY is not configured')
+      return NextResponse.json(
+        { error: 'Email service is not configured' },
+        { status: 503 }
+      )
+    }
+
+    // Initialize Resend with API key
+    const resend = new Resend(apiKey)
+
     // Parse and validate the request body
     const body = await request.json()
     const { from, subject, message } = emailSchema.parse(body)
