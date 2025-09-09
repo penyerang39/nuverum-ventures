@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline"
 import { useState, useEffect } from "react";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
+import { usePerformanceTracking } from "./hooks/usePerformanceTracking";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,11 +13,21 @@ export default function Home() {
   const [emailValue, setEmailValue] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
 
+  // Performance tracking
+  const { trackElementVisibility, trackUserInteraction } = usePerformanceTracking();
+
   // Email validation effect
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailValue.trim() !== '' && emailRegex.test(emailValue));
   }, [emailValue]);
+
+  // Track visibility of important sections
+  useEffect(() => {
+    trackElementVisibility('hero-heading');
+    trackElementVisibility('mission-eyebrow');
+    trackElementVisibility('services-heading');
+  }, [trackElementVisibility]);
 
   return (
     <>
@@ -47,6 +58,7 @@ export default function Home() {
                 placeholder="Enter your email"
                 value={emailValue}
                 onChange={(e) => setEmailValue(e.target.value)}
+                onFocus={() => trackUserInteraction('email-input-focus', 'hero-email')}
                 required
                 aria-required="true"
               />
@@ -54,6 +66,7 @@ export default function Home() {
                  className="bg-white group text-black h-full px-3 rounded-none flex items-center leading-none gap-2 transition-all duration-300 ease-out"
                  type="button"
                  onClick={() => {
+                   trackUserInteraction('contact-button-click', 'hero-contact');
                    const emailInput = document.getElementById('email') as HTMLInputElement;
                    const email = emailInput?.value || '';
                    setPrefilledEmail(email);
@@ -90,8 +103,10 @@ export default function Home() {
       <section id="services" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="services-heading">
         <div className="container">
           <h2 id="services-heading" className="heading-lg mb-6">Services</h2>
-          <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {/* Card 1 */}
+          <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
+            <p className="text-muted lg:max-w-md lg:flex-shrink-0 mb-6 lg:mb-0">Nuverum Ventures is a finder firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.</p>
+            <div className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
+              {/* Card 1 */}
             <div className="card">
               <div className="card-icon" aria-hidden>
                 <span className="text-[22px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -125,6 +140,7 @@ export default function Home() {
               <p className="card-body">
                 Raising capital begins with strategy. We provide tailored reports and guidance on next steps if you are considering or growing venture capital, helping you navigate decisions with clarity and precision.
               </p>
+            </div>
             </div>
           </div>
         </div>

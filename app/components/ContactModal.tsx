@@ -1,11 +1,12 @@
 'use client'
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon, PaperAirplaneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { usePerformanceTracking } from '../hooks/usePerformanceTracking'
 
 const emailSchema = z.object({
   from: z.string().email('Please enter a valid email address'),
@@ -25,6 +26,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
+  // Performance tracking
+  const { trackUserInteraction, trackCustomMetric } = usePerformanceTracking()
+
   const {
     register,
     handleSubmit,
@@ -34,7 +38,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     resolver: zodResolver(emailSchema),
   })
 
+  // Track modal open/close performance
+  useEffect(() => {
+    if (isOpen) {
+      trackCustomMetric('modal-open', performance.now())
+    }
+  }, [isOpen, trackCustomMetric])
+
   const onSubmit = async (data: EmailFormData) => {
+    const submitStartTime = performance.now()
+    trackUserInteraction('form-submit-start', 'contact-modal')
+    
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
@@ -47,18 +61,24 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         body: JSON.stringify(data),
       })
 
+      const submitEndTime = performance.now()
+      trackCustomMetric('form-submit-duration', submitEndTime - submitStartTime)
+
       if (response.ok) {
         setSubmitStatus('success')
+        trackUserInteraction('form-submit-success', 'contact-modal')
         reset()
         setTimeout(() => {
           setSubmitStatus('idle')
         }, 3000)
       } else {
         setSubmitStatus('error')
+        trackUserInteraction('form-submit-error', 'contact-modal')
       }
     } catch (error) {
       console.error('Error sending email:', error)
       setSubmitStatus('error')
+      trackUserInteraction('form-submit-error', 'contact-modal')
     } finally {
       setIsSubmitting(false)
     }
@@ -98,7 +118,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <button
                     type="button"
                     className="rounded-md p-2 text-muted hover:text-foreground hover:bg-background transition-colors"
-                    onClick={onClose}
+                    onClick={() => {
+                      trackUserInteraction('modal-close', 'contact-modal')
+                      onClose()
+                    }}
                   >
                     <span className="sr-only">Close</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -117,6 +140,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         frameBorder="0"
                         title="Schedule a meeting"
                         className="min-h-[600px]"
+                        onLoad={() => trackUserInteraction('calendly-iframe-load', 'contact-modal')}
                       />
                     </div>
                   </div>
