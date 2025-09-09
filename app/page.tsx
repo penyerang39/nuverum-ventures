@@ -129,13 +129,14 @@ export default function Home() {
           </div>
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 lg:gap-12">
             {/* Daniel */}
-            <div className="card-no-padding text-start p-0 overflow-hidden">
-              <div className="relative w-full aspect-[4/3] rounded-t-2xl overflow-hidden">
+            <div className="card-no-padding text-start overflow-hidden">
+              <div className="relative w-full rounded-t-2xl overflow-hidden">
                 <Image
                   src="/Daniels.jpg"
                   alt="Daniel - Growth-focused entrepreneur"
-                  fill
-                  className="object-cover"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto object-cover"
                 />
               </div>
               <div className="p-6">
@@ -147,13 +148,14 @@ export default function Home() {
             </div>
 
             {/* Thomas */}
-            <div className="card-no-padding text-start p-0 overflow-hidden">
-              <div className="relative w-full aspect-[4/3] rounded-t-2xl overflow-hidden">
+            <div className="card-no-padding text-start overflow-hidden">
+              <div className="relative w-full rounded-t-2xl overflow-hidden">
                 <Image
                   src="/Thomas.jpg"
                   alt="Thomas - Finance-driven entrepreneur"
-                  fill
-                  className="object-cover"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto object-cover"
                 />
               </div>
               <div className="p-6">
