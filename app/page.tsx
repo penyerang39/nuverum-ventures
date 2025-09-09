@@ -2,13 +2,22 @@
 
 // import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState('');
+  const [emailValue, setEmailValue] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  // Email validation effect
+  useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsEmailValid(emailValue.trim() !== '' && emailRegex.test(emailValue));
+  }, [emailValue]);
+
   return (
     <>
       {/* Hero */}
@@ -28,17 +37,7 @@ export default function Home() {
           <h1 id="hero-heading" className="font-light heading-xl mb-10">
             Bridging vision with opportunity.
           </h1>
-          <form 
-            className="w-full flex justify-center items-center" 
-            onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const email = formData.get('email') as string;
-              setPrefilledEmail(email || '');
-              setIsModalOpen(true);
-            }}
-            aria-label="Contact form"
-          >
+          <div className="w-full flex justify-center items-center">
             <label htmlFor="email" className="visually-hidden">Email</label>
             <div className="inline-flex border border-white bg-transparent items-stretch h-10 rounded-xl overflow-hidden align-middle">
               <input
@@ -47,18 +46,26 @@ export default function Home() {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
+                value={emailValue}
+                onChange={(e) => setEmailValue(e.target.value)}
                 required
                 aria-required="true"
               />
                <button
                  className="bg-white group text-black h-full px-3 rounded-none flex items-center leading-none gap-2 transition-all duration-300 ease-out"
-                 type="submit"
+                 type="button"
+                 onClick={() => {
+                   const emailInput = document.getElementById('email') as HTMLInputElement;
+                   const email = emailInput?.value || '';
+                   setPrefilledEmail(email);
+                   setIsModalOpen(true);
+                 }}
                >
                  Contact Us
-                 <AnimatedArrowIcon size="sm" />
+                 <AnimatedArrowIcon size="sm" isActive={isEmailValid} />
                </button>
             </div>
-          </form>
+          </div>
         </div>
       </section>
 

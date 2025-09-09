@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon, PaperAirplaneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
 import { useForm } from 'react-hook-form'
@@ -18,10 +18,10 @@ type EmailFormData = z.infer<typeof emailSchema>
 interface ContactModalProps {
   isOpen: boolean
   onClose: () => void
-  prefilledEmail?: string // Optional prefilled email from hero form
+  prefilledEmail?: string
 }
 
-export default function ContactModal({ isOpen, onClose, prefilledEmail = '' }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
@@ -30,20 +30,9 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '' }: C
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
   } = useForm<EmailFormData>({
     resolver: zodResolver(emailSchema),
-    defaultValues: {
-      from: prefilledEmail,
-    },
   })
-
-  // Update the email field when prefilledEmail changes
-  useEffect(() => {
-    if (prefilledEmail) {
-      setValue('from', prefilledEmail)
-    }
-  }, [prefilledEmail, setValue])
 
   const onSubmit = async (data: EmailFormData) => {
     setIsSubmitting(true)
@@ -154,7 +143,7 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '' }: C
                       </div>
 
                       <div>
-                        <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="subject" className="block text-sm rounded-xl font-medium text-foreground mb-2">
                           Subject
                         </label>
                         <input
