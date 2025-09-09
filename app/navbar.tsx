@@ -44,11 +44,12 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
+      className="group"
     >
       {({ open }) => (
         <>
         <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-4xl transition-transform duration-300 ${open || isVisible ? 'translate-y-2' : '-translate-y-100'}`}>
-            <div className="w-full overflow-hidden px-4 bg-surface/90 backdrop-blur-sm border border-white rounded-2xl group-data-open:rounded-b-none sm:rounded-2xl sm:group-data-open:rounded-b-2xl relative"
+            <div className="w-full overflow-hidden px-4 bg-surface/90 backdrop-blur-sm border border-white rounded-2xl group-data-[open]:rounded-b-none sm:rounded-2xl sm:group-data-[open]:rounded-b-2xl relative"
                   >
               <div className="relative flex h-15 items-center justify-between">
                 {/* Logo on the left */}

@@ -166,7 +166,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                           {...register('message')}
                           id="message"
                           rows={6}
-                          className="input w-full resize-none"
+                          className="input w-full h-[5ch]"
                           placeholder="Tell us about your project or inquiry..."
                         />
                         {errors.message && (
@@ -197,7 +197,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                       {submitStatus === 'success' && (
                         <div className="p-3 bg-green-50 border border-green-200 rounded-md">
-                          <p className="text-sm text-green-800">Message sent successfully! We'll get back to you soon.</p>
+                          <p className="text-sm text-green-800">Message sent successfully! We&apos;ll get back to you soon.</p>
                         </div>
                       )}
 

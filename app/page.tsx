@@ -1,6 +1,6 @@
 'use client'
 
-// import Image from "next/image";
+import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
@@ -23,13 +23,12 @@ export default function Home() {
       {/* Hero */}
       <section className="hero" aria-labelledby="hero-heading">
         <div aria-hidden className="absolute min-h-[100vh] inset-0 -z-10">
-          <img 
+          <Image 
             src="/heroBackground.jpg"
             alt="Mountain background"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              objectFit: 'cover',
-            }}
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
@@ -113,7 +112,7 @@ export default function Home() {
               </div>
               <div className="card-title">Pitch Material Evaluation</div>
               <p className="card-body">
-                Every detail matters. We dissect your pitch materials with an investor's eye, identifying gaps and strengths, and outlining the changes needed to make your story investor-ready.
+                Every detail matters. We dissect your pitch materials with an investor&apos;s eye, identifying gaps and strengths, and outlining the changes needed to make your story investor-ready.
               </p>
             </div>
 
