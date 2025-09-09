@@ -143,7 +143,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       </div>
 
                       <div>
-                        <label htmlFor="subject" className="block text-sm rounded-xl font-medium text-foreground mb-2">
+                        <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                           Subject
                         </label>
                         <input

@@ -91,7 +91,7 @@ export default function Home() {
       <section id="services" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="services-heading">
         <div className="container">
           <h2 id="services-heading" className="heading-lg mb-6">Services</h2>
-          <div className="grid gap-5 grid-cols-1">
+          <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {/* Card 1 */}
             <div className="card">
               <div className="card-icon" aria-hidden>

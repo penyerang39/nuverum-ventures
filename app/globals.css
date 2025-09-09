@@ -104,7 +104,7 @@ main {
   color: var(--foreground);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 0;
+  border-radius: 12px;
 }
 
 .input::placeholder { color: var(--muted); }
