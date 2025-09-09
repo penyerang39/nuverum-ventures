@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 import { usePerformanceTracking } from "./hooks/usePerformanceTracking";
@@ -28,6 +29,26 @@ export default function Home() {
     trackElementVisibility('mission-eyebrow');
     trackElementVisibility('services-heading');
   }, [trackElementVisibility]);
+
+  // Preload Calendly resources
+  useEffect(() => {
+    // Preload the Calendly domain and resources
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = 'https://calendly.com';
+    document.head.appendChild(link);
+
+    // Preload DNS for Calendly
+    const dnsLink = document.createElement('link');
+    dnsLink.rel = 'dns-prefetch';
+    dnsLink.href = 'https://calendly.com';
+    document.head.appendChild(dnsLink);
+
+    return () => {
+      document.head.removeChild(link);
+      document.head.removeChild(dnsLink);
+    };
+  }, []);
 
   return (
     <>
@@ -99,10 +120,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Founders */}
+      <section id="founders" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="founders-heading">
+        <div className="container">
+          <div className="text-start mb-12">
+            <p id="founders-heading" className="eyebrow mb-3">Our Founders</p>
+            <h2 className="heading-lg">Meet the team behind Nuverum Ventures</h2>
+          </div>
+          <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 lg:gap-12">
+            {/* Daniel */}
+            <div className="card-no-padding text-start p-0 overflow-hidden">
+              <div className="relative w-full aspect-[4/3] rounded-t-2xl overflow-hidden">
+                <Image
+                  src="/Daniels.jpg"
+                  alt="Daniel - Growth-focused entrepreneur"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-3 text-center">Daniel</h3>
+                <p className="text-muted text-start leading-relaxed">
+                  Daniel is a growth-focused entrepreneur who launched his first business at age 14, building it into a sizeable venture within two years. Since then, he has founded and led agencies in online course and community building, email marketing, and AI automation. Today, he supports startups in securing funding and works with established companies to design sales processes and teams that deliver sustainable growth.
+                </p>
+              </div>
+            </div>
+
+            {/* Thomas */}
+            <div className="card-no-padding text-start p-0 overflow-hidden">
+              <div className="relative w-full aspect-[4/3] rounded-t-2xl overflow-hidden">
+                <Image
+                  src="/Thomas.jpg"
+                  alt="Thomas - Finance-driven entrepreneur"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-3 text-center">Thomas</h3>
+                <p className="text-muted text-start leading-relaxed">
+                  Thomas is a finance-driven entrepreneur with expertise in tax strategy, financial optimization, and fintech. He, together with Saul Rosenberg, founded Brightincorp, a firm specializing in U.S. business and bank account formation, and Christian Marcus, a full-service agency covering marketing and tax consultancy. Drawing on financial services sector experience and a strong U.S. network, Thomas now helps startups secure funding and develop scalable business solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services */}
       <section id="services" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="services-heading">
         <div className="container">
-          <h2 id="services-heading" className="heading-lg mb-6">Services</h2>
+        <p id="services-heading" className="eyebrow mb-3">Services</p>
+          <h2 id="services-heading" className="heading-lg mb-6">What We Offer</h2>
           <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
             <p className="text-muted lg:max-w-[300px] lg:flex-shrink-0 mb-6 lg:mb-0">Nuverum Ventures is a finder firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.
               <br />
@@ -149,6 +218,22 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Hidden Calendly Preloader */}
+      <div 
+        className="fixed -top-[9999px] left-0 w-1 h-1 opacity-0 pointer-events-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <iframe
+          src="https://calendly.com/thomas-nuverum/30min?embed_domain=localhost&embed_type=Inline"
+          width="100%"
+          height="600"
+          frameBorder="0"
+          title="Calendly preload"
+          className="min-h-[600px]"
+          loading="eager"
+        />
+      </div>
 
       {/* Contact Modal */}
       <ContactModal 

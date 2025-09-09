@@ -25,6 +25,7 @@ interface ContactModalProps {
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false)
 
   // Performance tracking
   const { trackUserInteraction, trackCustomMetric } = usePerformanceTracking()
@@ -44,6 +45,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       trackCustomMetric('modal-open', performance.now())
     }
   }, [isOpen, trackCustomMetric])
+
 
   const onSubmit = async (data: EmailFormData) => {
     const submitStartTime = performance.now()
@@ -132,7 +134,15 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   {/* Calendly Section */}
                   <div className="space-y-4">
                     <h4 className="text-lg font-medium text-foreground">Schedule a Meeting</h4>
-                    <div className="bg-background rounded-lg overflow-hidden border border-border">
+                    <div className="bg-background rounded-lg overflow-hidden">
+                      {!isCalendlyLoaded && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-background z-10">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-8 w-8 mx-auto mb-2"></div>
+                            <p className="text-sm text-muted">Loading meeting scheduler...</p>
+                          </div>
+                        </div>
+                      )}
                       <iframe
                         src="https://calendly.com/thomas-nuverum/30min?embed_domain=localhost&embed_type=Inline"
                         width="100%"
@@ -140,7 +150,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         frameBorder="0"
                         title="Schedule a meeting"
                         className="min-h-[600px]"
-                        onLoad={() => trackUserInteraction('calendly-iframe-load', 'contact-modal')}
+                        onLoad={() => {
+                          setIsCalendlyLoaded(true)
+                          trackUserInteraction('calendly-iframe-load', 'contact-modal')
+                        }}
                       />
                     </div>
                   </div>

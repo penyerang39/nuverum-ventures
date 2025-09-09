@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 export default function LoadingSplash() {
   const [isVisible, setIsVisible] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     // Hide splash screen when page is fully loaded
@@ -47,15 +48,16 @@ export default function LoadingSplash() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black">
+    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black">
       <div className="animate-pulse">
         <Image
           src="/logos/SVG/nuverumBlack.svg"
           alt="Nuverum Ventures"
           width={200}
-          height={120}
+          height={70}
           priority
-          className="w-auto h-auto filter invert"
+          onLoad={() => setImageLoaded(true)}
+          className={`transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         />
       </div>
     </div>
