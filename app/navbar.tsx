@@ -4,7 +4,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Transition } from '@head
 import { Bars3Icon, XMarkIcon, ArrowUpRightIcon, } from '@heroicons/react/24/outline'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import AnimatedArrowIcon from './components/AnimatedArrowIcon'
+import ContactModal from './components/ContactModal'
 
 
 const navigation = [
@@ -20,6 +20,7 @@ function classNames(...classes: (string | undefined | null | false)[]): string {
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -45,6 +46,7 @@ export default function Navbar() {
       as="nav"
     >
       {({ open }) => (
+        <>
         <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-4xl transition-transform duration-300 ${open || isVisible ? 'translate-y-2' : '-translate-y-100'}`}>
             <div className="w-full overflow-hidden px-4 bg-surface/90 backdrop-blur-sm border border-white rounded-2xl group-data-open:rounded-b-none sm:rounded-2xl sm:group-data-open:rounded-b-2xl relative"
                   >
@@ -81,11 +83,8 @@ export default function Navbar() {
                     ))}
                     {/* Contact Us button - full height in normal flow */}
                     <button
-                      onClick={() => {
-                        const contactSection = document.querySelector('#contact');
-                        contactSection?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="bg-white group whitespace-nowrap text-black px-6 text-md font-medium transition-all duration-300 ease-out h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2"
+                      onClick={() => setIsContactModalOpen(true)}
+                      className="bg-white whitespace-nowrap text-accent-foreground border border-white px-6 text-sm font-medium transition-all duration-200 h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2"
                     >
                       Contact Us
                       <AnimatedArrowIcon />
@@ -133,11 +132,8 @@ export default function Navbar() {
                   ))}
                   {/* Contact Us button for mobile */}
                   <button
-                    onClick={() => {
-                      const contactSection = document.querySelector('#contact');
-                      contactSection?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="group block w-full text-nowrap text-left pl-7 py-3 text-base font-medium transition-all duration-300 ease-out bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden flex items-center gap-2"
+                    onClick={() => setIsContactModalOpen(true)}
+                    className="block w-full text-nowrap text-left pl-7 py-3 text-base font-medium transition-all duration-200 bg-white text-black shadow-sm hover:shadow-md rounded-b-2xl sm:hidden"
                   >
                     Contact Us
                     <AnimatedArrowIcon size="sm" />
@@ -146,6 +142,13 @@ export default function Navbar() {
               </DisclosurePanel>
             </Transition>
           </div>
+          
+          {/* Contact Modal */}
+          <ContactModal 
+            isOpen={isContactModalOpen} 
+            onClose={() => setIsContactModalOpen(false)} 
+          />
+        </>
       )}
     </Disclosure>
   )
