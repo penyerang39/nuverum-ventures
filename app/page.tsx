@@ -13,6 +13,7 @@ export default function Home() {
   const [prefilledEmail, setPrefilledEmail] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [calendlyReady, setCalendlyReady] = useState(false);
 
   // Performance tracking
   const { trackElementVisibility, trackUserInteraction } = usePerformanceTracking();
@@ -38,7 +39,7 @@ export default function Home() {
     trackElementVisibility('services-heading');
   }, [trackElementVisibility]);
 
-  // Preload Calendly resources
+  // Preload Calendly resources and create cached iframe
   useEffect(() => {
     // Preload the Calendly domain and resources
     const link = document.createElement('link');
@@ -52,9 +53,17 @@ export default function Home() {
     dnsLink.href = 'https://calendly.com';
     document.head.appendChild(dnsLink);
 
+    // Preload the Calendly script
+    const scriptLink = document.createElement('link');
+    scriptLink.rel = 'preload';
+    scriptLink.href = 'https://assets.calendly.com/assets/external/widget.js';
+    scriptLink.as = 'script';
+    document.head.appendChild(scriptLink);
+
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(dnsLink);
+      document.head.removeChild(scriptLink);
     };
   }, []);
 
@@ -355,18 +364,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hidden Calendly Preloader */}
+      {/* Hidden Calendly Preloader - Properly cached */}
       <div 
         className="fixed -top-[9999px] left-0 w-1 h-1 opacity-0 pointer-events-none overflow-hidden"
         aria-hidden="true"
       >
         <iframe
+          id="calendly-preloader"
           src="https://calendly.com/thomas-nuverum/30min?embed_domain=localhost&embed_type=Inline"
           width="100%"
           height="600"
           title="Calendly preload"
           className="min-h-[600px]"
           loading="eager"
+          onLoad={() => {
+            // Mark as preloaded for the modal to use
+            setCalendlyReady(true);
+            window.calendlyPreloaded = true;
+          }}
         />
       </div>
 
@@ -375,6 +390,7 @@ export default function Home() {
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)}
         prefilledEmail={prefilledEmail} // Email from hero form
+        calendlyReady={calendlyReady}
       />
     </>
   );

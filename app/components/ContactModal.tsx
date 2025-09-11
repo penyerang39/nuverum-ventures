@@ -8,6 +8,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { usePerformanceTracking } from '../hooks/usePerformanceTracking'
 
+// Extend window interface for Calendly preload state
+declare global {
+  interface Window {
+    calendlyPreloaded?: boolean
+  }
+}
+
 const emailSchema = z.object({
   from: z.string().email('Please enter a valid email address'),
   subject: z.string().min(1, 'Subject is required'),
@@ -20,9 +27,10 @@ interface ContactModalProps {
   isOpen: boolean
   onClose: () => void
   prefilledEmail?: string
+  calendlyReady?: boolean
 }
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, calendlyReady = false }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false)
@@ -39,12 +47,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     resolver: zodResolver(emailSchema),
   })
 
-  // Track modal open/close performance
+  // Track modal open/close performance and check if Calendly is preloaded
   useEffect(() => {
     if (isOpen) {
       trackCustomMetric('modal-open', performance.now())
+      // Check if Calendly was preloaded and set loaded state immediately
+      if (calendlyReady || window.calendlyPreloaded) {
+        setIsCalendlyLoaded(true)
+      }
     }
-  }, [isOpen, trackCustomMetric])
+  }, [isOpen, trackCustomMetric, calendlyReady])
 
 
   const onSubmit = async (data: EmailFormData) => {
@@ -134,11 +146,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   {/* Calendly Section */}
                   <div className="space-y-4">
                     <h4 className="text-lg font-medium text-foreground">Schedule a Meeting</h4>
-                    <div className="bg-background rounded-lg overflow-hidden">
+                    <div className="bg-background rounded-lg overflow-hidden relative">
                       {!isCalendlyLoaded && (
                         <div className="absolute inset-0 flex items-center justify-center bg-background z-10">
                           <div className="text-center">
-                            <div className="animate-spin rounded-full h-8 w-8 mx-auto mb-2"></div>
+                            <div className="animate-spin rounded-full h-8 w-8 mx-auto mb-2 border-2 border-gray-300 border-t-accent-strong"></div>
                             <p className="text-sm text-muted">Loading meeting scheduler...</p>
                           </div>
                         </div>
@@ -150,6 +162,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         frameBorder="0"
                         title="Schedule a meeting"
                         className="min-h-[600px]"
+                        loading="eager"
                         onLoad={() => {
                           setIsCalendlyLoaded(true)
                           trackUserInteraction('calendly-iframe-load', 'contact-modal')
@@ -196,16 +209,18 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       </div>
 
                       <div>
-                        <label htmlFor="message" className="block h-[100px] text-sm font-medium text-foreground mb-2">
-                          Message
-                        </label>
-                        <textarea
-                          {...register('message')}
-                          id="message"
-                          rows={6}
-                          className="input w-full"
-                          placeholder="Tell us about your project or inquiry..."
-                        />
+                        <div className="grid min-h-[120px] grid-rows-[auto,auto]">
+                          <label htmlFor="message" className="block text-sm font-medium text-foreground">
+                            Message
+                          </label>
+                          <textarea
+                            {...register('message')}
+                            id="message"
+                            rows={6}
+                            className="input w-full min-h-[80px] resize-y"
+                            placeholder="Tell us about your project or inquiry..."
+                          />
+                        </div>
                         {errors.message && (
                           <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                         )}
