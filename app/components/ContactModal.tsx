@@ -196,14 +196,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       </div>
 
                       <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="message" className="block h-[100px] text-sm font-medium text-foreground mb-2">
                           Message
                         </label>
                         <textarea
                           {...register('message')}
                           id="message"
                           rows={6}
-                          className="input w-full h-[5ch]"
+                          className="input w-full"
                           placeholder="Tell us about your project or inquiry..."
                         />
                         {errors.message && (
