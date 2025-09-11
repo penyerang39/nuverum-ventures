@@ -141,12 +141,26 @@ main {
   display: grid;
   place-items: center;
   aspect-ratio: 1/1;
-  padding: 20%;
+  padding: 16px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.966), transparent);
   color: var(--foreground);
   margin-bottom: 12px;
+}
+
+.card-icon-inline {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1/1;
+  padding: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.966), transparent);
+  color: var(--foreground);
+  flex-shrink: 0;
 }
 
 /* Header */
@@ -209,6 +223,19 @@ main {
   100% {
     background-position: -100%;
   }
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }
 
 .shiny-text.disabled {

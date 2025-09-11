@@ -24,20 +24,7 @@ Place these files in the `public/` directory:
 
 ### Microsoft Tiles
 - `mstile-70x70.png` - 70x70 PNG
-- `mstile-150x150.png` - 150x150 PNG
-- `mstile-310x150.png` - 310x150 PNG (wide)
-- `mstile-310x310.png` - 310x310 PNG
-
-### Safari Pinned Tab
-- `safari-pinned-tab.svg` - Monochrome SVG icon
-
-### Theme-Aware Favicons (Dark Mode Support)
-- `favicon-light.svg` - SVG favicon for light mode browsers ✅ Created
-- `favicon-dark.svg` - SVG favicon for dark mode browsers ✅ Created
-
-## Required Social Media Images
-
-### Open Graph Images (Facebook, LinkedIn, etc.)
+- `mstile-150x150.png` - 150x150 PNG 
 - `og-image.png` - 1200x630 PNG (primary)
 - `og-image-square.png` - 600x600 PNG (square format)
 

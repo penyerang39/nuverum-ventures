@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
-import Head from "next/head";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 import ShinyText from "./components/ShinyText";
@@ -148,8 +147,8 @@ export default function Home() {
           </div>
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 lg:gap-12">
             {/* Daniel */}
-            <div className="card-no-padding text-start overflow-hidden">
-              <div className="relative w-full rounded-t-2xl overflow-hidden">
+            <div className="card-no-padding text-start overflow-hidden flex flex-col lg:flex-row">
+              <div className="relative w-full lg:w-1/3 rounded-t-2xl lg:rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/Daniels.jpg"
                   alt="Daniel - Growth-focused entrepreneur"
@@ -158,8 +157,8 @@ export default function Home() {
                   className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-center">Daniel</h3>
+              <div className="p-6 flex-1">
+                <h3 className="text-2xl font-semibold mb-3 text-center lg:text-start">Daniel</h3>
                 <p className="text-muted text-start leading-relaxed">
                   Daniel is a growth-focused entrepreneur who launched his first business at age 14, building it into a sizeable venture within two years. Since then, he has founded and led agencies in online course and community building, email marketing, and AI automation. Today, he supports startups in securing funding and works with established companies to design sales processes and teams that deliver sustainable growth.
                 </p>
@@ -167,22 +166,65 @@ export default function Home() {
             </div>
 
             {/* Thomas */}
-            <div className="card-no-padding text-start overflow-hidden">
-              <div className="relative w-full rounded-t-2xl overflow-hidden">
+            <div className="card-no-padding text-start overflow-hidden flex flex-col lg:flex-row">
+              <div className="relative w-full lg:w-1/3 rounded-t-full lg:rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/Thomas.jpg"
                   alt="Thomas - Finance-driven entrepreneur"
                   width={400}
                   height={300}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover rounded-t-full lg:rounded-full"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-center">Thomas</h3>
+              <div className="p-6 flex-1">
+                <h3 className="text-2xl font-semibold mb-3 text-center lg:text-start">Thomas</h3>
                 <p className="text-muted text-start leading-relaxed">
                   Thomas is a finance-driven entrepreneur with expertise in tax strategy, financial optimization, and fintech. He, together with Saul Rosenberg, founded Brightincorp, a firm specializing in U.S. business and bank account formation, and Christian Marcus, a full-service agency covering marketing and tax consultancy. Drawing on financial services sector experience and a strong U.S. network, Thomas now helps startups secure funding and develop scalable business solutions.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why We Do It */}
+      <section id="why-we-do-it" className="section bg-background" aria-labelledby="why-heading">
+        <div className="container grid gap-7 grid-cols-1 items-start lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-white/20">
+          <div className="lg:pr-8">
+            <p id="why-heading" className="eyebrow mb-3">Why We Do It</p>
+            <h2 className="heading-lg m-0">From founders to facilitators</h2>
+          </div>
+          <div className="grid gap-4 lg:pl-8">
+            <p className="text-muted">
+              Having navigated the startup ecosystem ourselves, we understand the challenges founders face when seeking capital. The investor landscape often feels elusive and unreachable, with networks that seem impenetrable to those outside established circles.
+            </p>
+            <p className="text-muted">
+              Through years of building ventures and cultivating relationships, we developed the connections that once seemed out of reach. Today, we bridge this gap for other founders, transforming our network into their opportunity.
+            </p>
+            <p className="text-muted">
+              We are <strong>intermediaries</strong>, not investors ourselves. Our role is to facilitate meaningful connections between exceptional founders and the right capital partners, ensuring both sides find value in every introduction we make.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Approach */}
+      <section id="our-approach" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="approach-heading">
+        <div className="container">
+          <div className="text-start mb-8">
+            <p id="approach-heading" className="eyebrow mb-3">Our Approach</p>
+            <h2 className="heading-lg">Transparent partnerships, aligned incentives</h2>
+          </div>
+          <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 lg:gap-12">
+            <div className="space-y-3">
+              <h3 className="heading-xl">Success fee up to 5%</h3>
+              <p className="text-muted">Consultation fee discussed individually based on scope and stage.</p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Financing strategies, tailored to you</h3>
+              <p className="text-muted">
+                We help founders evaluate and pursue the right capital path—from equity and venture capital to venture debt, revenue-based financing, and other non-dilutive options—and tailor our approach to your goals, stage, and timeline.
+              </p>
             </div>
           </div>
         </div>
@@ -202,13 +244,15 @@ export default function Home() {
             <div className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
               {/* Card 1 */}
             <div className="card">
-              <div className="card-icon" aria-hidden>
-                <span className="text-[22px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-full">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
-                    </svg>
-              </span>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="card-icon-inline" aria-hidden>
+                  <span className="text-[22px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-full">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                      </svg>
+                </span>
+                </div>
+                <div className="card-title">Investor Introduction</div>
               </div>
-              <div className="card-title">Investor Introduction</div>
               <p className="card-body">
                 Access defines advantage. Through our established investor network, we deliver curated introductions that accelerate outcomes, turning selective capital partners into tangible opportunity.
               </p>
@@ -216,10 +260,12 @@ export default function Home() {
 
             {/* Card 2 */}
             <div className="card">
-              <div className="card-icon" aria-hidden>
-                <MagnifyingGlassIcon className="size-full" aria-hidden />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="card-icon-inline" aria-hidden>
+                  <MagnifyingGlassIcon className="size-full" aria-hidden />
+                </div>
+                <div className="card-title">Pitch Material Evaluation</div>
               </div>
-              <div className="card-title">Pitch Material Evaluation</div>
               <p className="card-body">
                 Every detail matters. We dissect your pitch materials with an investor&apos;s eye, identifying gaps and strengths, and outlining the changes needed to make your story investor-ready.
               </p>
@@ -227,10 +273,12 @@ export default function Home() {
 
             {/* Card 3 */}
             <div className="card">
-              <div className="card-icon" aria-hidden>
-                <BriefcaseIcon className="size-full" aria-hidden />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="card-icon-inline" aria-hidden>
+                  <BriefcaseIcon className="size-full" aria-hidden />
+                </div>
+                <div className="card-title">Venture Capital Consultation</div>
               </div>
-              <div className="card-title">Venture Capital Consultation</div>
               <p className="card-body">
                 Raising capital begins with strategy. We provide tailored reports and guidance on next steps if you are considering or growing venture capital, helping you navigate decisions with clarity and precision.
               </p>
@@ -249,7 +297,6 @@ export default function Home() {
           src="https://calendly.com/thomas-nuverum/30min?embed_domain=localhost&embed_type=Inline"
           width="100%"
           height="600"
-          frameBorder="0"
           title="Calendly preload"
           className="min-h-[600px]"
           loading="eager"
