@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 import ShinyText from "./components/ShinyText";
@@ -216,14 +217,16 @@ export default function Home() {
             <h2 className="heading-lg">Transparent partnerships, aligned incentives</h2>
           </div>
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 lg:gap-12">
-            <div className="space-y-3">
-              <h3 className="heading-xl">Success fee up to 5%</h3>
-              <p className="text-muted">Consultation fee discussed individually based on scope and stage.</p>
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Success-Based Partnership</h3>
+              <p className="text-muted">
+                Our revenue model aligns our success with yours. We operate on a success fee structure, ensuring we're incentivized to secure the right opportunities for your venture. Success fees are capped at a maximum of 5%, reflecting our commitment to fair and transparent partnerships.
+              </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold">Financing strategies, tailored to you</h3>
+              <h3 className="text-xl font-semibold">Tailored Consultation</h3>
               <p className="text-muted">
-                We help founders evaluate and pursue the right capital path—from equity and venture capital to venture debt, revenue-based financing, and other non-dilutive options—and tailor our approach to your goals, stage, and timeline.
+                Every startup is unique, operating at different stages with distinct needs. Our consultation fees are discussed individually, taking into account your specific requirements, stage of development, and the scope of guidance needed to optimize your fundraising strategy.
               </p>
             </div>
           </div>
@@ -283,6 +286,81 @@ export default function Home() {
                 Raising capital begins with strategy. We provide tailored reports and guidance on next steps if you are considering or growing venture capital, helping you navigate decisions with clarity and precision.
               </p>
             </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Approach */}
+      <section id="approach" className="section bg-background" aria-labelledby="approach-heading">
+        <div className="container">
+          <div className="text-start mb-8">
+            <p id="approach-heading" className="eyebrow mb-3">Our Approach</p>
+            <h2 className="heading-lg">Selective partnerships, strategic focus</h2>
+            <p className="text-muted max-w-2xl mt-4">
+              Every partnership begins with careful evaluation. We screen opportunities based on clear criteria that ensure mutual success and meaningful outcomes.
+            </p>
+          </div>
+          
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            {/* Focus Sectors */}
+            <div className="card">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="card-icon-inline" aria-hidden>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-full">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 14.5M14.25 3.104c.251.023.501.05.75.082M19.8 14.5l-2.382 2.382A2.25 2.25 0 0 1 15.826 17.5h-7.652c-.618 0-1.214-.246-1.65-.682L4.142 14.436M19.8 14.5V12a2.25 2.25 0 0 0-.659-1.591L16.659 8.409c-.422-.422-.659-.995-.659-1.591V3.104" />
+                  </svg>
+                </div>
+                <div className="card-title">Focus Sectors</div>
+              </div>
+              <p className="card-body">
+                Primary expertise in AI, fintech, and SaaS, while remaining open to exceptional opportunities across all industries and verticals.
+              </p>
+            </div>
+
+            {/* Market-Ready Concepts */}
+            <div className="card">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="card-icon-inline" aria-hidden>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-full">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623C21 7.51 20.402 5.227 19.402 4a11.966 11.966 0 0 0-8.402 1.36Z" />
+                  </svg>
+                </div>
+                <div className="card-title">Market-Ready Concepts</div>
+              </div>
+              <p className="card-body">
+                Well-defined ideas with clear execution plans, from <strong>pre-seed to Series A+</strong>. Concepts must be investor-presentation ready.
+              </p>
+            </div>
+
+            {/* Founder Commitment */}
+            <div className="card">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="card-icon-inline" aria-hidden>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-full">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                  </svg>
+                </div>
+                <div className="card-title">Genuine Passion</div>
+              </div>
+              <p className="card-body">
+                Founders with authentic dedication and unwavering commitment to their vision. Passion translates into persistence and resilience.
+              </p>
+            </div>
+
+            {/* Strategic Patience */}
+            <div className="card">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="card-icon-inline" aria-hidden>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-full">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                </div>
+                <div className="card-title">Strategic Patience</div>
+              </div>
+              <p className="card-body">
+                Understanding that successful fundraising is a methodical process requiring time, strategy, and relationship building.
+              </p>
             </div>
           </div>
         </div>
