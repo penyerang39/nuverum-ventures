@@ -115,7 +115,7 @@ export default function Navbar() {
                         className={classNames(
                           item.current 
                             ? 'bg-surface text-white' 
-                            : 'text-white hover:bg-surface hover:text-accent-strong',
+                            : 'text-white hover:text-accent-strong',
                           'rounded-md px-3 py-2 text-md font-light transition-colors nav-link',
                         )}
                       >

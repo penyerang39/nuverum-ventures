@@ -21,7 +21,7 @@ export default function LoadingSplash() {
     // Hide splash screen when page is fully loaded
     const handleLoad = () => {
       const elapsedTime = Date.now() - startTimeRef.current;
-      const minShowTime = isFirstLoadRef.current ? 1000 : 300;
+      const minShowTime = isFirstLoadRef.current ? 1000 : 500;
       const remainingTime = Math.max(0, minShowTime - elapsedTime);
 
       setTimeout(() => {

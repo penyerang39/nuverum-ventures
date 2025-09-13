@@ -275,10 +275,6 @@ main {
   color: black !important;
 }
 
-.navbar-white-theme .nav-link:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
-  color: black !important;
-}
 
 .navbar-white-theme .contact-button {
   background: black !important;
@@ -286,9 +282,6 @@ main {
   border-color: black !important;
 }
 
-.navbar-white-theme .contact-button:hover {
-  background: rgba(0, 0, 0, 0.9) !important;
-}
 
 .navbar-white-theme .mobile-menu {
   background: rgba(255, 255, 255, 0.442) !important;
@@ -296,11 +289,6 @@ main {
 }
 
 .navbar-white-theme .mobile-menu .nav-link {
-  color: black !important;
-}
-
-.navbar-white-theme .mobile-menu .nav-link:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
   color: black !important;
 }
 
@@ -318,12 +306,30 @@ main {
   color: black !important;
 }
 
-.navbar-white-theme .disclosure-button:hover {
-  background: transparent !important;
-  color: black !important;
-}
-
 /* Vertical divider */
 .navbar-white-theme .ml-4 {
   background: black !important;
+}
+
+/* Fade-in animations */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

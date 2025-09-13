@@ -7,6 +7,7 @@ import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 import ShinyText from "./components/ShinyText";
 import { usePerformanceTracking } from "./hooks/usePerformanceTracking";
+import { useIntersectionObserver, useStaggeredIntersectionObserver } from "./hooks/useIntersectionObserver";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +15,19 @@ export default function Home() {
   const [emailValue, setEmailValue] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [calendlyReady, setCalendlyReady] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Intersection observers for fade-in animations
+  const missionSection = useIntersectionObserver();
+  const foundersSection = useIntersectionObserver();
+  const whyWeDoItSection = useIntersectionObserver();
+  const ourApproachSection = useIntersectionObserver();
+  const servicesSection = useIntersectionObserver();
+  const approachSection = useIntersectionObserver();
+
+  // Staggered card animations
+  const servicesCards = useStaggeredIntersectionObserver(3, 200);
+  const approachCards = useStaggeredIntersectionObserver(4, 150);
 
   // Performance tracking
   const { trackElementVisibility, trackUserInteraction } = usePerformanceTracking();
@@ -23,6 +37,29 @@ export default function Home() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailValue.trim() !== '' && emailRegex.test(emailValue));
   }, [emailValue]);
+
+  // Auto-trigger animation every 5 seconds (twice in succession)
+  useEffect(() => {
+    const triggerAnimation = () => {
+      // First animation
+      setIsAnimating(true);
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 200);
+
+      // Second animation after 200ms
+      setTimeout(() => {
+        setIsAnimating(true);
+        setTimeout(() => {
+          setIsAnimating(false);
+        }, 200);
+      }, 500); // 200ms after first animation starts + 300ms duration
+    };
+
+    const interval = setInterval(triggerAnimation, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Scroll to next section function
   const scrollToNextSection = () => {
@@ -125,12 +162,17 @@ export default function Home() {
             speed={3}
             className="text-sm font-medium "
           />
-          <ChevronDownIcon className="w-5 h-5 text-muted group-hover:text-white group-hover:translate-y-1 transition-all duration-300" />
+          <ChevronDownIcon className={`w-5 h-5 text-muted group-hover:text-white group-hover:translate-y-1 transition-all duration-300 ${isAnimating ? 'text-white translate-y-1' : ''}`} />
         </div>
       </section>
 
       {/* Mission */}
-      <section id="approach" className="section bg-background" aria-labelledby="mission-eyebrow">
+      <section 
+        ref={missionSection.elementRef}
+        id="approach" 
+        className={`section bg-background fade-in-section ${missionSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="mission-eyebrow"
+      >
         <div className="container grid gap-7 grid-cols-1 items-start lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-white/20">
           <div className="lg:pr-8">
             <p id="mission-eyebrow" className="eyebrow mb-3">Our Mission</p>
@@ -148,7 +190,12 @@ export default function Home() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="founders-heading">
+      <section 
+        ref={foundersSection.elementRef}
+        id="founders" 
+        className={`section bg-gradient-to-b from-white/[0.02] to-transparent fade-in-section ${foundersSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="founders-heading"
+      >
         <div className="container">
           <div className="text-start mb-12">
             <p id="founders-heading" className="eyebrow mb-3">Our Founders</p>
@@ -201,7 +248,12 @@ export default function Home() {
       </section>
 
       {/* Why We Do It */}
-      <section id="why-we-do-it" className="section bg-background" aria-labelledby="why-heading">
+      <section 
+        ref={whyWeDoItSection.elementRef}
+        id="why-we-do-it" 
+        className={`section bg-background fade-in-section ${whyWeDoItSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="why-heading"
+      >
         <div className="container grid gap-7 grid-cols-1 items-start lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-white/20">
           <div className="lg:pr-8">
             <p id="why-heading" className="eyebrow mb-3">Why We Do It</p>
@@ -222,7 +274,12 @@ export default function Home() {
       </section>
 
       {/* Our Approach */}
-      <section id="our-approach" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="approach-heading">
+      <section 
+        ref={ourApproachSection.elementRef}
+        id="our-approach" 
+        className={`section bg-gradient-to-b from-white/[0.02] to-transparent fade-in-section ${ourApproachSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="approach-heading"
+      >
         <div className="container">
           <div className="text-start mb-8">
             <p id="approach-heading" className="eyebrow mb-3">Our Approach</p>
@@ -246,7 +303,12 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="services" className="section bg-gradient-to-b from-white/[0.02] to-transparent" aria-labelledby="services-heading">
+      <section 
+        ref={servicesSection.elementRef}
+        id="services" 
+        className={`section bg-gradient-to-b from-white/[0.02] to-transparent fade-in-section ${servicesSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="services-heading"
+      >
         <div className="container">
         <p id="services-heading" className="eyebrow mb-3">Services</p>
           <h2 id="services-heading" className="heading-lg mb-6">What We Offer</h2>
@@ -256,9 +318,9 @@ export default function Home() {
               <br />
               We Curate introductions, refine presentations, and illuminate the next steps, enabling companies to navigate their path from vision to opportunity with clariy and purpose.
             </p>
-            <div className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
+            <div ref={servicesCards.containerRef} className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
               {/* Card 1 */}
-            <div className="card">
+            <div ref={servicesCards.setCardRef(0)} className={`card fade-in-card ${servicesCards.isCardVisible(0) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
                  <LinkIcon className="size-full" aria-hidden />
@@ -271,7 +333,7 @@ export default function Home() {
             </div>
 
             {/* Card 2 */}
-            <div className="card">
+            <div ref={servicesCards.setCardRef(1)} className={`card fade-in-card ${servicesCards.isCardVisible(1) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
                   <MagnifyingGlassIcon className="size-full" aria-hidden />
@@ -284,7 +346,7 @@ export default function Home() {
             </div>
 
             {/* Card 3 */}
-            <div className="card">
+            <div ref={servicesCards.setCardRef(2)} className={`card fade-in-card ${servicesCards.isCardVisible(2) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
                   <BriefcaseIcon className="size-full" aria-hidden />
@@ -301,7 +363,12 @@ export default function Home() {
       </section>
 
       {/* Approach */}
-      <section id="approach" className="section bg-background" aria-labelledby="approach-heading">
+      <section 
+        ref={approachSection.elementRef}
+        id="approach" 
+        className={`section bg-background fade-in-section ${approachSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="approach-heading"
+      >
         <div className="container">
           <div className="text-start mb-8">
             <p id="approach-heading" className="eyebrow mb-3">Our Approach</p>
@@ -311,9 +378,9 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div ref={approachCards.containerRef} className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {/* Focus Sectors */}
-            <div className="card">
+            <div ref={approachCards.setCardRef(0)} className={`card fade-in-card ${approachCards.isCardVisible(0) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
                  <BeakerIcon className="size-full" aria-hidden/>
@@ -326,7 +393,7 @@ export default function Home() {
             </div>
 
             {/* Market-Ready Concepts */}
-            <div className="card">
+            <div ref={approachCards.setCardRef(1)} className={`card fade-in-card ${approachCards.isCardVisible(1) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
                 <ShieldCheckIcon className="size-full" aria-hidden/>
@@ -339,7 +406,7 @@ export default function Home() {
             </div>
 
             {/* Founder Commitment */}
-            <div className="card">
+            <div ref={approachCards.setCardRef(2)} className={`card fade-in-card ${approachCards.isCardVisible(2) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
                 <HeartIcon className="size-full" aria-hidden/>
@@ -352,7 +419,7 @@ export default function Home() {
             </div>
 
             {/* Strategic Patience */}
-            <div className="card">
+            <div ref={approachCards.setCardRef(3)} className={`card fade-in-card ${approachCards.isCardVisible(3) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
                 <ClockIcon className="size-full" aria-hidden/>
