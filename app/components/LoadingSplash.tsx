@@ -11,11 +11,14 @@ export default function LoadingSplash() {
     // Hide splash screen when page is fully loaded
     const handleLoad = () => {
       setIsVisible(false);
+      // Dispatch custom event to notify navbar
+      window.dispatchEvent(new CustomEvent('loadingComplete'));
     };
 
     // Check if page is already loaded
     if (document.readyState === 'complete') {
       setIsVisible(false);
+      window.dispatchEvent(new CustomEvent('loadingComplete'));
     } else {
       window.addEventListener('load', handleLoad);
     }
@@ -24,26 +27,6 @@ export default function LoadingSplash() {
       window.removeEventListener('load', handleLoad);
     };
   }, []);
-
-  useEffect(() => {
-    // Hide navbar during splash screen
-    const navbar = document.querySelector('nav');
-    if (navbar) {
-      if (isVisible) {
-        navbar.style.display = 'none';
-      } else {
-        navbar.style.display = '';
-      }
-    }
-
-    return () => {
-      // Restore navbar when component unmounts
-      const navbar = document.querySelector('nav');
-      if (navbar) {
-        navbar.style.display = '';
-      }
-    };
-  }, [isVisible]);
 
   if (!isVisible) return null;
 

@@ -21,6 +21,25 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Listen for loading complete event
+  useEffect(() => {
+    const handleLoadingComplete = () => {
+      setIsLoading(false)
+    }
+
+    window.addEventListener('loadingComplete', handleLoadingComplete)
+    
+    // Check if already loaded
+    if (document.readyState === 'complete') {
+      setIsLoading(false)
+    }
+
+    return () => {
+      window.removeEventListener('loadingComplete', handleLoadingComplete)
+    }
+  }, [])
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -40,6 +59,9 @@ export default function Navbar() {
     window.addEventListener('scroll', controlNavbar)
     return () => window.removeEventListener('scroll', controlNavbar)
   }, [lastScrollY])
+
+  // Don't render navbar if still loading
+  if (isLoading) return null
 
   return (
     <Disclosure
