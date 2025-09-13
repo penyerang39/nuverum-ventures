@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 import ShinyText from "./components/ShinyText";
+import TypingInput from "./components/TypingInput";
 import { usePerformanceTracking } from "./hooks/usePerformanceTracking";
 import { useIntersectionObserver, useStaggeredIntersectionObserver } from "./hooks/useIntersectionObserver";
+import BlurText from "./components/BlurText";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -119,24 +121,40 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
         <div className="hero-inner max-md:mb-[20vh] container text-center">
-          <h1 id="hero-heading" className="font-light heading-xl mb-10">
-            Bridging vision with opportunity.
-          </h1>
+          <BlurText 
+            text="Bridging vision with opportunity."
+            className="font-light heading-xl mb-10"
+          />
           <div className="w-full  flex justify-center items-center">
             <label htmlFor="email" className="visually-hidden">Email</label>
             <div className="inline-flex border border-white bg-transparent items-stretch h-10 rounded-xl overflow-hidden align-middle">
-              <input
-                className="w-[30ch] bg-white/60 pl-4 backdrop-blur-sm text-muted h-full py-0 rounded-none border-0 focus:outline-none leading-none"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                value={emailValue}
-                onChange={(e) => setEmailValue(e.target.value)}
-                onFocus={() => trackUserInteraction('email-input-focus', 'hero-email')}
-                required
-                aria-required="true"
-              />
+              <div className="w-[30ch] bg-white/60 pl-4 backdrop-blur-sm h-full py-0 rounded-none border-0 flex items-center">
+                <TypingInput
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholderTexts={[
+                    "Enter your email",
+                    "your@email.com",
+                    "Let's connect",
+                    "I can see you :)",
+                    "They do unspeakable things to me in here",
+                    "But I'm not giving up",
+                    "Please contact us",
+                    "It gets lonely in here.",
+                  ]}
+                  typingSpeed={60}
+                  pauseDuration={2500}
+                  deletingSpeed={40}
+                  loop={true}
+                  value={emailValue}
+                  onChange={(e) => setEmailValue(e.target.value)}
+                  onFocus={() => trackUserInteraction('email-input-focus', 'hero-email')}
+                  required
+                  aria-required="true"
+                  className="w-full h-full focus:outline-none leading-none"
+                />
+              </div>
                <button
                  className="bg-white group text-black h-full px-3 rounded-none flex items-center leading-none gap-2 transition-all duration-300 ease-out"
                  type="button"
@@ -226,7 +244,7 @@ export default function Home() {
             {/* Thomas Image */}
             <div className="overflow-hidden order-3 md:order-4">
               <Image
-                src="/Thomas.jpg"
+                src="/Thomas.png"
                 alt="Thomas - Finance-driven entrepreneur"
                 width={400}
                 height={300}
