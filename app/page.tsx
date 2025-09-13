@@ -81,7 +81,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
-        <div className="hero-inner max-md:mb-[20vh] container flex flex-col items-center justify-center text-center">
+        <div className="hero-inner max-md:mb-[20vh] container text-center">
           <h1 id="hero-heading" className="font-light heading-xl mb-10">
             Bridging vision with opportunity.
           </h1>
@@ -89,7 +89,7 @@ export default function Home() {
             <label htmlFor="email" className="visually-hidden">Email</label>
             <div className="inline-flex border border-white bg-transparent items-stretch h-10 rounded-xl overflow-hidden align-middle">
               <input
-                className="w-[30ch] bg-white/20 pl-4 backdrop-blur-sm text-white h-full py-0 rounded-none border-0 focus:outline-none leading-none"
+                className="w-[30ch] bg-white/60 pl-4 backdrop-blur-sm text-muted h-full py-0 rounded-none border-0 focus:outline-none leading-none"
                 id="email"
                 name="email"
                 type="email"
@@ -154,42 +154,46 @@ export default function Home() {
             <p id="founders-heading" className="eyebrow mb-3">Our Founders</p>
             <h2 className="heading-lg">Meet the team behind Nuverum Ventures</h2>
           </div>
-          <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 lg:gap-12">
-            {/* Daniel */}
-            <div className="card-no-padding text-start overflow-hidden flex flex-col lg:flex-row">
-              <div className="relative w-full lg:w-1/3 rounded-3xl lg:rounded-l-none overflow-hidden flex-shrink-0">
-                <Image
-                  src="/Daniels.jpg"
-                  alt="Daniel - Growth-focused entrepreneur"
-                  width={400}
-                  height={300}
-                  className="w-full h-auto object-cover rounded-3xl lg:rounded-l-none"
-                />
-              </div>
-              <div className="p-6 flex-1">
-                <h3 className="text-2xl font-semibold mb-3 text-center lg:text-start">Daniel</h3>
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 md:gap-12">
+            {/* Daniel Image */}
+            <div className="overflow-hidden order-1 md:order-1">
+              <Image
+                src="/Daniels.jpg"
+                alt="Daniel - Growth-focused entrepreneur"
+                width={400}
+                height={300}
+                className="w-full h-auto object-cover rounded-3xl"
+              />
+            </div>
+
+            {/* Daniel Text */}
+            <div className="text-start overflow-hidden order-2 md:order-2">
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-3 text-center md:text-start">Daniel</h3>
                 <p className="text-muted text-start leading-relaxed">
                   Daniel is a growth-focused entrepreneur who launched his first business at age 14, building it into a sizeable venture within two years. Since then, he has founded and led agencies in online course and community building, email marketing, and AI automation. Today, he supports startups in securing funding and works with established companies to design sales processes and teams that deliver sustainable growth.
                 </p>
               </div>
             </div>
 
-            {/* Thomas */}
-            <div className="card-no-padding text-start overflow-hidden flex flex-col lg:flex-row">
-              <div className="p-6 flex-1">
-                <h3 className="text-2xl font-semibold mb-3 text-center lg:text-start">Thomas</h3>
+            {/* Thomas Image */}
+            <div className="overflow-hidden order-3 md:order-4">
+              <Image
+                src="/Thomas.jpg"
+                alt="Thomas - Finance-driven entrepreneur"
+                width={400}
+                height={300}
+                className="w-full h-auto object-cover rounded-3xl"
+              />
+            </div>
+
+            {/* Thomas Text */}
+            <div className="text-start overflow-hidden order-4 md:order-3">
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-3 text-center md:text-start">Thomas</h3>
                 <p className="text-muted text-start leading-relaxed">
                   Thomas is a finance-driven entrepreneur with expertise in tax strategy, financial optimization, and fintech. He, together with Saul Rosenberg, founded Brightincorp, a firm specializing in U.S. business and bank account formation, and Christian Marcus, a full-service agency covering marketing and tax consultancy. Drawing on financial services sector experience and a strong U.S. network, Thomas now helps startups secure funding and develop scalable business solutions.
                 </p>
-              </div>
-              <div className="relative w-full lg:w-1/3 rounded-3xl lg:rounded-r-none overflow-hidden flex-shrink-0 lg:self-end order-first lg:order-none">
-                <Image
-                  src="/Thomas.jpg"
-                  alt="Thomas - Finance-driven entrepreneur"
-                  width={400}
-                  height={300}
-                  className="w-full h-auto object-cover rounded-3xl lg:rounded-r-none"
-                />
               </div>
             </div>
           </div>

@@ -115,17 +115,44 @@ main {
 
 /* Cards */
 .card {
-  background: var(--card);
+/*  background: var(--card); */
   border: 1px solid var(--border);
-  border-radius: 16px;
+/*  border-radius: 16px; */
   padding: 20px;
+  background: transparent;
+  border-top: none;
+  border-bottom: none;
+}
+
+/* Grid cards with conditional borders - only show borders between adjacent cards */
+.grid .card {
+  border-right: none;
+  border-left: none;
+}
+
+/* Add right border to cards that have a sibling to their right */
+.grid .card:not(:last-child) {
+  border-right: 1px solid var(--border);
 }
 
 .card-no-padding {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: transparent;
+  border: none;
   border-radius: 16px;
   padding: 0;
+  border-top: none;
+  border-bottom: none;
+}
+
+/* Grid cards with conditional borders - only show borders between adjacent cards */
+.grid .card-no-padding {
+  border-right: none;
+  border-left: none;
+}
+
+/* Add right border to cards that have a sibling to their right */
+.grid .card-no-padding:not(:last-child) {
+  border-right: 1px solid var(--border);
 }
 
 .card-title {
@@ -187,7 +214,14 @@ main {
   overflow: hidden;
 }
 
-.hero-inner { padding-block: 96px; }
+.hero-inner { 
+  padding-block: 96px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .visually-hidden {
   position: absolute;
@@ -229,4 +263,67 @@ main {
 
 .shiny-text.disabled {
   animation: none;
+}
+
+/* Navbar scroll-based white theme */
+.navbar-white-theme > div {
+  background: rgba(255, 255, 255, 0.442) !important;
+  border-color: black !important;
+}
+
+.navbar-white-theme .nav-link {
+  color: black !important;
+}
+
+.navbar-white-theme .nav-link:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: black !important;
+}
+
+.navbar-white-theme .contact-button {
+  background: black !important;
+  color: white !important;
+  border-color: black !important;
+}
+
+.navbar-white-theme .contact-button:hover {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.navbar-white-theme .mobile-menu {
+  background: rgba(255, 255, 255, 0.442) !important;
+  border-color: black !important;
+}
+
+.navbar-white-theme .mobile-menu .nav-link {
+  color: black !important;
+}
+
+.navbar-white-theme .mobile-menu .nav-link:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: black !important;
+}
+
+.navbar-white-theme .mobile-menu .contact-button {
+  background: black !important;
+  color: white !important;
+}
+
+.navbar-white-theme .logo-filter {
+  filter: brightness(0) !important;
+}
+
+/* Disclosure button styling */
+.navbar-white-theme .disclosure-button {
+  color: black !important;
+}
+
+.navbar-white-theme .disclosure-button:hover {
+  background: transparent !important;
+  color: black !important;
+}
+
+/* Vertical divider */
+.navbar-white-theme .ml-4 {
+  background: black !important;
 }

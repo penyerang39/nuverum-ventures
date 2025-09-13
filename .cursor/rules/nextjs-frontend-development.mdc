@@ -40,6 +40,7 @@ alwaysApply: true
 7. Avoid inline styles unless absolutely necessary - prefer Tailwind classes or CSS modules
 8. Implement dark mode support using CSS custom properties and Tailwind's dark mode utilities
 9. NEVER create overly convoluted tailwind or inline values where a simple p- tailwind value can suffice. NEVER do redundant things like pt-3 pb-3 when you can use py-3, NEVER use inline classes when tailwind works.
+10.  When dealing with children of rounded components, NEVER round the child if you expect its roundness to follow/be on the edge of the rounded parent div, instead give the parent overflow-hidden and the child rounded-0.
 
 ## Responsive Design:
 1. You will create scaling elements mobile-first, prioritizing first and foremost optimizing scaling for mobile, and only then adding **Tailwind className breakpoints** to guarantee optimal scaling

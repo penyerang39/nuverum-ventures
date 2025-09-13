@@ -1,24 +1,46 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 export default function LoadingSplash() {
   const [isVisible, setIsVisible] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const startTimeRef = useRef<number>(Date.now());
+  const isFirstLoadRef = useRef<boolean>(true);
 
   useEffect(() => {
+    // Check if this is first load or subsequent navigation
+    const isFirstLoad = !sessionStorage.getItem('hasLoadedBefore');
+    isFirstLoadRef.current = isFirstLoad;
+    
+    if (isFirstLoad) {
+      sessionStorage.setItem('hasLoadedBefore', 'true');
+    }
+
     // Hide splash screen when page is fully loaded
     const handleLoad = () => {
-      setIsVisible(false);
-      // Dispatch custom event to notify navbar
-      window.dispatchEvent(new CustomEvent('loadingComplete'));
+      const elapsedTime = Date.now() - startTimeRef.current;
+      const minShowTime = isFirstLoadRef.current ? 1000 : 300;
+      const remainingTime = Math.max(0, minShowTime - elapsedTime);
+
+      setTimeout(() => {
+        setIsVisible(false);
+        // Dispatch custom event to notify navbar
+        window.dispatchEvent(new CustomEvent('loadingComplete'));
+      }, remainingTime);
     };
 
     // Check if page is already loaded
     if (document.readyState === 'complete') {
-      setIsVisible(false);
-      window.dispatchEvent(new CustomEvent('loadingComplete'));
+      const elapsedTime = Date.now() - startTimeRef.current;
+      const minShowTime = isFirstLoadRef.current ? 1000 : 300;
+      const remainingTime = Math.max(0, minShowTime - elapsedTime);
+
+      setTimeout(() => {
+        setIsVisible(false);
+        window.dispatchEvent(new CustomEvent('loadingComplete'));
+      }, remainingTime);
     } else {
       window.addEventListener('load', handleLoad);
     }
