@@ -71,7 +71,7 @@ export default function Navbar() {
       {({ open }) => (
         <>
         <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-4xl transition-transform duration-300 ${open || isVisible ? 'translate-y-2' : '-translate-y-100'}`}>
-            <div className="w-full overflow-hidden px-4 bg-surface/90 backdrop-blur-sm border border-white rounded-2xl group-data-[open]:rounded-b-none sm:rounded-2xl sm:group-data-[open]:rounded-b-2xl relative"
+            <div className="w-full overflow-hidden px-4 bg-surface/90 backdrop-blur-sm border border-white rounded-2xl group-data-[open]:rounded-b-none sm:rounded-2xl sm:group-data-[open]:rounded-b-2xl relative transition-all duration-300 ease-out"
                   >
               <div className="relative flex h-15 items-center justify-between">
                 {/* Logo on the left */}
@@ -135,7 +135,7 @@ export default function Navbar() {
               leaveFrom="translate-y-0 opacity-100 scale-100"
               leaveTo="-translate-y-4 opacity-0 scale-95"
             >
-              <DisclosurePanel className="sm:hidden bg-transparent backdrop-blur-sm border border-white border-t-0 rounded-b-2xl origin-top">
+              <DisclosurePanel className="sm:hidden bg-surface/90 backdrop-blur-sm border border-white border-t-0 rounded-b-2xl origin-top">
                 <div className="space-y-1 p-0">
                   {navigation.map((item) => (
                     <DisclosureButton

@@ -81,11 +81,11 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
-        <div className="hero-inner max-md:mb-[20vh] container flex flex-col items-center justify-center text-center relative">
+        <div className="hero-inner max-md:mb-[20vh] container flex flex-col items-center justify-center text-center">
           <h1 id="hero-heading" className="font-light heading-xl mb-10">
             Bridging vision with opportunity.
           </h1>
-          <div className="w-full flex justify-center items-center">
+          <div className="w-full  flex justify-center items-center">
             <label htmlFor="email" className="visually-hidden">Email</label>
             <div className="inline-flex border border-white bg-transparent items-stretch h-10 rounded-xl overflow-hidden align-middle">
               <input
@@ -116,16 +116,16 @@ export default function Home() {
                </button>
             </div>
           </div>
-          
-          {/* Scroll Call to Action */}
-          <div className="absolute bottom left-1/2 transform -translate-x-1/2 flex flex-col items-end gap-2 cursor-pointer group" onClick={scrollToNextSection}>
-            <ShinyText 
-              text="Discover More" 
-              speed={3}
-              className="text-sm font-medium text-white/80 group-hover:text-white transition-colors duration-300"
-            />
-            <ChevronDownIcon className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-y-1 transition-all duration-300" />
-          </div>
+        </div>
+        
+        {/* Scroll Call to Action - positioned at bottom of 100vh hero section */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group" onClick={scrollToNextSection}>
+          <ShinyText 
+            text="Discover More" 
+            speed={3}
+            className="text-sm font-medium "
+          />
+          <ChevronDownIcon className="w-5 h-5 text-muted group-hover:text-white group-hover:translate-y-1 transition-all duration-300" />
         </div>
       </section>
 
