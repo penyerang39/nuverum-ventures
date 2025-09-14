@@ -7,6 +7,7 @@ import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 import ShinyText from "./components/ShinyText";
 import TypingInput from "./components/TypingInput";
+import AnimatedCounter from "./components/AnimatedCounter";
 import { usePerformanceTracking } from "./hooks/usePerformanceTracking";
 import { useIntersectionObserver, useStaggeredIntersectionObserver } from "./hooks/useIntersectionObserver";
 import BlurText from "./components/BlurText";
@@ -19,6 +20,8 @@ export default function Home() {
   const [calendlyReady, setCalendlyReady] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTypingInEmail, setIsTypingInEmail] = useState(false);
+  const [dialAnimationTriggered, setDialAnimationTriggered] = useState(false);
+  const [isAtBottom, setIsAtBottom] = useState(false);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Intersection observers for fade-in animations
@@ -28,10 +31,12 @@ export default function Home() {
   const ourApproachSection = useIntersectionObserver();
   const servicesSection = useIntersectionObserver();
   const approachSection = useIntersectionObserver();
+  const partnersSection = useIntersectionObserver();
 
   // Staggered card animations
   const servicesCards = useStaggeredIntersectionObserver(3, 200);
   const approachCards = useStaggeredIntersectionObserver(4, 150);
+  const partnersCards = useStaggeredIntersectionObserver(4, 150);
 
   // Performance tracking
   const { trackElementVisibility, trackUserInteraction } = usePerformanceTracking();
@@ -106,6 +111,29 @@ export default function Home() {
     trackElementVisibility('mission-eyebrow');
     trackElementVisibility('services-heading');
   }, [trackElementVisibility]);
+
+  // Trigger dial animation when partners section is visible
+  useEffect(() => {
+    if (partnersSection.isVisible && !dialAnimationTriggered) {
+      setDialAnimationTriggered(true);
+    }
+  }, [partnersSection.isVisible, dialAnimationTriggered]);
+
+  // Track when user reaches bottom of page
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Check if user is within 100px of the bottom
+      const isNearBottom = scrollTop + windowHeight >= documentHeight - 300;
+      setIsAtBottom(isNearBottom);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Preload Calendly resources and create cached iframe
   useEffect(() => {
@@ -250,7 +278,7 @@ export default function Home() {
       {/* Founders */}
       <section 
         ref={foundersSection.elementRef}
-        id="founders" 
+        id="about" 
         className={`section bg-gradient-to-b from-white/[0.02] to-transparent fade-in-section ${foundersSection.isVisible ? 'visible' : ''}`} 
         aria-labelledby="founders-heading"
       >
@@ -284,7 +312,7 @@ export default function Home() {
             {/* Thomas Image */}
             <div className="overflow-hidden order-3 md:order-4">
               <Image
-                src="/Thomas.png"
+                src="/Thomas.jpg"
                 alt="Thomas - Finance-driven entrepreneur"
                 width={400}
                 height={300}
@@ -488,6 +516,148 @@ export default function Home() {
                 Understanding that successful fundraising is a methodical process requiring time, strategy, and relationship building.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partners */}
+      <section 
+        ref={partnersSection.elementRef}
+        id="partners" 
+        className={`section bg-gradient-to-b from-white/[0.02] to-transparent fade-in-section ${partnersSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="partners-heading"
+      >
+        <div className="container">
+          <div className="text-start mb-12">
+            <p id="partners-heading" className="eyebrow mb-3">Our Partners</p>
+            <h2 className="heading-lg">Our Professional Network</h2>
+          </div>
+          
+          {/* Professional Network Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {/* VC Contacts */}
+            <div className="text-center">
+              <div className="text-8xl md:text-9xl font-bold text-foreground mb-4">
+                <AnimatedCounter
+                  end={100}
+                  duration={3000}
+                  suffix="+"
+                  trigger={partnersSection.isVisible}
+                />
+              </div>
+              <div className="text-xl text-muted">VC Contacts</div>
+            </div>
+
+            {/* Investment Countries */}
+            <div className="text-center">
+              <div className="text-8xl md:text-9xl font-bold text-foreground mb-4">
+                <AnimatedCounter
+                  end={25}
+                  duration={3000}
+                  suffix="+"
+                  trigger={partnersSection.isVisible}
+                />
+              </div>
+              <div className="text-xl text-muted">Investment Countries</div>
+            </div>
+          </div>
+          <div ref={partnersCards.containerRef} className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            {/* Overkill Capital */}
+            <div ref={partnersCards.setCardRef(0)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(0) ? 'visible' : ''}`}>
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+                <Image
+                  src="/partners/overkill.svg"
+                  alt="Overkill Capital logo"
+                  width={120}
+                  height={30}
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Overkill Capital</h4>
+                <p className="text-sm text-muted">Riga, Latvia</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  A dynamic venture capital firm with multiple partners, specializing in early-stage investments across the Baltic region. Known for their hands-on approach and deep understanding of emerging markets.
+                </p>
+              </div>
+            </div>
+
+            {/* Cherry VC */}
+            <div ref={partnersCards.setCardRef(1)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(1) ? 'visible' : ''}`}>
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+                <Image
+                  src="/partners/cherry-cropped.svg"
+                  alt="Cherry VC logo"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Cherry VC</h4>
+                <p className="text-sm text-muted">Amsterdam, Netherlands</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  A focused venture capital partner based in Amsterdam, bringing European expertise to global opportunities. Their strategic approach combines local market knowledge with international investment experience.
+                </p>
+              </div>
+            </div>
+
+            {/* Point Nine Capital */}
+            <div ref={partnersCards.setCardRef(2)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(2) ? 'visible' : ''}`}>
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+                <Image
+                  src="/partners/pointNine.png"
+                  alt="Point Nine Capital logo"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Point Nine Capital</h4>
+                <p className="text-sm text-muted">Berlin, Germany</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  A leading European venture capital firm with a single dedicated partner, focusing on B2B SaaS and marketplace investments. Renowned for their technical expertise and founder-friendly approach.
+                </p>
+              </div>
+            </div>
+
+            {/* Transform VC */}
+            <div ref={partnersCards.setCardRef(3)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(3) ? 'visible' : ''}`}>
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+                <Image
+                  src="/partners/transformVC.svg"
+                  alt="Transform VC logo"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Transform VC</h4>
+                <p className="text-sm text-muted">New York City, USA</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  A New York-based venture capital partner specializing in transformative technologies and innovative business models. Their global perspective and extensive network provide unique opportunities for portfolio companies.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Contact Us Button */}
+          <div className="flex justify-center mt-16 relative">
+            {/* Black line behind button */}
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-black z-0"></div>
+            <button
+              onClick={() => {
+                trackUserInteraction('contact-button-click', 'partners-contact');
+                setPrefilledEmail('');
+                setIsModalOpen(true);
+              }}
+              className="bg-black group whitespace-nowrap text-white px-8 py-4 text-lg font-medium transition-all duration-200 rounded-2xl flex items-center gap-3 relative z-10"
+            >
+              Contact Us
+              <AnimatedArrowIcon size="lg" isActive={isAtBottom} />
+            </button>
           </div>
         </div>
       </section>

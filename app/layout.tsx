@@ -174,9 +174,9 @@ export default function RootLayout({
         <main className="bg-background">{children}</main>
         <footer className="section">
           <div className="container flex flex-col md:flex-row justify-between items-start gap-4 md:gap-[30px]">
-            <p className="text-muted text-italic max-w-[600px]">Legal Disclaimer: We are not a licensed broker, dealer, or financial intermediary. Our role is limited to providing introductory and strategic consulting services. We do not execute, facilitate, or guarantee any transactions. All decisions and actions taken based on our services are at your sole discretion and risk.</p>
+            <p className="text-muted text-sm text-italic max-w-[600px]">Legal Disclaimer: We are not a licensed broker, dealer, or financial intermediary. Our role is limited to providing introductory and strategic consulting services. We do not execute, facilitate, or guarantee any transactions. All decisions and actions taken based on our services are at your sole discretion and risk.</p>
             <div className="flex flex-col items-end gap-2">
-              <p className="text-muted text-nowrap">© {new Date().getFullYear()} Nuverum Ventures</p>
+              <p className="text-muted text-sm text-nowrap">© {new Date().getFullYear()} Nuverum Ventures</p>
               <Image src="/logos/SVG/favicon-light.svg" alt="Nuverum Ventures" className="sm:absolute-bottom-2" width={50} height={50} />
             </div>
           </div>
