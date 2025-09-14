@@ -28,6 +28,7 @@ export default function Home() {
   const ourApproachSection = useIntersectionObserver();
   const servicesSection = useIntersectionObserver();
   const approachSection = useIntersectionObserver();
+  const partnersSection = useIntersectionObserver();
 
   // Staggered card animations
   const servicesCards = useStaggeredIntersectionObserver(3, 200);
@@ -486,6 +487,111 @@ export default function Home() {
               </div>
               <p className="card-body">
                 Understanding that successful fundraising is a methodical process requiring time, strategy, and relationship building.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partners */}
+      <section 
+        ref={partnersSection.elementRef}
+        id="partners" 
+        className={`section bg-gradient-to-b from-white/[0.02] to-transparent fade-in-section ${partnersSection.isVisible ? 'visible' : ''}`} 
+        aria-labelledby="partners-heading"
+      >
+        <div className="container">
+          <div className="text-center mb-12">
+            <p id="partners-heading" className="eyebrow mb-3">Our Network</p>
+            <h2 className="heading-lg mb-8">Our professional network</h2>
+            
+            {/* Network Stats Circles */}
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-16">
+              <div className="flex items-center justify-center w-48 h-48 rounded-full border-2 border-white/20 bg-white/5">
+                <div className="text-center">
+                  <div className="text-2xl font-semibold mb-1">100+ VC contacts</div>
+                </div>
+              </div>
+              <div className="flex items-center justify-center w-48 h-48 rounded-full border-2 border-white/20 bg-white/5">
+                <div className="text-center">
+                  <div className="text-2xl font-semibold mb-1">25+ investment</div>
+                  <div className="text-2xl font-semibold">countries</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-semibold mb-2">Our institutional partners</h3>
+          </div>
+          
+          {/* Partners Grid */}
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Overkill Capital */}
+            <div className="text-center">
+              <div className="w-full h-32 mb-4 flex items-center justify-center bg-white/10 rounded-lg border border-white/20">
+                <Image
+                  src="/partners/overkill.jpg"
+                  alt="Overkill Capital logo"
+                  width={120}
+                  height={60}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <p className="text-muted text-sm">
+                <strong>Overkill Capital</strong><br />
+                Riga-based venture capital firm with multiple partners focused on high-growth technology companies across the Baltics and beyond.
+              </p>
+            </div>
+            
+            {/* Cherry VC */}
+            <div className="text-center">
+              <div className="w-full h-32 mb-4 flex items-center justify-center bg-white/10 rounded-lg border border-white/20">
+                <Image
+                  src="/partners/cherry.avif"
+                  alt="Cherry VC logo"
+                  width={120}
+                  height={60}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <p className="text-muted text-sm">
+                <strong>Cherry VC</strong><br />
+                Amsterdam-based early-stage venture capital fund investing in ambitious European tech startups with global potential.
+              </p>
+            </div>
+            
+            {/* Point Nine Capital */}
+            <div className="text-center">
+              <div className="w-full h-32 mb-4 flex items-center justify-center bg-white/10 rounded-lg border border-white/20">
+                <Image
+                  src="/partners/pointNine.png"
+                  alt="Point Nine Capital logo"
+                  width={120}
+                  height={60}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <p className="text-muted text-sm">
+                <strong>Point Nine Capital</strong><br />
+                Berlin-headquartered venture capital firm specializing in early-stage B2B software and marketplace investments across Europe.
+              </p>
+            </div>
+            
+            {/* Transform VC */}
+            <div className="text-center">
+              <div className="w-full h-32 mb-4 flex items-center justify-center bg-white/10 rounded-lg border border-white/20">
+                <Image
+                  src="/partners/transformVC.svg"
+                  alt="Transform VC logo"
+                  width={120}
+                  height={60}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <p className="text-muted text-sm">
+                <strong>Transform VC</strong><br />
+                New York City-based venture capital firm focused on transformative technology companies disrupting traditional industries.
               </p>
             </div>
           </div>
