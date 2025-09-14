@@ -10,6 +10,7 @@ import TypingInput from "./components/TypingInput";
 import AnimatedCounter from "./components/AnimatedCounter";
 import { usePerformanceTracking } from "./hooks/usePerformanceTracking";
 import { useIntersectionObserver, useStaggeredIntersectionObserver } from "./hooks/useIntersectionObserver";
+import { useLoadingState } from "./hooks/useLoadingState";
 import BlurText from "./components/BlurText";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
   const [dialAnimationTriggered, setDialAnimationTriggered] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isLoading = useLoadingState();
 
   // Intersection observers for fade-in animations
   const missionSection = useIntersectionObserver();
@@ -68,11 +70,11 @@ export default function Home() {
   }, []);
 
   // Auto-trigger animation every 5 seconds (twice in succession)
-  // Only trigger if user is not typing in email input
+  // Only trigger if user is not typing in email input and not loading
   useEffect(() => {
     const triggerAnimation = () => {
-      // Don't trigger animation if user is typing in email
-      if (isTypingInEmail) return;
+      // Don't trigger animation if user is typing in email or still loading
+      if (isTypingInEmail || isLoading) return;
 
       // First animation
       setIsAnimating(true);
@@ -83,7 +85,7 @@ export default function Home() {
       // Second animation after 200ms
       setTimeout(() => {
         // Check again before second animation
-        if (isTypingInEmail) return;
+        if (isTypingInEmail || isLoading) return;
         
         setIsAnimating(true);
         setTimeout(() => {
@@ -95,7 +97,7 @@ export default function Home() {
     const interval = setInterval(triggerAnimation, 5000);
 
     return () => clearInterval(interval);
-  }, [isTypingInEmail]);
+  }, [isTypingInEmail, isLoading]);
 
   // Scroll to next section function
   const scrollToNextSection = () => {
@@ -536,8 +538,8 @@ export default function Home() {
           {/* Professional Network Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {/* VC Contacts */}
-            <div className="text-center">
-              <div className="text-8xl md:text-9xl font-bold text-foreground mb-4">
+            <div className="text-center max-sm:text-start">
+              <div className="text-9xl font-bold text-foreground mb-4">
                 <AnimatedCounter
                   end={100}
                   duration={3000}
@@ -549,8 +551,8 @@ export default function Home() {
             </div>
 
             {/* Investment Countries */}
-            <div className="text-center">
-              <div className="text-8xl md:text-9xl font-bold text-foreground mb-4">
+            <div className="text-center max-sm:text-start">
+              <div className="text-9xl font-bold text-foreground mb-4">
                 <AnimatedCounter
                   end={25}
                   duration={3000}

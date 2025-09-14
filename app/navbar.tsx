@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import ContactModal from './components/ContactModal'
 import AnimatedArrowIcon from './components/AnimatedArrowIcon'
+import { useLoadingState } from './hooks/useLoadingState'
 
 const navigation = [
   { name: 'Approach', href: '#approach', current: false },
@@ -21,27 +22,9 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const [hasScrolledPastInitial, setHasScrolledPastInitial] = useState(false)
   const [shouldShowWhiteTheme, setShouldShowWhiteTheme] = useState(false)
-
-  // Listen for loading complete event
-  useEffect(() => {
-    const handleLoadingComplete = () => {
-      setIsLoading(false)
-    }
-
-    window.addEventListener('loadingComplete', handleLoadingComplete)
-    
-    // Check if already loaded
-    if (document.readyState === 'complete') {
-      setIsLoading(false)
-    }
-
-    return () => {
-      window.removeEventListener('loadingComplete', handleLoadingComplete)
-    }
-  }, [])
+  const isLoading = useLoadingState()
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -125,7 +108,7 @@ export default function Navbar() {
                     {/* Contact Us button - full height in normal flow */}
                     <button
                       onClick={() => setIsContactModalOpen(true)}
-                      className="bg-white group whitespace-nowrap text-accent-foreground border border-white px-6 text-sm font-medium transition-all duration-200 h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2 contact-button"
+                      className="bg-white group whitespace-nowrap text-accent-foreground border border-white px-6 text-sm font-light transition-all duration-200 h-full flex items-center gap-2 -mr-[17px] -mt-2 -mb-2 contact-button"
                     >
                       Contact Us
                       <AnimatedArrowIcon />

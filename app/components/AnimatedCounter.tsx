@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import { useLoadingState } from '../hooks/useLoadingState';
 
 interface AnimatedCounterProps {
   end: number;
@@ -19,9 +20,10 @@ export default function AnimatedCounter({
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
   const [showSuffix, setShowSuffix] = useState(false);
+  const isLoading = useLoadingState();
 
   useEffect(() => {
-    if (!trigger) return;
+    if (!trigger || isLoading) return;
 
     let startTime: number;
     let animationFrame: number;
@@ -53,7 +55,7 @@ export default function AnimatedCounter({
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [end, duration, trigger]);
+  }, [end, duration, trigger, isLoading]);
 
   return (
     <span className={className}>

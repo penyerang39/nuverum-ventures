@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLoadingState } from './useLoadingState';
 
 interface UseIntersectionObserverOptions {
   threshold?: number;
@@ -9,10 +10,11 @@ export function useIntersectionObserver(options: UseIntersectionObserverOptions 
   const { threshold = 0.1, rootMargin = '0px' } = options;
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
+  const isLoading = useLoadingState();
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element || isLoading) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -32,7 +34,7 @@ export function useIntersectionObserver(options: UseIntersectionObserverOptions 
     return () => {
       observer.unobserve(element);
     };
-  }, [threshold, rootMargin]);
+  }, [threshold, rootMargin, isLoading]);
 
   return { elementRef, isVisible };
 }
@@ -47,10 +49,11 @@ export function useStaggeredIntersectionObserver(
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isLoading = useLoadingState();
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || cardCount === 0) return;
+    if (!container || cardCount === 0 || isLoading) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -75,7 +78,7 @@ export function useStaggeredIntersectionObserver(
     return () => {
       observer.unobserve(container);
     };
-  }, [cardCount, staggerDelay, threshold, rootMargin]);
+  }, [cardCount, staggerDelay, threshold, rootMargin, isLoading]);
 
   const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
     cardRefs.current[index] = el;

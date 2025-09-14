@@ -1,5 +1,6 @@
 import { motion, Transition, Easing } from 'motion/react';
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { useLoadingState } from '../hooks/useLoadingState';
 
 type BlurTextProps = {
   text?: string;
@@ -46,9 +47,10 @@ const BlurText: React.FC<BlurTextProps> = ({
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
+  const isLoading = useLoadingState();
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current || isLoading) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -60,7 +62,7 @@ const BlurText: React.FC<BlurTextProps> = ({
     );
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+  }, [threshold, rootMargin, isLoading]);
 
   const defaultFrom = useMemo(
     () => ({ filter: 'blur(10px)', opacity: 0 }),

@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 export default function LoadingSplash() {
   const [isVisible, setIsVisible] = useState(true);
+  const [isFadingOut, setIsFadingOut] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const startTimeRef = useRef<number>(Date.now());
   const isFirstLoadRef = useRef<boolean>(true);
@@ -21,13 +22,17 @@ export default function LoadingSplash() {
     // Hide splash screen when page is fully loaded
     const handleLoad = () => {
       const elapsedTime = Date.now() - startTimeRef.current;
-      const minShowTime = isFirstLoadRef.current ? 1000 : 500;
+      const minShowTime = isFirstLoadRef.current ? 4000 : 3000;
       const remainingTime = Math.max(0, minShowTime - elapsedTime);
 
       setTimeout(() => {
-        setIsVisible(false);
-        // Dispatch custom event to notify navbar
-        window.dispatchEvent(new CustomEvent('loadingComplete'));
+        setIsFadingOut(true);
+        // Wait for fade animation to complete before hiding
+        setTimeout(() => {
+          setIsVisible(false);
+          // Dispatch custom event to notify navbar and other components
+          window.dispatchEvent(new CustomEvent('loadingComplete'));
+        }, 500); // 500ms fade duration
       }, remainingTime);
     };
 
@@ -38,8 +43,13 @@ export default function LoadingSplash() {
       const remainingTime = Math.max(0, minShowTime - elapsedTime);
 
       setTimeout(() => {
-        setIsVisible(false);
-        window.dispatchEvent(new CustomEvent('loadingComplete'));
+        setIsFadingOut(true);
+        // Wait for fade animation to complete before hiding
+        setTimeout(() => {
+          setIsVisible(false);
+          // Dispatch custom event to notify navbar and other components
+          window.dispatchEvent(new CustomEvent('loadingComplete'));
+        }, 500); // 500ms fade duration
       }, remainingTime);
     } else {
       window.addEventListener('load', handleLoad);
@@ -53,7 +63,9 @@ export default function LoadingSplash() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500 ease-out ${
+      isFadingOut ? 'opacity-0' : 'opacity-100'
+    }`}>
       <div className="animate-pulse">
         <Image
           src="/logos/SVG/nuverumBlack.svg"

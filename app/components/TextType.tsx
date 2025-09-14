@@ -2,6 +2,7 @@
 
 import { ElementType, useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { useLoadingState } from '../hooks/useLoadingState';
 
 interface TextTypeProps {
   className?: string;
@@ -48,6 +49,7 @@ const TextType = ({
   const [displayedText, setDisplayedText] = useState('');
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const isLoading = useLoadingState();
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
   const cursorRef = useRef<HTMLSpanElement>(null);
@@ -98,7 +100,7 @@ const TextType = ({
   }, [showCursor, cursorBlinkDuration]);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || isLoading) return;
 
     let timeout: NodeJS.Timeout;
 
@@ -161,6 +163,7 @@ const TextType = ({
     loop,
     initialDelay,
     isVisible,
+    isLoading,
     reverseMode,
     variableSpeed,
     onSentenceComplete
