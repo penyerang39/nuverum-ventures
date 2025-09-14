@@ -30,7 +30,7 @@ interface ContactModalProps {
   calendlyReady?: boolean
 }
 
-export default function ContactModal({ isOpen, onClose, calendlyReady = false }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, prefilledEmail = '', calendlyReady = false }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false)
@@ -43,6 +43,7 @@ export default function ContactModal({ isOpen, onClose, calendlyReady = false }:
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<EmailFormData>({
     resolver: zodResolver(emailSchema),
   })
@@ -57,6 +58,13 @@ export default function ContactModal({ isOpen, onClose, calendlyReady = false }:
       }
     }
   }, [isOpen, trackCustomMetric, calendlyReady])
+
+  // Set prefilled email when modal opens
+  useEffect(() => {
+    if (isOpen && prefilledEmail) {
+      setValue('from', prefilledEmail)
+    }
+  }, [isOpen, prefilledEmail, setValue])
 
 
   const onSubmit = async (data: EmailFormData) => {

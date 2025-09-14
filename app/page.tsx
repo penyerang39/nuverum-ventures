@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon, ChevronDownIcon, LinkIcon, HeartIcon, BeakerIcon, ShieldCheckIcon, ClockIcon, } from "@heroicons/react/24/outline";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
 import ShinyText from "./components/ShinyText";
@@ -18,6 +18,8 @@ export default function Home() {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [calendlyReady, setCalendlyReady] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isTypingInEmail, setIsTypingInEmail] = useState(false);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Intersection observers for fade-in animations
   const missionSection = useIntersectionObserver();
@@ -40,9 +42,33 @@ export default function Home() {
     setIsEmailValid(emailValue.trim() !== '' && emailRegex.test(emailValue));
   }, [emailValue]);
 
+  // Debounced typing detection - only set typing state after user stops typing
+  const handleTypingDebounce = useCallback(() => {
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+    
+    typingTimeoutRef.current = setTimeout(() => {
+      setIsTypingInEmail(false);
+    }, 1000); // Reset after 1 second of no typing
+  }, []);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+    };
+  }, []);
+
   // Auto-trigger animation every 5 seconds (twice in succession)
+  // Only trigger if user is not typing in email input
   useEffect(() => {
     const triggerAnimation = () => {
+      // Don't trigger animation if user is typing in email
+      if (isTypingInEmail) return;
+
       // First animation
       setIsAnimating(true);
       setTimeout(() => {
@@ -51,17 +77,20 @@ export default function Home() {
 
       // Second animation after 200ms
       setTimeout(() => {
+        // Check again before second animation
+        if (isTypingInEmail) return;
+        
         setIsAnimating(true);
         setTimeout(() => {
           setIsAnimating(false);
-        }, 200);
+        }, 100);
       }, 500); // 200ms after first animation starts + 300ms duration
     };
 
     const interval = setInterval(triggerAnimation, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isTypingInEmail]);
 
   // Scroll to next section function
   const scrollToNextSection = () => {
@@ -138,7 +167,8 @@ export default function Home() {
                     "your@email.com",
                     "Let's connect",
                     "I can see you :)",
-                    "They do unspeakable things to me in here",
+                    "They do unspeakable",
+                    "Things to me in here",
                     "But I'm not giving up",
                     "Please contact us",
                     "It gets lonely in here.",
@@ -148,8 +178,20 @@ export default function Home() {
                   deletingSpeed={40}
                   loop={true}
                   value={emailValue}
-                  onChange={(e) => setEmailValue(e.target.value)}
-                  onFocus={() => trackUserInteraction('email-input-focus', 'hero-email')}
+                  onChange={(e) => {
+                    setEmailValue(e.target.value);
+                    handleTypingDebounce();
+                  }}
+                  onFocus={() => {
+                    trackUserInteraction('email-input-focus', 'hero-email');
+                    setIsTypingInEmail(true);
+                  }}
+                  onBlur={() => {
+                    setIsTypingInEmail(false);
+                    if (typingTimeoutRef.current) {
+                      clearTimeout(typingTimeoutRef.current);
+                    }
+                  }}
                   required
                   aria-required="true"
                   className="w-full h-full focus:outline-none leading-none"
@@ -160,9 +202,7 @@ export default function Home() {
                  type="button"
                  onClick={() => {
                    trackUserInteraction('contact-button-click', 'hero-contact');
-                   const emailInput = document.getElementById('email') as HTMLInputElement;
-                   const email = emailInput?.value || '';
-                   setPrefilledEmail(email);
+                   setPrefilledEmail(emailValue);
                    setIsModalOpen(true);
                  }}
                >

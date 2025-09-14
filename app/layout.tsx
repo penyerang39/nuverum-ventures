@@ -177,7 +177,7 @@ export default function RootLayout({
             <p className="text-muted text-italic max-w-[600px]">Legal Disclaimer: We are not a licensed broker, dealer, or financial intermediary. Our role is limited to providing introductory and strategic consulting services. We do not execute, facilitate, or guarantee any transactions. All decisions and actions taken based on our services are at your sole discretion and risk.</p>
             <div className="flex flex-col items-end gap-2">
               <p className="text-muted text-nowrap">© {new Date().getFullYear()} Nuverum Ventures</p>
-              <Image src="/logos/SVG/favicon-light.svg" alt="Nuverum Ventures" width={50} height={50} />
+              <Image src="/logos/SVG/favicon-light.svg" alt="Nuverum Ventures" className="sm:absolute-bottom-2" width={50} height={50} />
             </div>
           </div>
         </footer>
