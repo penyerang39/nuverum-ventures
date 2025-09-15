@@ -18,6 +18,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overscroll-behavior: none;
 }
 
 body {
@@ -26,6 +27,7 @@ body {
   font-family: var(--font-roboto), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
 }
 
 main {
@@ -133,6 +135,7 @@ main {
 /* Add right border to cards that have a sibling to their right */
 .grid .card:not(:last-child) {
   border-right: 1px solid var(--border);
+  margin-right: -1px; /* Pull the border into the gap */
 }
 
 .card-no-padding {
@@ -332,4 +335,58 @@ main {
 .fade-in-card.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Footer Styles */
+.footer {
+  background: #000000;
+  color: #ffffff;
+  padding-block: 64px;
+  position: relative;
+  z-index: 10;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .footer { 
+    padding-block: 96px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+  }
+}
+
+/* Mobile favicon positioning in overscroll area */
+.mobile-favicon-container {
+  position: fixed;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  z-index: 30;
+  pointer-events: none;
+  display: block;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .mobile-favicon-container {
+    display: none;
+  }
+}
+
+.mobile-favicon {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }

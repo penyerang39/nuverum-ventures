@@ -563,10 +563,10 @@ export default function Home() {
               <div className="text-xl text-muted">Investment Countries</div>
             </div>
           </div>
-          <div ref={partnersCards.containerRef} className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div ref={partnersCards.containerRef} className="grid gap-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {/* Overkill Capital */}
             <div ref={partnersCards.setCardRef(0)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(0) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Image
                   src="/partners/overkill.svg"
                   alt="Overkill Capital logo"
@@ -586,7 +586,7 @@ export default function Home() {
 
             {/* Cherry VC */}
             <div ref={partnersCards.setCardRef(1)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(1) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Image
                   src="/partners/cherry-cropped.svg"
                   alt="Cherry VC logo"
@@ -606,7 +606,7 @@ export default function Home() {
 
             {/* Point Nine Capital */}
             <div ref={partnersCards.setCardRef(2)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(2) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Image
                   src="/partners/pointNine.png"
                   alt="Point Nine Capital logo"
@@ -626,7 +626,7 @@ export default function Home() {
 
             {/* Transform VC */}
             <div ref={partnersCards.setCardRef(3)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(3) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-end justify-center mb-4">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Image
                   src="/partners/transformVC.svg"
                   alt="Transform VC logo"
