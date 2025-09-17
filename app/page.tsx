@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import { MagnifyingGlassIcon, BriefcaseIcon, ChevronDownIcon, LinkIcon, HeartIcon, BeakerIcon, ShieldCheckIcon, ClockIcon, } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, BriefcaseIcon, ChevronDownIcon, LinkIcon, HeartIcon, BeakerIcon, ShieldCheckIcon, ClockIcon, FireIcon, ChartBarIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect, useRef, useCallback } from "react";
 import AnimatedArrowIcon from "./components/AnimatedArrowIcon";
 import ContactModal from "./components/ContactModal";
@@ -37,7 +37,7 @@ export default function Home() {
 
   // Staggered card animations
   const servicesCards = useStaggeredIntersectionObserver(3, 200);
-  const approachCards = useStaggeredIntersectionObserver(4, 150);
+  const approachCards = useStaggeredIntersectionObserver(3, 150);
   const partnersCards = useStaggeredIntersectionObserver(4, 150);
 
   // Performance tracking
@@ -460,62 +460,49 @@ export default function Home() {
         <div className="container">
           <div className="text-start mb-8">
             <p id="approach-heading" className="eyebrow mb-3">Our Approach</p>
-            <h2 className="heading-lg">Selective partnerships, strategic focus</h2>
+            <h2 className="heading-lg">The 3 P Framework</h2>
             <p className="text-muted max-w-2xl mt-4">
               Every partnership begins with careful evaluation. We screen opportunities based on clear criteria that ensure mutual success and meaningful outcomes.
             </p>
           </div>
           
-          <div ref={approachCards.containerRef} className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-            {/* Focus Sectors */}
+          <div ref={approachCards.containerRef} className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {/* Passion */}
             <div ref={approachCards.setCardRef(0)} className={`card fade-in-card ${approachCards.isCardVisible(0) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
-                 <BeakerIcon className="size-full" aria-hidden/>
+                 <FireIcon className="size-full" aria-hidden/>
                 </div>
-                <div className="card-title">Focus Sectors</div>
+                <div className="card-title">Passion</div>
               </div>
               <p className="card-body">
-                Primary expertise in AI, fintech, and SaaS, while remaining open to exceptional opportunities across all industries and verticals.
+                We seek founders driven by genuine passion and deep commitment to creating meaningful impact. We partner with entrepreneurs who view their companies as platforms for substantial change, not quick exits. This intrinsic motivation translates into resilience and authentic leadership that attracts both talent and investors.
               </p>
             </div>
 
-            {/* Market-Ready Concepts */}
+            {/* Potential */}
             <div ref={approachCards.setCardRef(1)} className={`card fade-in-card ${approachCards.isCardVisible(1) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
-                <ShieldCheckIcon className="size-full" aria-hidden/>
+                <ChartBarIcon className="size-full" aria-hidden/>
                 </div>
-                <div className="card-title">Market-Ready Concepts</div>
+                <div className="card-title">Potential</div>
               </div>
               <p className="card-body">
-                Well-defined ideas with clear execution plans, from <strong>pre-seed to Series A+</strong>. Concepts must be investor-presentation ready.
+                We focus on ventures that represent the founder&apos;s primary commitment with scale to justify significant investment. We work exclusively with projects that command founders&apos; full attention, not side ventures. We seek opportunities with substantial market potential that can support meaningful growth trajectories.
               </p>
             </div>
 
-            {/* Founder Commitment */}
+            {/* Possibility */}
             <div ref={approachCards.setCardRef(2)} className={`card fade-in-card ${approachCards.isCardVisible(2) ? 'visible' : ''}`}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
-                <HeartIcon className="size-full" aria-hidden/>
+                <CheckCircleIcon className="size-full" aria-hidden/>
                 </div>
-                <div className="card-title">Genuine Passion</div>
+                <div className="card-title">Possibility</div>
               </div>
               <p className="card-body">
-                Founders with authentic dedication and unwavering commitment to their vision. Passion translates into persistence and resilience.
-              </p>
-            </div>
-
-            {/* Strategic Patience */}
-            <div ref={approachCards.setCardRef(3)} className={`card fade-in-card ${approachCards.isCardVisible(3) ? 'visible' : ''}`}>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="card-icon-inline" aria-hidden>
-                <ClockIcon className="size-full" aria-hidden/>
-                </div>
-                <div className="card-title">Strategic Patience</div>
-              </div>
-              <p className="card-body">
-                Understanding that successful fundraising is a methodical process requiring time, strategy, and relationship building.
+                We maintain high standards because we believe in setting founders up for success. Rather than pursuing &quot;maybe&quot; opportunities, we conduct thorough assessments to ensure realistic paths to successful fundraising. Our reputation is built on presenting well-prepared, investment-ready companies with honest feedback when needed.
               </p>
             </div>
           </div>
@@ -547,7 +534,7 @@ export default function Home() {
                   trigger={partnersSection.isVisible}
                 />
               </div>
-              <div className="text-xl text-muted">VC Contacts</div>
+              <div className="text-xl text-muted">VC Connections</div>
             </div>
 
             {/* Investment Countries */}
@@ -566,7 +553,7 @@ export default function Home() {
           <div ref={partnersCards.containerRef} className="grid gap-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {/* Overkill Capital */}
             <div ref={partnersCards.setCardRef(0)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(0) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
                 <Image
                   src="/partners/overkill.svg"
                   alt="Overkill Capital logo"
@@ -586,7 +573,7 @@ export default function Home() {
 
             {/* Cherry VC */}
             <div ref={partnersCards.setCardRef(1)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(1) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
                 <Image
                   src="/partners/cherry-cropped.svg"
                   alt="Cherry VC logo"
@@ -626,7 +613,7 @@ export default function Home() {
 
             {/* Transform VC */}
             <div ref={partnersCards.setCardRef(3)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(3) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
                 <Image
                   src="/partners/transformVC.svg"
                   alt="Transform VC logo"
