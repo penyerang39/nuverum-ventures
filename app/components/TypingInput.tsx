@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import TextType from './TextType';
+import { useLoadingState } from '../hooks/useLoadingState';
 
 interface TypingInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholderTexts?: string[];
@@ -25,12 +26,29 @@ const TypingInput = ({
 }: TypingInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
+  const [canStartTyping, setCanStartTyping] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const isLoading = useLoadingState();
 
   // Show placeholder when input is empty and not focused
   useEffect(() => {
     setShowPlaceholder(!value && !isFocused);
   }, [value, isFocused]);
+
+  // Handle typing animation delay - start 1000ms after loading is complete
+  useEffect(() => {
+    if (isLoading) {
+      setCanStartTyping(false);
+      return;
+    }
+
+    // Add 1000ms delay after loading is complete before starting typing animation
+    const timer = setTimeout(() => {
+      setCanStartTyping(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);
@@ -63,20 +81,26 @@ const TypingInput = ({
       />
       {showPlaceholder && (
         <div className="absolute inset-0 pointer-events-none flex items-center">
-          <TextType
-            text={placeholderTexts}
-            typingSpeed={typingSpeed}
-            pauseDuration={pauseDuration}
-            deletingSpeed={deletingSpeed}
-            loop={loop}
-            onSentenceComplete={onPlaceholderComplete}
-            className="text-muted"
-            showCursor={true}
-            cursorCharacter="|"
-            cursorBlinkDuration={0.5}
-            cursorClassName="text-muted"
-            textColors={['#5b646e']}
-          />
+          {canStartTyping ? (
+            <TextType
+              text={placeholderTexts}
+              typingSpeed={typingSpeed}
+              pauseDuration={pauseDuration}
+              deletingSpeed={deletingSpeed}
+              loop={loop}
+              onSentenceComplete={onPlaceholderComplete}
+              className="text-muted"
+              showCursor={true}
+              cursorCharacter="|"
+              cursorBlinkDuration={0.5}
+              cursorClassName="text-muted"
+              textColors={['#5b646e']}
+            />
+          ) : (
+            <span className="text-muted">
+              {placeholderTexts[0]}
+            </span>
+          )}
         </div>
       )}
     </div>

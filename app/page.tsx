@@ -196,12 +196,6 @@ export default function Home() {
                     "Enter your email",
                     "your@email.com",
                     "Let's connect",
-                    "I can see you :)",
-                    "They do unspeakable",
-                    "Things to me in here",
-                    "But I'm not giving up",
-                    "Please contact us",
-                    "It gets lonely in here.",
                   ]}
                   typingSpeed={60}
                   pauseDuration={2500}
