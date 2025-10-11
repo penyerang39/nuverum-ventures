@@ -544,7 +544,7 @@ export default function Home() {
               <div className="text-xl text-muted">Investment Countries</div>
             </div>
           </div>
-          <div ref={partnersCards.containerRef} className="grid gap-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div ref={partnersCards.containerRef} className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
             {/* Overkill Capital */}
             <div ref={partnersCards.setCardRef(0)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(0) ? 'visible' : ''}`}>
               <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
@@ -627,12 +627,12 @@ export default function Home() {
 
             {/* B Combinator */}
             <div ref={partnersCards.setCardRef(3)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(3) ? 'visible' : ''}`}>
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
+              <div className="w-full h-20 p-0 bg-primary/10 rounded-lg flex items-start justify-start mt-4">
                 <Image
                   src="/partners/bCombinator.png"
                   alt="B Combinator logo"
-                  width={120}
-                  height={40}
+                  width={200}
+                  height={20}
                   className="h-16 w-auto object-contain"
                 />
               </div>
