@@ -623,8 +623,10 @@ export default function Home() {
                   A New York-based venture capital partner specializing in transformative technologies and innovative business models. Their global perspective and extensive network provide unique opportunities for portfolio companies.
                 </p>
               </div>
-              {/* B Combinator */ }
-              <div ref={partnersCards.setCardRef(3)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(3) ? 'visible' : ''}`}>
+            </div>
+
+            {/* B Combinator */}
+            <div ref={partnersCards.setCardRef(3)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(3) ? 'visible' : ''}`}>
               <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
                 <Image
                   src="/partners/bCombinator.png"
