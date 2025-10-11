@@ -63,7 +63,7 @@ export default function LoadingSplash() {
   if (!isVisible) return null;
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500 ease-out ${
+    <div className={`fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black transition-opacity duration-500 ease-out ${
       isFadingOut ? 'opacity-0' : 'opacity-100'
     }`}>
       <div className="animate-pulse">

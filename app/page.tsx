@@ -623,6 +623,23 @@ export default function Home() {
                   A New York-based venture capital partner specializing in transformative technologies and innovative business models. Their global perspective and extensive network provide unique opportunities for portfolio companies.
                 </p>
               </div>
+              {/* B Combinator */ }
+              <div ref={partnersCards.setCardRef(3)} className={`card text-start fade-in-card ${partnersCards.isCardVisible(3) ? 'visible' : ''}`}>
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
+                <Image
+                  src="/partners/bCombinator.png"
+                  alt="B Combinator logo"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">B Combinator</h4>
+                <p className="text-sm text-muted">Barcelona, Spain</p>
+                <p className="text-sm text-muted leading-relaxed">
+                B Combinator is a Barcelona-based venture capital fund investing in transformative technologies and innovative business models, leveraging a global network to unlock exceptional growth opportunities for founders.                </p>
+              </div>
             </div>
           </div>
           
