@@ -110,15 +110,10 @@ export const metadata: Metadata = {
     },
   },
   
-  // Verification codes - Add your actual codes from Google Search Console, Bing Webmaster Tools, etc.
-  // verification: {
-  //   google: 'your-google-site-verification-code',
-  //   yandex: 'your-yandex-verification-code',
-  //   yahoo: 'your-yahoo-verification-code',
-  //   other: {
-  //     'msvalidate.01': 'your-bing-verification-code',
-  //   },
-  // },
+  // Verification codes
+  verification: {
+    google: 'M35pjyXOH0hDBwAdlKeBFtXjJFhxYOMzGyidEYsdq64',
+  },
 };
 
 export default function RootLayout({

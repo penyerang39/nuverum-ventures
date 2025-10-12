@@ -26,7 +26,6 @@ export default function ContactButton() {
 
   return (
     <div className="flex justify-center mt-16 relative">
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-black z-0"></div>
       <button
         onClick={() => {
           trackUserInteraction('contact-button-click', 'partners-contact');
