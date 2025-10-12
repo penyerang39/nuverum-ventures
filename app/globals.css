@@ -380,8 +380,6 @@ main {
   padding-block: 64px;
   position: relative;
   z-index: 10;
-  transform: translateY(100%);
-  will-change: transform;
 }
 
 @media (min-width: 768px) {
@@ -392,6 +390,8 @@ main {
     left: 0;
     right: 0;
     z-index: 20;
+    transform: translateY(100%);
+    will-change: transform;
   }
 }
 
