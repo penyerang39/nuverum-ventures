@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./navbar";
 import LoadingSplash from "./components/LoadingSplash";
 import Footer from "./components/Footer";
+import StructuredData from "./components/StructuredData";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const roboto = Inter({
@@ -52,17 +53,11 @@ export const metadata: Metadata = {
     siteName: 'Nuverum Ventures',
     images: [
       {
-        url: '/og-image.png',
+        url: '/heroBackground.jpg',
         width: 1200,
         height: 630,
-        alt: 'Nuverum Ventures - Strategic Investment Solutions',
+        alt: 'Nuverum Ventures - Bridging Vision with Opportunity',
       },
-      {
-        url: '/og-image-square.png',
-        width: 600,
-        height: 600,
-        alt: 'Nuverum Ventures Logo',
-      }
     ],
   },
   
@@ -73,7 +68,7 @@ export const metadata: Metadata = {
     description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
     creator: '@nuverum_ventures',
     site: '@nuverum_ventures',
-    images: ['/twitter-image.png'],
+    images: ['/heroBackground.jpg'],
   },
   
   // Icons and manifest
@@ -90,20 +85,12 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
         media: '(prefers-color-scheme: dark)'
       },
-      // Fallback PNG favicons (using root for existing files)
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      // Fallback PNG favicons
+      { url: '/logos/favicons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/logos/favicons/favicon.ico', sizes: '32x32' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    other: [
-      {
-        rel: 'mask-icon',
-        url: '/safari-pinned-tab.svg',
-        color: '#000000',
-      },
+      { url: '/logos/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   manifest: '/manifest.json',
@@ -123,15 +110,15 @@ export const metadata: Metadata = {
     },
   },
   
-  // Verification (placeholders)
-  verification: {
-    google: 'your-google-site-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
-    other: {
-      'msvalidate.01': 'your-bing-verification-code',
-    },
-  },
+  // Verification codes - Add your actual codes from Google Search Console, Bing Webmaster Tools, etc.
+  // verification: {
+  //   google: 'your-google-site-verification-code',
+  //   yandex: 'your-yandex-verification-code',
+  //   yahoo: 'your-yahoo-verification-code',
+  //   other: {
+  //     'msvalidate.01': 'your-bing-verification-code',
+  //   },
+  // },
 };
 
 export default function RootLayout({
@@ -165,10 +152,10 @@ export default function RootLayout({
         {/* Theme-aware favicons for better browser support */}
         <link rel="icon" href="/logos/SVG/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
         <link rel="icon" href="/logos/SVG/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/logos/favicons/favicon.ico" sizes="32x32" />
       </head>
       <body className={`${roboto.variable} antialiased bg-background text-foreground`}>
+        <StructuredData />
         <LoadingSplash />
         <Navbar />
         <main className="bg-background">{children}</main>

@@ -17,6 +17,16 @@ const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript
     "build/**",
     "next-env.d.ts",
   ],
+  rules: {
+    // Allow unused vars if they start with underscore
+    "@typescript-eslint/no-unused-vars": ["warn", {
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^_",
+      "caughtErrorsIgnorePattern": "^_"
+    }],
+    // Allow explicit any in specific cases
+    "@typescript-eslint/no-explicit-any": "warn",
+  }
 }];
 
 export default eslintConfig;

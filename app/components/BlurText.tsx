@@ -4,17 +4,13 @@ import { useLoadingState } from '../hooks/useLoadingState';
 
 type BlurTextProps = {
   text?: string;
-  delay?: number;
   className?: string;
-  animateBy?: 'words' | 'letters';
-  direction?: 'top' | 'bottom';
   threshold?: number;
   rootMargin?: string;
   animationFrom?: Record<string, string | number>;
   animationTo?: Array<Record<string, string | number>>;
   easing?: Easing | Easing[];
   onAnimationComplete?: () => void;
-  stepDuration?: number;
 };
 
 const buildKeyframes = (
@@ -32,19 +28,14 @@ const buildKeyframes = (
 
 const BlurText: React.FC<BlurTextProps> = ({
   text = '',
-  delay = 200,
   className = '',
-  animateBy = 'words',
-  direction = 'top',
   threshold = 0.1,
   rootMargin = '0px',
   animationFrom,
   animationTo,
   easing = (t: number) => t,
   onAnimationComplete,
-  stepDuration = 0.35
 }) => {
-  const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
   const isLoading = useLoadingState();
@@ -66,12 +57,12 @@ const BlurText: React.FC<BlurTextProps> = ({
 
   const defaultFrom = useMemo(
     () => ({ filter: 'blur(10px)', opacity: 0 }),
-    [direction]
+    []
   );
 
   const defaultTo = useMemo(
     () => [{ filter: 'blur(0px)', opacity: 1 }],
-    [direction]
+    []
   );
 
   const fromSnapshot = animationFrom ?? defaultFrom;

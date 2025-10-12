@@ -8,7 +8,6 @@ export default function Footer() {
   const [isOverscrolling, setIsOverscrolling] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
-  const overscrollAmount = useRef(0);
   
   // Configuration variables
   const FRICTION_THRESHOLD = 30; // How much extra scroll needed before footer starts sliding
