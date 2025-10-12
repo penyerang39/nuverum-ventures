@@ -21,6 +21,8 @@ export default function Footer() {
     let isAnimating = false;
     let targetOverscroll = 0;
     let currentOverscroll = 0;
+    let lastScrollTop = 0;
+    let debounceTimer: NodeJS.Timeout;
 
     // Check if we're on desktop
     const checkIsDesktop = () => {
@@ -28,9 +30,20 @@ export default function Footer() {
     };
 
     const calculateMaxScroll = () => {
-      const documentHeight = document.documentElement.scrollHeight;
+      // Use Math.max to handle cases where content is shorter than viewport
+      const documentHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight
+      );
       const windowHeight = window.innerHeight;
-      maxScroll = documentHeight - windowHeight;
+      maxScroll = Math.max(0, documentHeight - windowHeight);
+    };
+
+    const isAtBottom = () => {
+      const scrollTop = Math.ceil(window.scrollY);
+      calculateMaxScroll();
+      // Add a small tolerance (3px) to account for browser rounding differences
+      return scrollTop >= maxScroll - 3;
     };
 
     const updateFooterState = (overscrollValue: number) => {
@@ -77,9 +90,12 @@ export default function Footer() {
       
       animationFrameId = requestAnimationFrame(() => {
         const scrollTop = window.scrollY;
-        calculateMaxScroll();
+        const currentMaxScroll = Math.max(0, Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight
+        ) - window.innerHeight);
         
-        const overscrollValue = scrollTop - maxScroll;
+        const overscrollValue = scrollTop - currentMaxScroll;
         
         // Only apply custom behavior on desktop
         if (isDesktop) {
@@ -89,6 +105,8 @@ export default function Footer() {
           setScrollProgress(0);
           setIsOverscrolling(false);
         }
+        
+        lastScrollTop = scrollTop;
       });
     };
 
@@ -97,11 +115,8 @@ export default function Footer() {
       // Only apply custom overscroll on desktop (md and up)
       if (!isDesktop) return;
       
-      const scrollTop = window.scrollY;
-      calculateMaxScroll();
-      
       // If we're at the bottom and trying to scroll down
-      if (scrollTop >= maxScroll && e.deltaY > 0) {
+      if (isAtBottom() && e.deltaY > 0) {
         e.preventDefault();
         
         // Add to target overscroll amount
@@ -110,6 +125,7 @@ export default function Footer() {
         targetOverscroll = Math.max(0, targetOverscroll);
         
         // Apply rubberband effect
+        calculateMaxScroll();
         const newScroll = maxScroll + targetOverscroll;
         window.scrollTo(0, newScroll);
         
@@ -122,22 +138,39 @@ export default function Footer() {
       }
     };
 
-    // Initial calculation
+    // Handle resize with debouncing to recalculate on layout changes
+    const handleResize = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        checkIsDesktop();
+        calculateMaxScroll();
+        // Reset states on resize to prevent glitches
+        setScrollProgress(0);
+        setIsOverscrolling(false);
+        targetOverscroll = 0;
+        currentOverscroll = 0;
+      }, 150);
+    };
+
+    // Initial calculation with a small delay to ensure DOM is ready
     checkIsDesktop();
-    calculateMaxScroll();
+    setTimeout(() => {
+      calculateMaxScroll();
+    }, 100);
 
     // Add event listeners
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('resize', checkIsDesktop);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }
+      clearTimeout(debounceTimer);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('resize', checkIsDesktop);
+      window.removeEventListener('resize', handleResize);
     };
   }, [isDesktop]);
 
