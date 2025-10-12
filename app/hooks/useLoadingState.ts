@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-// Global loading state management
-let globalLoadingState = true;
+// Global loading state management - default to false for immediate rendering
+let globalLoadingState = false;
 const loadingStateListeners = new Set<(isLoading: boolean) => void>();
 
 export function useLoadingState() {
@@ -18,6 +18,9 @@ export function useLoadingState() {
     };
 
     window.addEventListener('loadingComplete', handleLoadingComplete);
+
+    // Ensure loading is false on mount
+    setIsLoading(false);
 
     return () => {
       // Remove listener
