@@ -4,36 +4,42 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function LoadingSplash() {
-  const [isVisible, setIsVisible] = useState(false); // Start hidden for SSR
+  const [mounted, setMounted] = useState(false);
+  const [shouldShow, setShouldShow] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {
-    // Only show splash on client-side and only if not already loaded
+    setMounted(true);
+    
+    // Check if user has seen splash before
     const hasLoadedBefore = sessionStorage.getItem('hasLoadedBefore');
     
-    if (!hasLoadedBefore) {
-      setIsVisible(true);
-      sessionStorage.setItem('hasLoadedBefore', 'true');
+    if (hasLoadedBefore) {
+      // Skip splash for returning visitors
+      setShouldShow(false);
+      window.dispatchEvent(new CustomEvent('loadingComplete'));
+      return;
     }
     
-    // Immediately dispatch loading complete for other components
-    window.dispatchEvent(new CustomEvent('loadingComplete'));
-
+    sessionStorage.setItem('hasLoadedBefore', 'true');
+    
     // Quick fade out after a brief moment
     const timer = setTimeout(() => {
       setIsFadingOut(true);
       setTimeout(() => {
-        setIsVisible(false);
-      }, 300); // 300ms fade duration
-    }, 800); // Show for 800ms total
+        setShouldShow(false);
+        window.dispatchEvent(new CustomEvent('loadingComplete'));
+      }, 400); // Fade duration
+    }, 600); // Show for 600ms total
 
     return () => clearTimeout(timer);
   }, []);
 
-  if (!isVisible) return null;
+  // Don't render anything during SSR
+  if (!mounted || !shouldShow) return null;
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black transition-opacity duration-300 ease-out pointer-events-none ${
+    <div className={`fixed inset-0 z-[100] flex items-center justify-center w-full h-full bg-black transition-opacity duration-400 ease-out ${
       isFadingOut ? 'opacity-0' : 'opacity-100'
     }`}>
       <div className="animate-pulse">
