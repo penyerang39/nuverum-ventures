@@ -152,8 +152,9 @@ export default function Footer() {
         className="footer"
         style={isDesktop ? { 
           transform: footerTransform,
-          transition: scrollProgress > 0 ? 'none' : 'transform 0.3s ease-out'
-        } : undefined}
+          transition: scrollProgress > 0 ? 'none' : 'transform 0.3s ease-out',
+          display: 'block'
+        } : { display: 'block' }}
       >
         <div className="container flex flex-col md:flex-row justify-between items-start gap-4 md:gap-[30px]">
           <p className="text-white/70 text-sm text-italic max-w-[600px]">

@@ -149,8 +149,6 @@ export default function Home() {
                   </div>
                 </AnimatedCards>
               </div>
-              
-              <ContactButton />
             </div>
           </AnimatedSection>
 
@@ -399,6 +397,7 @@ export default function Home() {
               Startups and investors move faster than ever. To keep pace, Nuverum Ventures puts curated introductions ahead of noise and builds bridges that bring founders and investors closer to the connections that truly matter.
             </p>
           </div>
+          <ContactButton />
         </div>
           </AnimatedSection>
     </PageWrapper>

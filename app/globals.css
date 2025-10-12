@@ -380,6 +380,9 @@ main {
   padding-block: 64px;
   position: relative;
   z-index: 10;
+  width: 100vw;
+  left: 0;
+  right: 0;
 }
 
 @media (min-width: 768px) {
@@ -392,6 +395,18 @@ main {
     z-index: 20;
     transform: translateY(100%);
     will-change: transform;
+    width: 100vw;
+  }
+}
+
+/* Ensure footer is visible and properly constrained on ultra-wide displays */
+@media (min-width: 1920px) {
+  .footer {
+    max-width: 100vw;
+  }
+  
+  .footer .container {
+    max-width: 1400px;
   }
 }
 
@@ -407,9 +422,11 @@ main {
   will-change: transform;
 }
 
+/* Hide mobile favicon on desktop - it's only for mobile overscroll */
 @media (min-width: 768px) {
   .mobile-favicon-container {
-    display: none;
+    display: none !important;
+    visibility: hidden;
   }
 }
 
