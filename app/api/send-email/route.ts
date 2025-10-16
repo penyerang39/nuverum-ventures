@@ -8,7 +8,7 @@ const sanitizeInput = (input: string): string => {
   if (!input || typeof input !== 'string') return ''
   
   // First, decode HTML entities
-  let decoded = input
+  const decoded = input
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&amp;/g, '&')
