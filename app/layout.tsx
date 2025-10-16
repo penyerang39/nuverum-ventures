@@ -153,10 +153,11 @@ export default function RootLayout({
       <body className={`${roboto.variable} antialiased bg-background text-foreground`}>
         <StructuredData />
         <LoadingSplash />
-        <PageWrapper />
-        <Navbar />
-        <main className="bg-background">{children}</main>
-        <Footer />
+        <PageWrapper>
+          <Navbar />
+          <main className="bg-background">{children}</main>
+          <Footer />
+        </PageWrapper>
         <SpeedInsights />
       </body>
     </html>

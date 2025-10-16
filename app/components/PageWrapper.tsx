@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, createContext, useContext } from 'react';
+import { ReactNode, useState, useEffect, createContext, useContext } from 'react';
 import ContactModal from './ContactModal';
 
 interface ModalContextType {
@@ -18,7 +18,11 @@ export const useModal = () => {
   return context;
 };
 
-export default function PageWrapper() {
+interface PageWrapperProps {
+  children: ReactNode;
+}
+
+export default function PageWrapper({ children }: PageWrapperProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState('');
   const [calendlyReady, setCalendlyReady] = useState(false);
@@ -55,6 +59,8 @@ export default function PageWrapper() {
 
   return (
     <ModalContext.Provider value={{ openModal, calendlyReady }}>
+      {children}
+      
       {/* Hidden Calendly Preloader */}
       <div 
         className="fixed -top-[9999px] left-0 w-1 h-1 opacity-0 pointer-events-none overflow-hidden"
