@@ -1,11 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import DOMPurify from 'dompurify'
+
+// Server-side sanitization function
+const sanitizeInput = (input: string): string => {
+  if (!input || typeof input !== 'string') return ''
+  
+  // First, decode HTML entities
+  let decoded = input
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/&#x2F;/g, '/')
+    .replace(/&#x60;/g, '`')
+    .replace(/&#x3D;/g, '=')
+  
+  // Strip all HTML tags completely
+  const stripped = decoded.replace(/<[^>]*>/g, '')
+  
+  // Use DOMPurify for additional sanitization
+  const sanitized = DOMPurify.sanitize(stripped, { 
+    ALLOWED_TAGS: [], // No HTML tags allowed
+    ALLOWED_ATTR: [], // No attributes allowed
+    KEEP_CONTENT: true // Keep text content but strip tags
+  })
+  
+  // Remove potentially dangerous characters and patterns
+  return sanitized
+    .replace(/[<>]/g, '') // Remove angle brackets
+    .replace(/javascript:/gi, '') // Remove javascript: protocols
+    .replace(/data:/gi, '') // Remove data: protocols
+    .replace(/vbscript:/gi, '') // Remove vbscript: protocols
+    .replace(/on\w+\s*=/gi, '') // Remove event handlers
+    .replace(/expression\s*\(/gi, '') // Remove CSS expressions
+    .replace(/url\s*\(/gi, '') // Remove CSS url() functions
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim()
+}
 
 const emailSchema = z.object({
-  from: z.string().email(),
-  subject: z.string().min(1),
-  message: z.string().min(10),
+  from: z.string().email().transform(sanitizeInput),
+  subject: z.string().min(1).max(200).transform(sanitizeInput),
+  message: z.string().min(10).max(5000).transform(sanitizeInput),
 })
 
 export async function POST(request: NextRequest) {
@@ -27,11 +66,26 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { from, subject, message } = emailSchema.parse(body)
 
+    // Additional server-side sanitization (defense in depth)
+    const safeFrom = sanitizeInput(from)
+    const safeSubject = sanitizeInput(subject)
+    const safeMessage = sanitizeInput(message)
+
+    // HTML escape function for additional safety
+    const htmlEscape = (text: string): string => {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+    }
+
     // Send email via Resend
     const { data, error } = await resend.emails.send({
       from: 'Contact Form <noreply@nuverum.com>', // This should match your verified domain
       to: ['thomas@nuverum.com'],
-      subject: `Contact Form: ${subject}`,
+      subject: `Contact Form: ${safeSubject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #111827; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
@@ -39,24 +93,24 @@ export async function POST(request: NextRequest) {
           </h2>
           
           <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 0 0 10px 0;"><strong>From:</strong> ${from}</p>
-            <p style="margin: 0 0 10px 0;"><strong>Subject:</strong> ${subject}</p>
+            <p style="margin: 0 0 10px 0;"><strong>From:</strong> ${htmlEscape(safeFrom)}</p>
+            <p style="margin: 0 0 10px 0;"><strong>Subject:</strong> ${htmlEscape(safeSubject)}</p>
           </div>
           
           <div style="margin: 20px 0;">
             <h3 style="color: #111827; margin-bottom: 10px;">Message:</h3>
             <div style="background-color: #ffffff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; white-space: pre-wrap;">
-${message}
+${htmlEscape(safeMessage)}
             </div>
           </div>
           
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
             <p>This email was sent from the Nuverum Ventures contact form.</p>
-            <p>Reply directly to this email to respond to ${from}</p>
+            <p>Reply directly to this email to respond to ${htmlEscape(safeFrom)}</p>
           </div>
         </div>
       `,
-      replyTo: from,
+      replyTo: safeFrom,
     })
 
     if (error) {

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 
 // Global loading state management - default to true to prevent animations during splash

@@ -6,6 +6,7 @@ import { XMarkIcon, PaperAirplaneIcon, EnvelopeIcon } from '@heroicons/react/24/
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import DOMPurify from 'dompurify'
 import { usePerformanceTracking } from '../hooks/usePerformanceTracking'
 
 // Extend window interface for Calendly preload state
@@ -15,10 +16,59 @@ declare global {
   }
 }
 
+// Sanitization function to clean user input
+const sanitizeInput = (input: string): string => {
+  if (!input || typeof input !== 'string') return ''
+  
+  // First, decode HTML entities
+  let decoded = input
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/&#x2F;/g, '/')
+    .replace(/&#x60;/g, '`')
+    .replace(/&#x3D;/g, '=')
+  
+  // Strip all HTML tags completely
+  const stripped = decoded.replace(/<[^>]*>/g, '')
+  
+  // Then use DOMPurify for additional sanitization
+  const sanitized = DOMPurify.sanitize(stripped, { 
+    ALLOWED_TAGS: [], // No HTML tags allowed
+    ALLOWED_ATTR: [], // No attributes allowed
+    KEEP_CONTENT: true // Keep text content but strip tags
+  })
+  
+  // Remove any remaining potentially dangerous characters and patterns
+  return sanitized
+    .replace(/[<>]/g, '') // Remove any remaining angle brackets
+    .replace(/javascript:/gi, '') // Remove javascript: protocols
+    .replace(/data:/gi, '') // Remove data: protocols
+    .replace(/vbscript:/gi, '') // Remove vbscript: protocols
+    .replace(/on\w+\s*=/gi, '') // Remove event handlers
+    .replace(/expression\s*\(/gi, '') // Remove CSS expressions
+    .replace(/url\s*\(/gi, '') // Remove CSS url() functions
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim()
+}
+
 const emailSchema = z.object({
-  from: z.string().email('Please enter a valid email address'),
-  subject: z.string().min(1, 'Subject is required'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
+  from: z.string()
+    .email('Please enter a valid email address')
+    .transform(sanitizeInput)
+    .refine(val => val.length > 0, 'Email is required'),
+  subject: z.string()
+    .min(1, 'Subject is required')
+    .max(200, 'Subject must be less than 200 characters')
+    .transform(sanitizeInput)
+    .refine(val => val.length > 0, 'Subject is required'),
+  message: z.string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(5000, 'Message must be less than 5000 characters')
+    .transform(sanitizeInput)
+    .refine(val => val.length >= 10, 'Message must be at least 10 characters'),
 })
 
 type EmailFormData = z.infer<typeof emailSchema>
@@ -75,12 +125,19 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
     setSubmitStatus('idle')
 
     try {
+      // Additional sanitization before sending (defense in depth)
+      const sanitizedData = {
+        from: sanitizeInput(data.from),
+        subject: sanitizeInput(data.subject),
+        message: sanitizeInput(data.message),
+      }
+
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(sanitizedData),
       })
 
       const submitEndTime = performance.now()
