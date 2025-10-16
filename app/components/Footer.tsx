@@ -21,7 +21,7 @@ export default function Footer() {
     let isAnimating = false;
     let targetOverscroll = 0;
     let currentOverscroll = 0;
-    let _lastScrollTop = 0;
+    const _lastScrollTop = 0;
     let debounceTimer: NodeJS.Timeout;
 
     // Check if we're on desktop
@@ -106,7 +106,7 @@ export default function Footer() {
           setIsOverscrolling(false);
         }
         
-        lastScrollTop = scrollTop;
+        // lastScrollTop = scrollTop; // Commented out as it's not used
       });
     };
 
