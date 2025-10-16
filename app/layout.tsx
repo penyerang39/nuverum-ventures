@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   applicationName: "Nuverum Ventures",
   
   // Basic metadata
-  metadataBase: new URL('https://nuverum-ventures.com'),
+  metadataBase: new URL('https://nuverum.com'),
   alternates: {
     canonical: '/',
     languages: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://nuverum-ventures.com',
+    url: 'https://nuverum.com',
     title: 'Nuverum Ventures - Bridging Vision with Opportunity',
     description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
     siteName: 'Nuverum Ventures',
