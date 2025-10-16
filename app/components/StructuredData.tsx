@@ -4,8 +4,8 @@ export default function StructuredData() {
     '@type': 'Organization',
     name: 'Nuverum Ventures',
     description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
-    url: 'https://nuverum-ventures.com',
-    logo: 'https://nuverum-ventures.com/logos/nuverumBlack.svg',
+    url: 'https://nuverum.com',
+    logo: 'https://nuverum.com/logos/nuverumBlack.svg',
     foundingDate: '2024',
     founders: [
       {
@@ -28,7 +28,7 @@ export default function StructuredData() {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Business Inquiries',
-      url: 'https://nuverum-ventures.com/#contact',
+      url: 'https://nuverum.com/#contact',
     },
     sameAs: [
       'https://twitter.com/nuverum_ventures',
@@ -39,7 +39,7 @@ export default function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Nuverum Ventures',
-    url: 'https://nuverum-ventures.com',
+    url: 'https://nuverum.com',
     description: 'Bridging vision with opportunity. Strategic investment and venture capital solutions.',
     publisher: {
       '@type': 'Organization',

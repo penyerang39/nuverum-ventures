@@ -3,7 +3,6 @@ import { MagnifyingGlassIcon, BriefcaseIcon, LinkIcon, FireIcon, ChartBarIcon, C
 import HeroSection from "./components/HeroSection";
 import AnimatedSection from "./components/AnimatedSection";
 import AnimatedCards from "./components/AnimatedCards";
-import PageWrapper from "./components/PageWrapper";
 import PartnersStats from "./components/PartnersStats";
 import ContactButton from "./components/ContactButton";
 import type { Metadata } from 'next';
@@ -28,20 +27,20 @@ export const metadata: Metadata = {
     title: 'Nuverum Ventures - Bridging Vision with Opportunity',
     description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
     type: 'website',
-    url: 'https://nuverum-ventures.com',
+    url: 'https://nuverum.com',
   },
 };
 
 export default function Home() {
   return (
-    <PageWrapper>
+    <>
       <HeroSection />
 
       {/* Partners */}
-          <AnimatedSection 
+      <AnimatedSection 
         id="partners" 
-            className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
-            ariaLabelledBy="partners-heading"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+        ariaLabelledBy="partners-heading"
       >
         <div className="container">
           <div className="text-start mb-12">
@@ -49,108 +48,108 @@ export default function Home() {
             <h2 className="heading-lg">Our Professional Network</h2>
           </div>
           
-              <PartnersStats />
+          <PartnersStats />
 
-              <div className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
-                <AnimatedCards staggerDelay={150}>
-                  <div className="card text-start">
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
-                <Image
-                  src="/partners/overkill.svg"
-                  alt="Overkill Capital logo"
-                  width={120}
-                  height={30}
-                  className="h-16 w-auto object-contain"
-                />
+          <div className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+            <AnimatedCards staggerDelay={150}>
+              <div className="card text-start">
+                <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
+                  <Image
+                    src="/partners/overkill.svg"
+                    alt="Overkill Capital logo"
+                    width={120}
+                    height={30}
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-lg font-semibold text-foreground">Overkill Capital</h4>
+                  <p className="text-sm text-muted">Riga, Latvia</p>
+                  <p className="text-sm text-muted leading-relaxed">
+                    A dynamic venture capital firm with multiple partners, specializing in early-stage investments across the Baltic region. Known for their hands-on approach and deep understanding of emerging markets.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-2">
-                <h4 className="text-lg font-semibold text-foreground">Overkill Capital</h4>
-                <p className="text-sm text-muted">Riga, Latvia</p>
-                <p className="text-sm text-muted leading-relaxed">
-                  A dynamic venture capital firm with multiple partners, specializing in early-stage investments across the Baltic region. Known for their hands-on approach and deep understanding of emerging markets.
-                </p>
-              </div>
-            </div>
 
-                  <div className="card text-start">
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
-                <Image
-                  src="/partners/cherry-cropped.svg"
-                  alt="Cherry VC logo"
-                  width={120}
-                  height={40}
-                  className="h-16 w-auto object-contain"
-                />
+              <div className="card text-start">
+                <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
+                  <Image
+                    src="/partners/cherry-cropped.svg"
+                    alt="Cherry VC logo"
+                    width={120}
+                    height={40}
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-lg font-semibold text-foreground">Cherry VC</h4>
+                  <p className="text-sm text-muted">Amsterdam, Netherlands</p>
+                  <p className="text-sm text-muted leading-relaxed">
+                    A focused venture capital partner based in Amsterdam, bringing European expertise to global opportunities. Their strategic approach combines local market knowledge with international investment experience.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-2">
-                <h4 className="text-lg font-semibold text-foreground">Cherry VC</h4>
-                <p className="text-sm text-muted">Amsterdam, Netherlands</p>
-                <p className="text-sm text-muted leading-relaxed">
-                  A focused venture capital partner based in Amsterdam, bringing European expertise to global opportunities. Their strategic approach combines local market knowledge with international investment experience.
-                </p>
-              </div>
-            </div>
 
-                  <div className="card text-start">
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <Image
-                  src="/partners/pointNine.png"
-                  alt="Point Nine Capital logo"
-                  width={120}
-                  height={40}
-                  className="h-16 w-auto object-contain"
-                />
+              <div className="card text-start">
+                <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                  <Image
+                    src="/partners/pointNine.png"
+                    alt="Point Nine Capital logo"
+                    width={120}
+                    height={40}
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-lg font-semibold text-foreground">Point Nine Capital</h4>
+                  <p className="text-sm text-muted">Berlin, Germany</p>
+                  <p className="text-sm text-muted leading-relaxed">
+                    A leading European venture capital firm with a single dedicated partner, focusing on B2B SaaS and marketplace investments. Renowned for their technical expertise and founder-friendly approach.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-2">
-                <h4 className="text-lg font-semibold text-foreground">Point Nine Capital</h4>
-                <p className="text-sm text-muted">Berlin, Germany</p>
-                <p className="text-sm text-muted leading-relaxed">
-                  A leading European venture capital firm with a single dedicated partner, focusing on B2B SaaS and marketplace investments. Renowned for their technical expertise and founder-friendly approach.
-                </p>
-              </div>
-            </div>
 
-                  <div className="card text-start">
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
-                <Image
-                  src="/partners/transformVC.svg"
-                  alt="Transform VC logo"
-                  width={120}
-                  height={40}
-                  className="h-16 w-auto object-contain"
-                />
+              <div className="card text-start">
+                <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
+                  <Image
+                    src="/partners/transformVC.svg"
+                    alt="Transform VC logo"
+                    width={120}
+                    height={40}
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-lg font-semibold text-foreground">Transform VC</h4>
+                  <p className="text-sm text-muted">New York City, USA</p>
+                  <p className="text-sm text-muted leading-relaxed">
+                    A New York-based venture capital partner specializing in transformative technologies and innovative business models. Their global perspective and extensive network provide unique opportunities for portfolio companies.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-2">
-                <h4 className="text-lg font-semibold text-foreground">Transform VC</h4>
-                <p className="text-sm text-muted">New York City, USA</p>
-                <p className="text-sm text-muted leading-relaxed">
-                  A New York-based venture capital partner specializing in transformative technologies and innovative business models. Their global perspective and extensive network provide unique opportunities for portfolio companies.
-                </p>
-              </div>
-            </div>
 
-                  <div className="card text-start">
-              <div className="w-full h-20 p-0 bg-primary/10 rounded-lg flex items-start justify-start mt-4">
-                <Image
-                  src="/partners/bCombinator.png"
-                  alt="B Combinator logo"
-                  width={200}
-                  height={20}
-                  className="h-16 w-auto object-contain"
-                />
+              <div className="card text-start">
+                <div className="w-full h-20 p-0 bg-primary/10 rounded-lg flex items-start justify-start mt-4">
+                  <Image
+                    src="/partners/bCombinator.png"
+                    alt="B Combinator logo"
+                    width={200}
+                    height={20}
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-lg font-semibold text-foreground">B Combinator</h4>
+                  <p className="text-sm text-muted">Barcelona, Spain</p>
+                  <p className="text-sm text-muted leading-relaxed">
+                    B Combinator is a Barcelona-based venture capital fund investing in transformative technologies and innovative business models, leveraging a global network to unlock exceptional growth opportunities for founders.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-2">
-                <h4 className="text-lg font-semibold text-foreground">B Combinator</h4>
-                <p className="text-sm text-muted">Barcelona, Spain</p>
-                <p className="text-sm text-muted leading-relaxed">
-                        B Combinator is a Barcelona-based venture capital fund investing in transformative technologies and innovative business models, leveraging a global network to unlock exceptional growth opportunities for founders.
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedCards>
-              </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedCards>
+          </div>
+        </div>
+      </AnimatedSection>
 
       {/* Services */}
           <AnimatedSection 
@@ -399,7 +398,7 @@ export default function Home() {
           </div>
         </div>
         <ContactButton />
-          </AnimatedSection>
-    </PageWrapper>
+      </AnimatedSection>
+    </>
   );
 }

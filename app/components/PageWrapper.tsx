@@ -1,8 +1,7 @@
 'use client'
 
-import { ReactNode, useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import ContactModal from './ContactModal';
-import { usePerformanceTracking } from '../hooks/usePerformanceTracking';
 
 interface ModalContextType {
   openModal: (email: string) => void;
@@ -19,22 +18,10 @@ export const useModal = () => {
   return context;
 };
 
-interface PageWrapperProps {
-  children: ReactNode;
-}
-
-export default function PageWrapper({ children }: PageWrapperProps) {
+export default function PageWrapper() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState('');
   const [calendlyReady, setCalendlyReady] = useState(false);
-
-  const { trackElementVisibility } = usePerformanceTracking();
-
-  // Track visibility of important sections
-  useEffect(() => {
-    trackElementVisibility('mission-eyebrow');
-    trackElementVisibility('services-heading');
-  }, [trackElementVisibility]);
 
   // Preload Calendly resources
   useEffect(() => {
@@ -68,8 +55,6 @@ export default function PageWrapper({ children }: PageWrapperProps) {
 
   return (
     <ModalContext.Provider value={{ openModal, calendlyReady }}>
-      {children}
-      
       {/* Hidden Calendly Preloader */}
       <div 
         className="fixed -top-[9999px] left-0 w-1 h-1 opacity-0 pointer-events-none overflow-hidden"

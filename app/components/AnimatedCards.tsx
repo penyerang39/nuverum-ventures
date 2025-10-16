@@ -1,14 +1,16 @@
-'use client'
-
 import { ReactNode } from 'react';
+import { CardAnimationWrapper } from './ClientAnimations';
 
 interface AnimatedCardsProps {
   children: ReactNode;
   staggerDelay?: number;
 }
 
-// Simplified version - just renders children without animation wrapper
-export default function AnimatedCards({ children }: AnimatedCardsProps) {
-  return <>{children}</>;
+export default function AnimatedCards({ children, staggerDelay = 0 }: AnimatedCardsProps) {
+  return (
+    <CardAnimationWrapper staggerDelay={staggerDelay}>
+      {children}
+    </CardAnimationWrapper>
+  );
 }
 
