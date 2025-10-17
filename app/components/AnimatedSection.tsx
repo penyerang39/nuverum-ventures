@@ -10,15 +10,15 @@ interface AnimatedSectionProps {
 
 export default function AnimatedSection({ children, className = '', id, ariaLabelledBy }: AnimatedSectionProps) {
   return (
-    <FadeInWrapper>
-      <section 
-        id={id}
-        className={`server-visible ${className}`}
-        aria-labelledby={ariaLabelledBy}
-      >
+    <section 
+      id={id}
+      className={`server-visible ${className}`}
+      aria-labelledby={ariaLabelledBy}
+    >
+      <FadeInWrapper>
         {children}
-      </section>
-    </FadeInWrapper>
+      </FadeInWrapper>
+    </section>
   );
 }
 

@@ -490,13 +490,6 @@ main {
   transform: translateY(20px);
 }
 
-/* Card animation base - wrapper participates in grid layout */
-.card-animation {
-  display: grid;
-  grid-template-columns: subgrid;
-  grid-column: 1 / -1;
-}
-
 /* Cards are visible by default for SEO */
 .card-animation .card,
 .card {
