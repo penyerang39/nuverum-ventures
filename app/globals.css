@@ -490,9 +490,11 @@ main {
   transform: translateY(20px);
 }
 
-/* Card animation base - use display: contents to not interfere with parent grid */
+/* Card animation base - wrapper participates in grid layout */
 .card-animation {
-  display: contents;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
 }
 
 /* Cards are visible by default for SEO */

@@ -92,13 +92,10 @@ interface CardAnimationWrapperProps {
 
 export function CardAnimationWrapper({ children, staggerDelay = 0, className = '' }: CardAnimationWrapperProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [isAnimated, setIsAnimated] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(true); // Set to true immediately to hide cards on mount
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Mark as animated after mount (client-side only)
-    setIsAnimated(true);
-    
     if (!ref.current) return;
 
     const observer = new IntersectionObserver(
@@ -118,7 +115,7 @@ export function CardAnimationWrapper({ children, staggerDelay = 0, className = '
   return (
     <div 
       ref={ref} 
-      className={`card-animation ${isVisible ? 'visible' : ''}`}
+      className={`card-animation ${isVisible ? 'visible' : ''} ${className}`}
       data-animated={isAnimated ? "true" : undefined}
       style={{
         '--stagger-delay': `${staggerDelay}ms`

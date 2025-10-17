@@ -50,8 +50,7 @@ export default function Home() {
           
               <PartnersStats />
 
-              <div className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
-                <AnimatedCards staggerDelay={150}>
+              <AnimatedCards staggerDelay={150} className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
                   <div className="card text-start">
               <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
                 <Image
@@ -146,8 +145,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                </AnimatedCards>
-              </div>
+              </AnimatedCards>
             </div>
           </AnimatedSection>
 
@@ -167,8 +165,7 @@ export default function Home() {
               <br />
                   We Curate introductions, refine presentations, and illuminate the next steps, enabling companies to navigate their path from vision to opportunity with clarity and purpose.
                 </p>
-                <div className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
-                  <AnimatedCards staggerDelay={200}>
+                  <AnimatedCards staggerDelay={200} className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
                     <div className="card">
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
@@ -205,7 +202,6 @@ export default function Home() {
               </p>
             </div>
                   </AnimatedCards>
-            </div>
           </div>
         </div>
           </AnimatedSection>
@@ -225,8 +221,7 @@ export default function Home() {
             </p>
           </div>
           
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                <AnimatedCards staggerDelay={150}>
+              <AnimatedCards staggerDelay={150} className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                   <div className="card">
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
@@ -262,8 +257,7 @@ export default function Home() {
                 We maintain high standards because we believe in setting founders up for success. Rather than pursuing &quot;maybe&quot; opportunities, we conduct thorough assessments to ensure realistic paths to successful fundraising. Our reputation is built on presenting well-prepared, investment-ready companies with honest feedback when needed.
               </p>
             </div>
-                </AnimatedCards>
-          </div>
+              </AnimatedCards>
         </div>
           </AnimatedSection>
 
