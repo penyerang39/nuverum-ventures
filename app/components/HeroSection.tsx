@@ -5,7 +5,7 @@ import HeroDiscoverMore from "./HeroDiscoverMore";
 export default function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-heading">
-      <div aria-hidden className="absolute min-h-[100vh] inset-0 -z-10">
+      <div className="absolute min-h-[100vh] inset-0 -z-10">
         <Image 
           src="/heroBackground.jpg"
           alt="Mountain background"
