@@ -114,7 +114,7 @@ export function CardAnimationWrapper({ children, staggerDelay = 0, className = '
   return (
     <div 
       ref={ref} 
-      className={`${className} ${isVisible ? 'visible' : ''}`}
+      className={`card-animation ${isVisible ? 'visible' : ''}`}
       style={{
         '--stagger-delay': `${staggerDelay}ms`
       } as React.CSSProperties}
