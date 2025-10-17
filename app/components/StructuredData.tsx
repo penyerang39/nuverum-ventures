@@ -3,7 +3,7 @@ export default function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Nuverum Ventures',
-    description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
+    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
     url: 'https://nuverum.com',
     logo: 'https://nuverum.com/logos/nuverumBlack.svg',
     foundingDate: '2024',
@@ -40,7 +40,7 @@ export default function StructuredData() {
     '@type': 'WebSite',
     name: 'Nuverum Ventures',
     url: 'https://nuverum.com',
-    description: 'Bridging vision with opportunity. Strategic investment and venture capital solutions.',
+    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
     publisher: {
       '@type': 'Organization',
       name: 'Nuverum Ventures',

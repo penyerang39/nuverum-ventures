@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: "Nuverum Ventures",
     template: "%s | Nuverum Ventures"
   },
-  description: "Bridging vision with opportunity. Strategic investment and venture capital solutions for innovative companies and entrepreneurs.",
+  description: "Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.",
   keywords: [
     "venture capital",
     "investment",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://nuverum.com',
     title: 'Nuverum Ventures - Bridging Vision with Opportunity',
-    description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
+    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
     siteName: 'Nuverum Ventures',
     images: [
       {
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Nuverum Ventures - Bridging Vision with Opportunity',
-    description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
+    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
     creator: '@nuverum_ventures',
     site: '@nuverum_ventures',
     images: ['/heroBackground.jpg'],
