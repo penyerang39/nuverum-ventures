@@ -495,28 +495,13 @@ main {
   display: contents;
 }
 
-/* Make all cards visible by default */
+/* Make all cards visible by default - remove animation interference */
 .card {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Individual card animations - visible by default */
-.card-animation .card {
   opacity: 1 !important;
   transform: translateY(0) !important;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Cards animate when wrapper is not visible */
-.card-animation:not(.visible) .card {
-  opacity: 0 !important;
-  transform: translateY(30px) !important;
-}
-
-/* Individual card stagger delays */
-.card-animation:not(.visible) .card:nth-child(1) { transition-delay: calc(var(--stagger-delay, 0ms) + 0ms); }
-.card-animation:not(.visible) .card:nth-child(2) { transition-delay: calc(var(--stagger-delay, 0ms) + 150ms); }
-.card-animation:not(.visible) .card:nth-child(3) { transition-delay: calc(var(--stagger-delay, 0ms) + 300ms); }
-.card-animation:not(.visible) .card:nth-child(4) { transition-delay: calc(var(--stagger-delay, 0ms) + 450ms); }
-.card-animation:not(.visible) .card:nth-child(5) { transition-delay: calc(var(--stagger-delay, 0ms) + 600ms); }
+/* Since display: contents makes the wrapper invisible to CSS, 
+   we can't use .card-animation:not(.visible) .card selector.
+   Instead, just ensure cards are always visible */
