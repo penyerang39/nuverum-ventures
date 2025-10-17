@@ -92,10 +92,14 @@ interface CardAnimationWrapperProps {
 
 export function CardAnimationWrapper({ children, staggerDelay = 0, className = '' }: CardAnimationWrapperProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [isAnimated, setIsAnimated] = useState(true); // Set to true immediately to hide cards on mount
+  const [isAnimated, setIsAnimated] = useState(false); // Start false so server HTML has visible cards for SEO
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // This only runs client-side, never on server
+    // Set animated immediately to hide cards before intersection observer triggers
+    setIsAnimated(true);
+    
     if (!ref.current) return;
 
     const observer = new IntersectionObserver(
