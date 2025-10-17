@@ -490,21 +490,32 @@ main {
   transform: translateY(20px);
 }
 
-/* Card animation base */
+/* Card animation base - inherit grid from parent */
 .card-animation {
-  display: contents; /* Allow grid layout to pass through */
+  display: grid;
+  gap: inherit;
+  grid-template-columns: inherit;
+  grid-template-rows: inherit;
+  width: 100%;
 }
 
-/* Individual card animations */
+/* Make all cards visible by default */
+.card {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Individual card animations - visible by default */
 .card-animation .card {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* Cards animate when wrapper is not visible */
 .card-animation:not(.visible) .card {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 0 !important;
+  transform: translateY(30px) !important;
 }
 
 /* Individual card stagger delays */
