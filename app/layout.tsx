@@ -76,6 +76,10 @@ export const metadata: Metadata = {
   // Icons and manifest
   icons: {
     icon: [
+      // Primary favicon for Google search results (must be at root)
+      { url: '/favicon.ico', sizes: 'any' },
+      // High-resolution PNG favicons
+      { url: '/logos/favicons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
       // Theme-aware SVG favicons (modern browsers)
       { 
         url: '/logos/SVG/favicon-light.svg', 
@@ -87,9 +91,6 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
         media: '(prefers-color-scheme: dark)'
       },
-      // Fallback PNG favicons
-      { url: '/logos/favicons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/logos/favicons/favicon.ico', sizes: '32x32' },
     ],
     apple: [
       { url: '/logos/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
@@ -146,10 +147,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         
-        {/* Theme-aware favicons for better browser support */}
-        <link rel="icon" href="/logos/SVG/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
-        <link rel="icon" href="/logos/SVG/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
-        <link rel="icon" href="/logos/favicons/favicon.ico" sizes="32x32" />
+        {/* Additional favicon support for older browsers */}
+        <link rel="shortcut icon" href="/favicon.ico" />
       </head>
       <body className={`${roboto.variable} antialiased bg-background text-foreground`}>
         <StructuredData />
