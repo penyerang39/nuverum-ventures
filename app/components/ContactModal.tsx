@@ -303,9 +303,9 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
                       </div>
 
                       <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 flex justify-between items-center">
+                        <label htmlFor="message" className="block text-sm font-medium mb-2 flex justify-between items-center">
                           <span>Message</span>
-                          <span className={`text-xs }`}>
+                          <span className={`text-xs text-muted`}>
                             {messageLength}/5000 {messageLength < 10 && '(min: 10)'}
                           </span>
                         </label>
