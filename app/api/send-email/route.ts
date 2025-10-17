@@ -3,6 +3,18 @@ import { Resend } from 'resend'
 import { z } from 'zod'
 import DOMPurify from 'dompurify'
 
+// Handle OPTIONS request for CORS preflight
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  })
+}
+
 // Server-side sanitization function
 const sanitizeInput = (input: string): string => {
   if (!input || typeof input !== 'string') return ''
@@ -42,9 +54,16 @@ const sanitizeInput = (input: string): string => {
 }
 
 const emailSchema = z.object({
-  from: z.string().email().transform(sanitizeInput),
-  subject: z.string().min(1).max(200).transform(sanitizeInput),
-  message: z.string().min(10).max(5000).transform(sanitizeInput),
+  from: z.string()
+    .email('Invalid email address')
+    .transform(sanitizeInput)
+    .refine(val => val.length > 0, 'Email is required'),
+  subject: z.string()
+    .transform(sanitizeInput)
+    .refine(val => val.length >= 1 && val.length <= 200, 'Subject must be between 1 and 200 characters'),
+  message: z.string()
+    .transform(sanitizeInput)
+    .refine(val => val.length >= 10 && val.length <= 5000, 'Message must be between 10 and 5000 characters'),
 })
 
 export async function POST(request: NextRequest) {
@@ -55,7 +74,12 @@ export async function POST(request: NextRequest) {
       console.error('RESEND_API_KEY is not configured')
       return NextResponse.json(
         { error: 'Email service is not configured' },
-        { status: 503 }
+        { 
+          status: 503,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
       )
     }
 
@@ -117,24 +141,48 @@ ${htmlEscape(safeMessage)}
       console.error('Resend error:', error)
       return NextResponse.json(
         { error: 'Failed to send email' },
-        { status: 500 }
+        { 
+          status: 500,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
       )
     }
 
-    return NextResponse.json({ success: true, id: data?.id })
+    return NextResponse.json(
+      { success: true, id: data?.id },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }
+    )
   } catch (error) {
     console.error('API error:', error)
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid request data', details: error.issues },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
       )
     }
 
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
+      }
     )
   }
 }

@@ -60,15 +60,13 @@ const emailSchema = z.object({
     .transform(sanitizeInput)
     .refine(val => val.length > 0, 'Email is required'),
   subject: z.string()
-    .min(1, 'Subject is required')
-    .max(200, 'Subject must be less than 200 characters')
     .transform(sanitizeInput)
-    .refine(val => val.length > 0, 'Subject is required'),
+    .refine(val => val.length >= 1, 'Subject is required')
+    .refine(val => val.length <= 200, 'Subject is too long'),
   message: z.string()
-    .min(10, 'Message must be at least 10 characters')
-    .max(5000, 'Message must be less than 5000 characters')
     .transform(sanitizeInput)
-    .refine(val => val.length >= 10, 'Message must be at least 10 characters'),
+    .refine(val => val.length >= 10, 'Message must be at least 10 characters')
+    .refine(val => val.length <= 5000, 'Message is too long'),
 })
 
 type EmailFormData = z.infer<typeof emailSchema>
@@ -84,9 +82,23 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false)
+  const [serverError, setServerError] = useState<string>('')
+  const [messageLength, setMessageLength] = useState(0)
+  const [subjectLength, setSubjectLength] = useState(0)
 
   // Performance tracking
   const { trackUserInteraction, trackCustomMetric } = usePerformanceTracking()
+
+  // Count "safe" characters after sanitization (client-side preview)
+  const getSafeLength = (input: string): number => {
+    if (!input) return 0
+    return input
+      .replace(/<[^>]*>/g, '') // Remove HTML tags
+      .replace(/[<>]/g, '') // Remove angle brackets
+      .replace(/\s+/g, ' ') // Normalize whitespace
+      .trim()
+      .length
+  }
 
   const {
     register,
@@ -145,18 +157,28 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
 
       if (response.ok) {
         setSubmitStatus('success')
+        setServerError('')
         trackUserInteraction('form-submit-success', 'contact-modal')
         reset()
+        setMessageLength(0)
+        setSubjectLength(0)
         setTimeout(() => {
           setSubmitStatus('idle')
         }, 3000)
       } else {
         setSubmitStatus('error')
+        // Generic error - never reveal sanitization details
+        if (response.status === 400) {
+          setServerError('Please check your input and try again')
+        } else {
+          setServerError('Failed to send message. Please try again or email us directly.')
+        }
         trackUserInteraction('form-submit-error', 'contact-modal')
       }
     } catch (error) {
       console.error('Error sending email:', error)
       setSubmitStatus('error')
+      setServerError('Failed to send message. Please try again or email us directly.')
       trackUserInteraction('form-submit-error', 'contact-modal')
     } finally {
       setIsSubmitting(false)
@@ -228,6 +250,8 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
                         title="Schedule a meeting"
                         className="min-h-[600px]"
                         loading="eager"
+                        allow="payment; geolocation"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                         onLoad={() => {
                           setIsCalendlyLoaded(true)
                           trackUserInteraction('calendly-iframe-load', 'contact-modal')
@@ -258,13 +282,18 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
                       </div>
 
                       <div>
-                        <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                          Subject
+                        <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2 flex justify-between items-center">
+                          <span>Subject</span>
+                          <span className={`text-xs ${subjectLength > 200 ? 'text-red-600' : 'text-muted'}`}>
+                            {subjectLength}/200
+                          </span>
                         </label>
                         <input
                           {...register('subject')}
                           type="text"
                           id="subject"
+                          maxLength={200}
+                          onChange={(e) => setSubjectLength(getSafeLength(e.target.value))}
                           className="input w-full"
                           placeholder="What can we help you with?"
                         />
@@ -274,18 +303,25 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
                       </div>
 
                       <div>
-                        <div className="grid min-h-[120px] grid-rows-[auto,auto]">
-                          <label htmlFor="message" className="block text-sm font-medium text-foreground">
-                            Message
-                          </label>
-                          <textarea
-                            {...register('message')}
-                            id="message"
-                            rows={6}
-                            className="input w-full min-h-[80px] resize-y"
-                            placeholder="Tell us about your project or inquiry..."
-                          />
-                        </div>
+                        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 flex justify-between items-center">
+                          <span>Message</span>
+                          <span className={`text-xs ${
+                            messageLength < 10 ? 'text-red-600' : 
+                            messageLength > 5000 ? 'text-red-600' : 
+                            'text-muted'
+                          }`}>
+                            {messageLength}/5000 {messageLength < 10 && '(min: 10)'}
+                          </span>
+                        </label>
+                        <textarea
+                          {...register('message')}
+                          id="message"
+                          rows={6}
+                          maxLength={5000}
+                          onChange={(e) => setMessageLength(getSafeLength(e.target.value))}
+                          className="input w-full min-h-[80px] resize-y"
+                          placeholder="Tell us about your project or inquiry..."
+                        />
                         {errors.message && (
                           <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                         )}
@@ -320,7 +356,7 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
 
                       {submitStatus === 'error' && (
                         <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-                          <p className="text-sm text-red-800">Failed to send message. Please try again or use the email link below.</p>
+                          <p className="text-sm text-red-800">{serverError || 'Failed to send message. Please try again or use the email link below.'}</p>
                         </div>
                       )}
                     </form>

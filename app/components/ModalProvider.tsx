@@ -81,6 +81,8 @@ export default function ModalProvider({ children }: ModalProviderProps) {
           title="Calendly preload"
           className="min-h-[600px]"
           loading="eager"
+          allow="payment; geolocation"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
           onLoad={() => {
             setCalendlyReady(true);
             if (typeof window !== 'undefined') {
