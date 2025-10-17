@@ -5,7 +5,7 @@ import AnimatedArrowIcon from './AnimatedArrowIcon';
 import TypingInput from './TypingInput';
 import { usePerformanceTracking } from '../hooks/usePerformanceTracking';
 import { useLoadingState } from '../hooks/useLoadingState';
-import { useModal } from './PageWrapper';
+import { useModal } from './ModalProvider';
 
 export default function HeroEmailInput() {
   const { openModal } = useModal();
