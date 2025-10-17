@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import AnimatedArrowIcon from './AnimatedArrowIcon';
 import { usePerformanceTracking } from '../hooks/usePerformanceTracking';
-import { useModal } from './PageWrapper';
+import { useModal } from './ModalProvider';
 
 export default function ContactButton() {
   const { openModal } = useModal();

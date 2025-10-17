@@ -490,33 +490,71 @@ main {
   transform: translateY(20px);
 }
 
-/* Card animation base - don't interfere with parent grid */
-.card-animation {
-  display: contents; /* Allow parent grid to control layout */
+/* ============================================
+   ANIMATION SYSTEM - Leaf Pattern with Progressive Enhancement
+   ============================================ */
+
+/* DEFAULT STATE: Fully visible for SSR, no-JS, and SEO */
+.card,
+[data-animate] {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition: none;
 }
 
-/* Make all cards visible by default */
-.card {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Individual card animations - visible by default */
-.card-animation .card {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+/* AFTER JS LOADS: Prepare elements for animation */
+.js-loaded [data-animate="section"]:not(.animate-visible) {
+  opacity: 0;
+  transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Cards animate when wrapper is not visible */
-.card-animation:not(.visible) .card {
-  opacity: 0 !important;
-  transform: translateY(30px) !important;
+.js-loaded [data-animate="section"].animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Individual card stagger delays */
-.card-animation:not(.visible) .card:nth-child(1) { transition-delay: calc(var(--stagger-delay, 0ms) + 0ms); }
-.card-animation:not(.visible) .card:nth-child(2) { transition-delay: calc(var(--stagger-delay, 0ms) + 150ms); }
-.card-animation:not(.visible) .card:nth-child(3) { transition-delay: calc(var(--stagger-delay, 0ms) + 300ms); }
-.card-animation:not(.visible) .card:nth-child(4) { transition-delay: calc(var(--stagger-delay, 0ms) + 450ms); }
-.card-animation:not(.visible) .card:nth-child(5) { transition-delay: calc(var(--stagger-delay, 0ms) + 600ms); }
+/* CARD ANIMATIONS: Base state with stagger delays */
+.js-loaded [data-animate="cards"][data-stagger="150"] .card:not(.animate-visible) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: calc(var(--card-index, 0) * 150ms);
+}
+
+.js-loaded [data-animate="cards"][data-stagger="150"] .card.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: calc(var(--card-index, 0) * 150ms);
+}
+
+.js-loaded [data-animate="cards"][data-stagger="200"] .card:not(.animate-visible) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: calc(var(--card-index, 0) * 200ms);
+}
+
+.js-loaded [data-animate="cards"][data-stagger="200"] .card.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: calc(var(--card-index, 0) * 200ms);
+}
+
+/* HERO TEXT BLUR: Separate animation */
+.js-loaded [data-animate="hero-text"]:not(.animate-visible) {
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 1s ease, filter 1s ease;
+  will-change: filter, opacity;
+}
+
+.js-loaded [data-animate="hero-text"].animate-visible {
+  opacity: 1;
+  filter: blur(0);
+  transition: opacity 1s ease, filter 1s ease;
+}

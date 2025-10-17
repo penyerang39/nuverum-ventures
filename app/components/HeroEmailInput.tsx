@@ -5,7 +5,7 @@ import AnimatedArrowIcon from './AnimatedArrowIcon';
 import TypingInput from './TypingInput';
 import { usePerformanceTracking } from '../hooks/usePerformanceTracking';
 import { useLoadingState } from '../hooks/useLoadingState';
-import { useModal } from './PageWrapper';
+import { useModal } from './ModalProvider';
 
 export default function HeroEmailInput() {
   const { openModal } = useModal();
@@ -75,7 +75,7 @@ export default function HeroEmailInput() {
           
           {/* Client-side animated placeholder overlay */}
           {!emailValue && (
-            <div className="absolute inset-0 pointer-events-none flex items-center">
+            <div className="absolute inset-0 pointer-events-none ml-3 flex items-center">
               <TypingInput
                 placeholderTexts={[
                   "Enter your email",
