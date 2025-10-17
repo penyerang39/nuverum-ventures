@@ -490,13 +490,9 @@ main {
   transform: translateY(20px);
 }
 
-/* Card animation base - inherit grid from parent */
+/* Card animation base - don't interfere with parent grid */
 .card-animation {
-  display: grid;
-  gap: inherit;
-  grid-template-columns: inherit;
-  grid-template-rows: inherit;
-  width: 100%;
+  display: contents; /* Allow parent grid to control layout */
 }
 
 /* Make all cards visible by default */
