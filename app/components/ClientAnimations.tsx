@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 
 interface FadeInWrapperProps {
@@ -112,14 +112,14 @@ export function CardAnimationWrapper({ children, staggerDelay = 0, className = '
   }, []);
 
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.6, delay: staggerDelay }}
+    <div 
+      ref={ref} 
+      className={`${className} ${isVisible ? 'visible' : ''}`}
+      style={{
+        '--stagger-delay': `${staggerDelay}ms`
+      } as React.CSSProperties}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

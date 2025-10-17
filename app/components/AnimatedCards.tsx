@@ -8,7 +8,7 @@ interface AnimatedCardsProps {
 
 export default function AnimatedCards({ children, staggerDelay = 0 }: AnimatedCardsProps) {
   return (
-    <CardAnimationWrapper staggerDelay={staggerDelay}>
+    <CardAnimationWrapper staggerDelay={staggerDelay} className="card-animation">
       {children}
     </CardAnimationWrapper>
   );
