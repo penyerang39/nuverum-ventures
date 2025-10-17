@@ -490,29 +490,60 @@ main {
   transform: translateY(20px);
 }
 
-/* Cards are visible by default for SEO */
-.card-animation .card,
-.card {
+/* ============================================
+   ANIMATION SYSTEM - Leaf Pattern with Progressive Enhancement
+   ============================================ */
+
+/* DEFAULT STATE: Fully visible for SSR, no-JS, and SEO */
+.card,
+[data-animate] {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
+  transition: none;
+}
+
+/* AFTER JS LOADS: Prepare elements for animation */
+.js-loaded [data-animate="section"]:not(.animate-visible) {
+  opacity: 0;
+  transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* When JavaScript loads and before intersection observer fires, hide cards for animation */
-.card-animation[data-animated="true"] .card {
+.js-loaded [data-animate="cards"] .card:not(.animate-visible) {
   opacity: 0;
   transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* When intersection observer fires and adds visible class, show cards with animation */
-.card-animation[data-animated="true"].visible .card {
+.js-loaded [data-animate="hero-text"]:not(.animate-visible) {
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 1s ease, filter 1s ease;
+  will-change: filter, opacity;
+}
+
+/* VISIBLE STATE: Elements become visible when observed */
+.js-loaded [data-animate="section"].animate-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Individual card stagger delays when animating */
-.card-animation[data-animated="true"] .card:nth-child(1) { transition-delay: calc(var(--stagger-delay, 0ms) + 0ms); }
-.card-animation[data-animated="true"] .card:nth-child(2) { transition-delay: calc(var(--stagger-delay, 0ms) + 150ms); }
-.card-animation[data-animated="true"] .card:nth-child(3) { transition-delay: calc(var(--stagger-delay, 0ms) + 300ms); }
-.card-animation[data-animated="true"] .card:nth-child(4) { transition-delay: calc(var(--stagger-delay, 0ms) + 450ms); }
-.card-animation[data-animated="true"] .card:nth-child(5) { transition-delay: calc(var(--stagger-delay, 0ms) + 600ms); }
+.js-loaded [data-animate="cards"] .card.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-loaded [data-animate="hero-text"].animate-visible {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* CARD STAGGER: Individual card delays based on index */
+.js-loaded [data-animate="cards"][data-stagger="150"] .card {
+  transition-delay: calc(var(--card-index, 0) * 150ms);
+}
+
+.js-loaded [data-animate="cards"][data-stagger="200"] .card {
+  transition-delay: calc(var(--card-index, 0) * 200ms);
+}

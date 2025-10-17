@@ -6,6 +6,7 @@ import LoadingSplash from "./components/LoadingSplash";
 import Footer from "./components/Footer";
 import StructuredData from "./components/StructuredData";
 import ModalProvider from "./components/ModalProvider";
+import AnimationObserver from "./components/AnimationObserver";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const roboto = Inter({
@@ -153,10 +154,12 @@ export default function RootLayout({
       <body className={`${roboto.variable} antialiased bg-background text-foreground`}>
         <StructuredData />
         <LoadingSplash />
-        <Navbar />
-        <main className="bg-background">{children}</main>
-        <Footer />
-        <ModalProvider />
+        <ModalProvider>
+          <Navbar />
+          <main className="bg-background">{children}</main>
+          <Footer />
+        </ModalProvider>
+        <AnimationObserver />
         <SpeedInsights />
       </body>
     </html>

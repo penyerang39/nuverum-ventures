@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { BlurTextWrapper } from "./ClientAnimations";
 import HeroEmailInput from "./HeroEmailInput";
 import HeroDiscoverMore from "./HeroDiscoverMore";
 
@@ -17,11 +16,9 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
       </div>
       <div className="hero-inner max-md:mb-[20vh] container text-center">
-        <BlurTextWrapper 
-          className="font-light heading-xl mb-10"
-        >
+        <div className="font-light heading-xl mb-10" data-animate="hero-text">
           <p>Bridging vision with opportunity.</p>
-        </BlurTextWrapper>
+        </div>
         <HeroEmailInput />
       </div>
       

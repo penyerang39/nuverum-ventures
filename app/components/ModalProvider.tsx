@@ -19,10 +19,10 @@ export const useModal = () => {
 };
 
 interface ModalProviderProps {
-  children?: ReactNode;
+  children: ReactNode;
 }
 
-export default function ModalProvider({ children = null }: ModalProviderProps = {}) {
+export default function ModalProvider({ children }: ModalProviderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState('');
   const [calendlyReady, setCalendlyReady] = useState(false);

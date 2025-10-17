@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { MagnifyingGlassIcon, BriefcaseIcon, LinkIcon, FireIcon, ChartBarIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import HeroSection from "./components/HeroSection";
-import AnimatedSection from "./components/AnimatedSection";
-import AnimatedCards from "./components/AnimatedCards";
 import PartnersStats from "./components/PartnersStats";
 import ContactButton from "./components/ContactButton";
 import type { Metadata } from 'next';
@@ -37,10 +35,11 @@ export default function Home() {
       <HeroSection />
 
       {/* Partners */}
-          <AnimatedSection 
+      <section 
         id="partners" 
-            className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
-            ariaLabelledBy="partners-heading"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+        aria-labelledby="partners-heading"
+        data-animate="section"
       >
         <div className="container">
           <div className="text-start mb-12">
@@ -48,9 +47,9 @@ export default function Home() {
             <h2 className="heading-lg">Our Professional Network</h2>
           </div>
           
-              <PartnersStats />
+          <PartnersStats />
 
-              <AnimatedCards staggerDelay={150} className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+          <div className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5" data-animate="cards" data-stagger="150">
                   <div className="card text-start">
               <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
                 <Image
@@ -145,27 +144,28 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-              </AnimatedCards>
-            </div>
-          </AnimatedSection>
+          </div>
+        </div>
+      </section>
 
       {/* Services */}
-          <AnimatedSection 
+      <section 
         id="services" 
-            className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
-            ariaLabelledBy="services-heading"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+        aria-labelledby="services-heading"
+        data-animate="section"
       >
         <div className="container">
-        <p id="services-heading" className="eyebrow mb-3">Services</p>
-              <h2 className="heading-lg mb-6">What We Offer</h2>
+          <p id="services-heading" className="eyebrow mb-3">Services</p>
+          <h2 className="heading-lg mb-6">What We Offer</h2>
           <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
-                <p className="text-muted lg:max-w-[300px] lg:flex-shrink-0 mb-6 lg:mb-0">
-                  Nuverum Ventures is a finder firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.
+            <p className="text-muted lg:max-w-[300px] lg:flex-shrink-0 mb-6 lg:mb-0">
+              Nuverum Ventures is a finder firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.
               <br />
               <br />
-                  We Curate introductions, refine presentations, and illuminate the next steps, enabling companies to navigate their path from vision to opportunity with clarity and purpose.
-                </p>
-                  <AnimatedCards staggerDelay={200} className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1">
+              We Curate introductions, refine presentations, and illuminate the next steps, enabling companies to navigate their path from vision to opportunity with clarity and purpose.
+            </p>
+            <div className="grid gap-5 grid-cols-1 lg:grid-cols-3 lg:flex-1" data-animate="cards" data-stagger="200">
                     <div className="card">
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
@@ -201,27 +201,28 @@ export default function Home() {
                 Raising capital begins with strategy. We provide tailored reports and guidance on next steps if you are considering or growing venture capital, helping you navigate decisions with clarity and precision.
               </p>
             </div>
-                  </AnimatedCards>
+            </div>
           </div>
         </div>
-          </AnimatedSection>
+      </section>
 
-          {/* Approach - 3P Framework */}
-          <AnimatedSection 
-            id="framework" 
-            className="section bg-background" 
-            ariaLabelledBy="framework-heading"
+      {/* Approach - 3P Framework */}
+      <section 
+        id="framework" 
+        className="section bg-background" 
+        aria-labelledby="framework-heading"
+        data-animate="section"
       >
         <div className="container">
           <div className="text-start mb-8">
-                <p id="framework-heading" className="eyebrow mb-3">Our Approach</p>
+            <p id="framework-heading" className="eyebrow mb-3">Our Approach</p>
             <h2 className="heading-lg">The 3 P Framework</h2>
             <p className="text-muted max-w-2xl mt-4">
               Every partnership begins with careful evaluation. We screen opportunities based on clear criteria that ensure mutual success and meaningful outcomes.
             </p>
           </div>
           
-              <AnimatedCards staggerDelay={150} className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3" data-animate="cards" data-stagger="150">
                   <div className="card">
               <div className="flex items-center gap-3 mb-3">
                 <div className="card-icon-inline" aria-hidden>
@@ -257,15 +258,16 @@ export default function Home() {
                 We maintain high standards because we believe in setting founders up for success. Rather than pursuing &quot;maybe&quot; opportunities, we conduct thorough assessments to ensure realistic paths to successful fundraising. Our reputation is built on presenting well-prepared, investment-ready companies with honest feedback when needed.
               </p>
             </div>
-              </AnimatedCards>
+          </div>
         </div>
-          </AnimatedSection>
+      </section>
 
       {/* Founders */}
-          <AnimatedSection 
+      <section 
         id="about" 
-            className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
-            ariaLabelledBy="founders-heading"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+        aria-labelledby="founders-heading"
+        data-animate="section"
       >
         <div className="container">
           <div className="text-start mb-12">
@@ -316,13 +318,14 @@ export default function Home() {
             </div>
           </div>
         </div>
-          </AnimatedSection>
+      </section>
 
       {/* Why We Do It */}
-          <AnimatedSection 
+      <section 
         id="why-we-do-it" 
-            className="section bg-background" 
-            ariaLabelledBy="why-heading"
+        className="section bg-background" 
+        aria-labelledby="why-heading"
+        data-animate="section"
       >
         <div className="container grid gap-7 grid-cols-1 items-start lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-white/20">
           <div className="lg:pr-8">
@@ -341,13 +344,14 @@ export default function Home() {
             </p>
           </div>
         </div>
-          </AnimatedSection>
+      </section>
 
       {/* Our Approach */}
-          <AnimatedSection 
+      <section 
         id="our-approach" 
-            className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
-            ariaLabelledBy="approach-heading"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+        aria-labelledby="approach-heading"
+        data-animate="section"
       >
         <div className="container">
           <div className="text-start mb-8">
@@ -369,13 +373,14 @@ export default function Home() {
             </div>
           </div>
         </div>
-          </AnimatedSection>
+      </section>
 
       {/* Mission */}
-          <AnimatedSection 
+      <section 
         id="approach" 
-            className="section bg-background" 
-            ariaLabelledBy="mission-eyebrow"
+        className="section bg-background" 
+        aria-labelledby="mission-eyebrow"
+        data-animate="section"
       >
         <div className="container grid gap-7 grid-cols-1 items-start lg:grid-cols-2 lg:gap-0 lg:divide-x lg:divide-white/20">
           <div className="lg:pr-8">
@@ -392,7 +397,7 @@ export default function Home() {
           </div>
         </div>
         <ContactButton />
-          </AnimatedSection>
+      </section>
     </>
   );
 }
