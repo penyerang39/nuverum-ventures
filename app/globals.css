@@ -495,13 +495,29 @@ main {
   display: contents;
 }
 
-/* Make all cards visible by default - remove animation interference */
+/* Cards are visible by default for SEO */
+.card-animation .card,
 .card {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Since display: contents makes the wrapper invisible to CSS, 
-   we can't use .card-animation:not(.visible) .card selector.
-   Instead, just ensure cards are always visible */
+/* When JavaScript loads and before intersection observer fires, hide cards for animation */
+.card-animation[data-animated="true"] .card {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* When intersection observer fires and adds visible class, show cards with animation */
+.card-animation[data-animated="true"].visible .card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Individual card stagger delays when animating */
+.card-animation[data-animated="true"] .card:nth-child(1) { transition-delay: calc(var(--stagger-delay, 0ms) + 0ms); }
+.card-animation[data-animated="true"] .card:nth-child(2) { transition-delay: calc(var(--stagger-delay, 0ms) + 150ms); }
+.card-animation[data-animated="true"] .card:nth-child(3) { transition-delay: calc(var(--stagger-delay, 0ms) + 300ms); }
+.card-animation[data-animated="true"] .card:nth-child(4) { transition-delay: calc(var(--stagger-delay, 0ms) + 450ms); }
+.card-animation[data-animated="true"] .card:nth-child(5) { transition-delay: calc(var(--stagger-delay, 0ms) + 600ms); }
