@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
-import DOMPurify from 'dompurify'
 
 // Handle OPTIONS request for CORS preflight
 export async function OPTIONS() {
@@ -33,15 +32,8 @@ const sanitizeInput = (input: string): string => {
   // Strip all HTML tags completely
   const stripped = decoded.replace(/<[^>]*>/g, '')
   
-  // Use DOMPurify for additional sanitization
-  const sanitized = DOMPurify.sanitize(stripped, { 
-    ALLOWED_TAGS: [], // No HTML tags allowed
-    ALLOWED_ATTR: [], // No attributes allowed
-    KEEP_CONTENT: true // Keep text content but strip tags
-  })
-  
   // Remove potentially dangerous characters and patterns
-  return sanitized
+  return stripped
     .replace(/[<>]/g, '') // Remove angle brackets
     .replace(/javascript:/gi, '') // Remove javascript: protocols
     .replace(/data:/gi, '') // Remove data: protocols
