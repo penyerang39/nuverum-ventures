@@ -305,11 +305,7 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
                       <div>
                         <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 flex justify-between items-center">
                           <span>Message</span>
-                          <span className={`text-xs ${
-                            messageLength < 10 ? 'text-red-600' : 
-                            messageLength > 5000 ? 'text-red-600' : 
-                            'text-muted'
-                          }`}>
+                          <span className={`text-xs }`}>
                             {messageLength}/5000 {messageLength < 10 && '(min: 10)'}
                           </span>
                         </label>

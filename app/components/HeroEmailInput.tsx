@@ -75,7 +75,7 @@ export default function HeroEmailInput() {
           
           {/* Client-side animated placeholder overlay */}
           {!emailValue && (
-            <div className="absolute inset-0 pointer-events-none flex items-center">
+            <div className="absolute inset-0 pointer-events-none ml-3 flex items-center">
               <TypingInput
                 placeholderTexts={[
                   "Enter your email",
