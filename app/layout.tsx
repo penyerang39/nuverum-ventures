@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     siteName: 'Nuverum Ventures',
     images: [
       {
-        url: '/heroBackground.jpg',
+        url: '/logos/nuverumBlack.jpg',
         width: 1200,
         height: 630,
         alt: 'Nuverum Ventures - Bridging Vision with Opportunity',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
     creator: '@nuverum_ventures',
     site: '@nuverum_ventures',
-    images: ['/heroBackground.jpg'],
+    images: ['/nuverumBlack.jpg'],
   },
   
   // Icons and manifest
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
       follow: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
-      'max-snippet': -1,
+      'max-snippet': 0,
     },
   },
   

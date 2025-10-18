@@ -5,14 +5,14 @@ import ShinyText from "./ShinyText";
 
 export default function HeroDiscoverMore() {
   const scrollToNextSection = () => {
-    const nextSection = document.getElementById('approach');
+    const nextSection = document.getElementById('partners');
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group" onClick={scrollToNextSection}>
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group" onClick={scrollToNextSection}>
       <ShinyText 
         text="Discover More" 
         speed={3}

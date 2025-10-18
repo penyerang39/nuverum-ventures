@@ -33,32 +33,9 @@ export default function StructuredData() {
     sameAs: [
       'https://twitter.com/nuverum_ventures',
     ],
-  };
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Nuverum Ventures',
-    url: 'https://nuverum.com',
-    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Nuverum Ventures',
-    },
-  };
-
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: 'Venture Capital Consulting',
-    provider: {
-      '@type': 'Organization',
-      name: 'Nuverum Ventures',
-    },
-    areaServed: 'Worldwide',
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Venture Capital Services',
+      name: 'Venture Capital Finders Services',
       itemListElement: [
         {
           '@type': 'Offer',
@@ -88,6 +65,18 @@ export default function StructuredData() {
     },
   };
 
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Nuverum Ventures',
+    url: 'https://nuverum.com',
+    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Nuverum Ventures',
+    },
+  };
+
   return (
     <>
       <script
@@ -97,10 +86,6 @@ export default function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
     </>
   );

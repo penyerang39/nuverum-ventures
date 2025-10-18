@@ -17,11 +17,13 @@ export default function HeroSection() {
       </div>
       <div className="hero-inner max-md:mb-[20vh] container text-center">
         <div className="font-light heading-xl mb-10" data-animate="hero-text">
-          <p>Bridging vision with opportunity.</p>
+          <h1>Bridging vision with opportunity.</h1>
         </div>
         <HeroEmailInput />
+        <div className="max-w-[800px] text-muted/90 absolute bottom-30">
+          <p>Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.</p>
       </div>
-      
+      </div>
       <HeroDiscoverMore />
     </section>
   );

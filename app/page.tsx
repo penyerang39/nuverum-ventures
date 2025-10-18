@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Nuverum Ventures - Bridging Vision with Opportunity',
-  description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs. Access curated investor introductions, pitch material evaluation, and venture capital consultation.',
+  description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
   keywords: [
     'venture capital',
     'investment',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Nuverum Ventures - Bridging Vision with Opportunity',
-    description: 'Strategic investment and venture capital solutions for innovative companies and entrepreneurs.',
+    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
     type: 'website',
     url: 'https://nuverum.com',
   },
@@ -58,12 +58,13 @@ export default function Home() {
                   width={120}
                   height={30}
                   className="h-16 w-auto object-contain"
+                  data-noindex
                 />
               </div>
               <div className="space-y-2">
                 <h4 className="text-lg font-semibold text-foreground">Overkill Capital</h4>
                 <p className="text-sm text-muted">Riga, Latvia</p>
-                <p className="text-sm text-muted leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
                   A dynamic venture capital firm with multiple partners, specializing in early-stage investments across the Baltic region. Known for their hands-on approach and deep understanding of emerging markets.
                 </p>
               </div>
@@ -77,12 +78,13 @@ export default function Home() {
                   width={120}
                   height={40}
                   className="h-16 w-auto object-contain"
+                  data-noindex
                 />
               </div>
               <div className="space-y-2">
                 <h4 className="text-lg font-semibold text-foreground">Cherry VC</h4>
                 <p className="text-sm text-muted">Amsterdam, Netherlands</p>
-                <p className="text-sm text-muted leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
                   A focused venture capital partner based in Amsterdam, bringing European expertise to global opportunities. Their strategic approach combines local market knowledge with international investment experience.
                 </p>
               </div>
@@ -96,12 +98,13 @@ export default function Home() {
                   width={120}
                   height={40}
                   className="h-16 w-auto object-contain"
+                  data-noindex
                 />
               </div>
               <div className="space-y-2">
                 <h4 className="text-lg font-semibold text-foreground">Point Nine Capital</h4>
                 <p className="text-sm text-muted">Berlin, Germany</p>
-                <p className="text-sm text-muted leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
                   A leading European venture capital firm with a single dedicated partner, focusing on B2B SaaS and marketplace investments. Renowned for their technical expertise and founder-friendly approach.
                 </p>
               </div>
@@ -115,12 +118,13 @@ export default function Home() {
                   width={120}
                   height={40}
                   className="h-16 w-auto object-contain"
+                  data-noindex
                 />
               </div>
               <div className="space-y-2">
                 <h4 className="text-lg font-semibold text-foreground">Transform VC</h4>
                 <p className="text-sm text-muted">New York City, USA</p>
-                <p className="text-sm text-muted leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
                   A New York-based venture capital partner specializing in transformative technologies and innovative business models. Their global perspective and extensive network provide unique opportunities for portfolio companies.
                 </p>
               </div>
@@ -134,12 +138,13 @@ export default function Home() {
                   width={200}
                   height={20}
                   className="h-16 w-auto object-contain"
+                  data-noindex
                 />
               </div>
               <div className="space-y-2">
                 <h4 className="text-lg font-semibold text-foreground">B Combinator</h4>
                 <p className="text-sm text-muted">Barcelona, Spain</p>
-                <p className="text-sm text-muted leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
                         B Combinator is a Barcelona-based venture capital fund investing in transformative technologies and innovative business models, leveraging a global network to unlock exceptional growth opportunities for founders.
                       </p>
                     </div>
@@ -160,7 +165,7 @@ export default function Home() {
           <h2 className="heading-lg mb-6">What We Offer</h2>
           <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
             <p className="text-muted lg:max-w-[300px] lg:flex-shrink-0 mb-6 lg:mb-0">
-              Nuverum Ventures is a finder firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.
+              Nuverum Ventures is a finders firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.
               <br />
               <br />
               We Curate introductions, refine presentations, and illuminate the next steps, enabling companies to navigate their path from vision to opportunity with clarity and purpose.
@@ -283,6 +288,7 @@ export default function Home() {
                 width={400}
                 height={300}
                 className="w-full h-auto object-cover rounded-3xl"
+                data-noindex
               />
             </div>
 
@@ -304,6 +310,7 @@ export default function Home() {
                 width={400}
                 height={300}
                 className="w-full h-auto object-cover rounded-3xl"
+                data-noindex
               />
             </div>
 
