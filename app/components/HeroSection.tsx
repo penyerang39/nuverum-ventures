@@ -21,7 +21,7 @@ export default function HeroSection() {
         </div>
         <HeroEmailInput />
         <div className="max-w-[800px] text-muted/90 absolute bottom-30">
-          <p>Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.</p>
+          <p>Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.</p>
       </div>
       </div>
       <HeroDiscoverMore />

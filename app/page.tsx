@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Nuverum Ventures - Bridging Vision with Opportunity',
-  description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
+  description: 'Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.',
   keywords: [
     'venture capital',
     'investment',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Nuverum Ventures - Bridging Vision with Opportunity',
-    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
+    description: 'Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.',
     type: 'website',
     url: 'https://nuverum.com',
   },
@@ -165,7 +165,7 @@ export default function Home() {
           <h2 className="heading-lg mb-6">What We Offer</h2>
           <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
             <p className="text-muted lg:max-w-[300px] lg:flex-shrink-0 mb-6 lg:mb-0">
-              Nuverum Ventures is a finders firm, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.
+              Nuverum Ventures is an introductory service, we provide founders with selective access to investors, thoughtful evaluation of pitch materials and strategic guidance tailored to their venture.
               <br />
               <br />
               We Curate introductions, refine presentations, and illuminate the next steps, enabling companies to navigate their path from vision to opportunity with clarity and purpose.
@@ -369,7 +369,7 @@ export default function Home() {
             <div className="space-y-4">
               <h3 className="text-xl font-semibold">Success-Based Partnership</h3>
               <p className="text-muted">
-                Our revenue model aligns our success with yours. We operate on a success fee structure, ensuring we&apos;re incentivized to secure the right opportunities for your venture. Success fees are capped at a maximum of 5%, reflecting our commitment to fair and transparent partnerships.
+                Our revenue model aligns our success with yours. We operate on a consulting fee structure, ensuring we&apos;re incentivized to secure the right opportunities for your venture. Consulting fees are capped at a maximum of 5% of final funding round amount, reflecting our commitment to fair and transparent partnerships.
               </p>
             </div>
             <div className="space-y-4">

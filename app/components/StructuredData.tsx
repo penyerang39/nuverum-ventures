@@ -3,7 +3,7 @@ export default function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Nuverum Ventures',
-    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
+    description: 'Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.',
     url: 'https://nuverum.com',
     logo: 'https://nuverum.com/logos/nuverumBlack.svg',
     foundingDate: '2024',
@@ -35,7 +35,7 @@ export default function StructuredData() {
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Venture Capital Finders Services',
+      name: 'Venture Capital Introductory Services',
       itemListElement: [
         {
           '@type': 'Offer',
@@ -70,7 +70,7 @@ export default function StructuredData() {
     '@type': 'WebSite',
     name: 'Nuverum Ventures',
     url: 'https://nuverum.com',
-    description: 'Strategic venture capital and investment solutions for innovative companies. We bridge vision with opportunity to fuel business growth and entrepreneurship.',
+    description: 'Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.',
     publisher: {
       '@type': 'Organization',
       name: 'Nuverum Ventures',
