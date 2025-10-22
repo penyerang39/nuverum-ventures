@@ -49,7 +49,7 @@ export default function Home() {
           
           <PartnersStats />
 
-          <div className="grid gap-0 grid-cols-1 md:grid-cols-3 lg:grid-cols-5" data-animate="cards" data-stagger="150">
+          <div className="grid gap-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4" data-animate="cards" data-stagger="150">
                   <div className="card text-start">
               <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
                 <Image
@@ -109,27 +109,6 @@ export default function Home() {
                 </p>
               </div>
             </div>
-
-                  <div className="card text-start">
-              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
-                <Image
-                  src="/partners/transformVC.svg"
-                  alt="Transform VC logo"
-                  width={120}
-                  height={40}
-                  className="h-16 w-auto object-contain"
-                  data-noindex
-                />
-              </div>
-              <div className="space-y-2">
-                <h4 className="text-lg font-semibold text-foreground">Transform VC</h4>
-                <p className="text-sm text-muted">New York City, USA</p>
-                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
-                  A New York-based venture capital partner specializing in transformative technologies and innovative business models. Their global perspective and extensive network provide unique opportunities for portfolio companies.
-                </p>
-              </div>
-            </div>
-
                   <div className="card text-start">
               <div className="w-full h-20 p-0 bg-primary/10 rounded-lg flex items-start justify-start mt-4">
                 <Image
