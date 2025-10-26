@@ -28,7 +28,7 @@ export default function ModalProvider({ children }: ModalProviderProps) {
   const [prefilledSubject, setPrefilledSubject] = useState('');
   const [calendlyReady, setCalendlyReady] = useState(false);
 
-  // Preload Calendly resources
+  // Preconnect to Calendly for faster initial load
   useEffect(() => {
     const link = document.createElement('link');
     link.rel = 'preconnect';
@@ -40,16 +40,9 @@ export default function ModalProvider({ children }: ModalProviderProps) {
     dnsLink.href = 'https://calendly.com';
     document.head.appendChild(dnsLink);
 
-    const scriptLink = document.createElement('link');
-    scriptLink.rel = 'preload';
-    scriptLink.href = 'https://assets.calendly.com/assets/external/widget.js';
-    scriptLink.as = 'script';
-    document.head.appendChild(scriptLink);
-
     return () => {
       if (document.head.contains(link)) document.head.removeChild(link);
       if (document.head.contains(dnsLink)) document.head.removeChild(dnsLink);
-      if (document.head.contains(scriptLink)) document.head.removeChild(scriptLink);
     };
   }, []);
 
@@ -70,30 +63,7 @@ export default function ModalProvider({ children }: ModalProviderProps) {
     <ModalContext.Provider value={{ openModal, calendlyReady }}>
       {children}
       
-      {/* Hidden Calendly Preloader */}
-      <div 
-        className="fixed -top-[9999px] left-0 w-1 h-1 opacity-0 pointer-events-none overflow-hidden"
-        aria-hidden="true"
-      >
-        <iframe
-          id="calendly-preloader"
-          src="https://calendly.com/thomas-nuverum/30min?embed_domain=localhost&embed_type=Inline"
-          width="100%"
-          height="600"
-          title="Calendly preload"
-          className="min-h-[600px]"
-          loading="eager"
-          allow="payment; geolocation"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-          onLoad={() => {
-            setCalendlyReady(true);
-            if (typeof window !== 'undefined') {
-              (window as Window & { calendlyPreloaded?: boolean }).calendlyPreloaded = true;
-            }
-          }}
-        />
-      </div>
-
+      {/* ContactModal is always mounted to prevent iframe reload */}
       <ContactModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)}

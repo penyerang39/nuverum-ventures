@@ -302,7 +302,7 @@ export default function Home() {
                 <div>
                   <h4 className="font-semibold mb-3">What You Get:</h4>
                   <ul className="space-y-2 text-muted">
-                    <li className="flex gap-2">
+                    <li className="flex gap-2 text-black">
                       <CheckCircleIcon className="size-5 flex-shrink-0 mt-0.5" />
                       <span>Everything in Package 1, plus:</span>
                     </li>
@@ -343,7 +343,7 @@ export default function Home() {
                 <div>
                   <h4 className="font-semibold mb-3">What You Get:</h4>
                   <ul className="space-y-2 text-muted z-2">
-                    <li className="flex gap-2">
+                    <li className="flex gap-2 text-black">
                       <CheckCircleIcon className="size-5 flex-shrink-0 mt-0.5" />
                       <span>Everything in Package 2, plus:</span>
                     </li>
