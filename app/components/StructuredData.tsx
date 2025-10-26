@@ -3,7 +3,7 @@ export default function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Nuverum Ventures',
-    description: 'Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.',
+    description: 'We help founders prepare to raise capital with strategic guidance, pitch refinement, and investor preparation. Flat-fee fundraising consultation services.',
     url: 'https://nuverum.com',
     logo: 'https://nuverum.com/logos/nuverumBlack.svg',
     foundingDate: '2024',
@@ -70,7 +70,7 @@ export default function StructuredData() {
     '@type': 'WebSite',
     name: 'Nuverum Ventures',
     url: 'https://nuverum.com',
-    description: 'Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.',
+    description: 'We help founders prepare to raise capital with strategic guidance, pitch refinement, and investor preparation. Flat-fee fundraising consultation services.',
     publisher: {
       '@type': 'Organization',
       name: 'Nuverum Ventures',

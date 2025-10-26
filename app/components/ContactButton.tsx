@@ -1,31 +1,41 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AnimatedArrowIcon from './AnimatedArrowIcon';
 import { usePerformanceTracking } from '../hooks/usePerformanceTracking';
 import { useModal } from './ModalProvider';
 
 interface ContactButtonProps {
   variant?: 'default' | 'muted';
+  packageName?: string;
 }
 
-export default function ContactButton({ variant = 'default' }: ContactButtonProps) {
+export default function ContactButton({ variant = 'default', packageName }: ContactButtonProps) {
   const { openModal } = useModal();
-  const [isAtBottom, setIsAtBottom] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const { trackUserInteraction } = usePerformanceTracking();
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      
-      const isNearBottom = scrollTop + windowHeight >= documentHeight - 300;
-      setIsAtBottom(isNearBottom);
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Activate when button enters the top 80% of the viewport
+        setIsActive(entry.isIntersecting);
+      },
+      {
+        // Shrink intersection area by 20% from top, so it triggers when entering top 80%
+        rootMargin: '0px 0px -20% 0px',
+        threshold: 0
+      }
+    );
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (buttonRef.current) {
+      observer.observe(buttonRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const isMuted = variant === 'muted';
@@ -35,16 +45,17 @@ export default function ContactButton({ variant = 'default' }: ContactButtonProp
     : 'bg-black group whitespace-nowrap text-white px-8 py-4 text-lg font-medium transition-all duration-200 rounded-2xl flex items-center gap-3 relative z-10';
 
   return (
-    <div className="flex justify-center mt-16 relative">
+    <div ref={buttonRef} className="flex justify-center mt-16 relative">
       <button
         onClick={() => {
           trackUserInteraction('contact-button-click', 'partners-contact');
-          openModal('');
+          const subject = packageName ? `${packageName} Inquiry` : '';
+          openModal('', subject);
         }}
         className={buttonClasses}
       >
         Contact Us
-        <AnimatedArrowIcon size="lg" isActive={isAtBottom} muted={isMuted} />
+        <AnimatedArrowIcon size="lg" isActive={isActive} muted={isMuted} />
       </button>
     </div>
   );

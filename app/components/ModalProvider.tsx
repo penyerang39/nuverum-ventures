@@ -4,7 +4,7 @@ import { ReactNode, useState, useEffect, createContext, useContext } from 'react
 import ContactModal from './ContactModal';
 
 interface ModalContextType {
-  openModal: (email: string) => void;
+  openModal: (email: string, subject?: string) => void;
   calendlyReady: boolean;
 }
 
@@ -25,6 +25,7 @@ interface ModalProviderProps {
 export default function ModalProvider({ children }: ModalProviderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState('');
+  const [prefilledSubject, setPrefilledSubject] = useState('');
   const [calendlyReady, setCalendlyReady] = useState(false);
 
   // Preload Calendly resources
@@ -52,8 +53,9 @@ export default function ModalProvider({ children }: ModalProviderProps) {
     };
   }, []);
 
-  const openModal = (email: string) => {
+  const openModal = (email: string, subject?: string) => {
     setPrefilledEmail(email);
+    setPrefilledSubject(subject || '');
     setIsModalOpen(true);
   };
 
@@ -96,6 +98,7 @@ export default function ModalProvider({ children }: ModalProviderProps) {
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)}
         prefilledEmail={prefilledEmail}
+        prefilledSubject={prefilledSubject}
         calendlyReady={calendlyReady}
       />
     </ModalContext.Provider>

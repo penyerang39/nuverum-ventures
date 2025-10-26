@@ -15,6 +15,13 @@ const roboto = Inter({
   variable: '--font-roboto',
 });
 
+const robotoItalic = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700'],
+  style: ['italic'],
+  variable: '--font-roboto-italic',
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Nuverum Ventures",
@@ -150,7 +157,7 @@ export default function RootLayout({
         {/* Additional favicon support for older browsers */}
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
-      <body className={`${roboto.variable} antialiased bg-background text-foreground`}>
+      <body className={`${roboto.variable} ${robotoItalic.variable} antialiased bg-background text-foreground`}>
         <StructuredData />
         <LoadingSplash />
         <ModalProvider>

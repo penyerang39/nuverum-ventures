@@ -194,22 +194,22 @@ export default function Footer() {
           <p className="text-white/70 text-sm text-italic max-w-[600px]">
             Legal Disclaimer: We are not a licensed broker, dealer, or financial intermediary. Our role is limited to providing introductory and strategic consulting services. We do not execute, facilitate, or guarantee any transactions. All decisions and actions taken based on our services are at your sole discretion and risk.
           </p>
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-col md:items-end gap-2">
             <div className="flex gap-4 text-white/70 text-sm">
               <Link 
                 href="/privacy-policy" 
-                className="hover:text-white transition-colors"
+                className="text-white"
               >
                 Privacy Policy
               </Link>
               <Link 
                 href="/terms-of-service" 
-                className="hover:text-white transition-colors"
+                className="text-white"
               >
                 Terms of Service
               </Link>
             </div>
-            <p className="text-white/70 text-sm text-nowrap">© {new Date().getFullYear()} Nuverum Ventures</p>
+            <p className="text-white/70 text-sm text-nowrap mt-10">© {new Date().getFullYear()} Nuverum Ventures</p>
             <Image 
               src="/logos/SVG/favicon-light.svg" 
               alt="Nuverum Ventures" 

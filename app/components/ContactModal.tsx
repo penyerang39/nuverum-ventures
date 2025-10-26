@@ -75,10 +75,11 @@ interface ContactModalProps {
   isOpen: boolean
   onClose: () => void
   prefilledEmail?: string
+  prefilledSubject?: string
   calendlyReady?: boolean
 }
 
-export default function ContactModal({ isOpen, onClose, prefilledEmail = '', calendlyReady = false }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, prefilledEmail = '', prefilledSubject = '', calendlyReady = false }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false)
@@ -127,6 +128,13 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
       setValue('from', prefilledEmail)
     }
   }, [isOpen, prefilledEmail, setValue])
+
+  // Set prefilled subject when modal opens
+  useEffect(() => {
+    if (isOpen && prefilledSubject) {
+      setValue('subject', prefilledSubject)
+    }
+  }, [isOpen, prefilledSubject, setValue])
 
 
   const onSubmit = async (data: EmailFormData) => {
@@ -360,7 +368,7 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
                     {/* Mailto Link */}
                     <div className="pt-4 border-t border-border">
                       <a
-                        href="mailto:thomas@nuverum.com?subject=Nuverum Ventures Inquiry"
+                        href={`mailto:thomas@nuverum.com?subject=${sanitizeInput(prefilledSubject)}`}
                         className="inline-flex items-center gap-2 text-sm text-accent-strong hover:underline"
                       >
                         <EnvelopeIcon className="h-4 w-4" />

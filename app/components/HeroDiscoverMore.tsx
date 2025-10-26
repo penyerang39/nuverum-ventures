@@ -5,7 +5,7 @@ import ShinyText from "./ShinyText";
 
 export default function HeroDiscoverMore() {
   const scrollToNextSection = () => {
-    const nextSection = document.getElementById('partners');
+    const nextSection = document.getElementById('what-we-do');
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: 'smooth' });
     }
