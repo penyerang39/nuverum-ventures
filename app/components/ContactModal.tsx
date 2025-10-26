@@ -197,7 +197,7 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-white backdrop-blur-sm" />
+          <div className="fixed inset-0 backdrop-blur-sm" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -211,7 +211,7 @@ export default function ContactModal({ isOpen, onClose, prefilledEmail = '', cal
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-6xl transform overflow-hidden rounded-2xl bg-surface p-8 text-left align-middle border border-muted transition-all">
+              <Dialog.Panel className="w-full max-w-6xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle border border-muted transition-all">
                 <div className="flex items-start justify-between mb-6">
                   <Dialog.Title as="h3" className="text-2xl font-semibold leading-6 text-foreground">
                     Get in Touch

@@ -68,22 +68,29 @@ export default function Tooltip({ text, className = '' }: TooltipProps) {
       {mounted && showTooltip && createPortal(
         <div 
           style={{
-            position: 'absolute',
-            top: `${position.top}px`,
-            left: `${position.left}px`,
+            position: 'fixed',
+            top: position.top - window.scrollY,
+            left: position.left,
             transform: 'translate(-50%, calc(-100% - 8px))',
-            zIndex: 9999,
+            zIndex: 99999,
             pointerEvents: 'auto',
           }}
-          className="w-64 p-3 bg-foreground text-background rounded-lg shadow-lg text-sm leading-relaxed"
+          className="w-64 p-3 bg-foreground text-background rounded-lg shadow-xl text-sm leading-relaxed border border-white/20"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <p>{text}</p>
           {/* Tooltip arrow */}
-          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
-            <div className="w-3 h-3 bg-foreground rotate-45"></div>
-          </div>
+          <div 
+            style={{
+              position: 'absolute',
+              top: '100%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: -1,
+            }}
+            className="w-3 h-3 bg-foreground rotate-45"
+          />
         </div>,
         document.body
       )}
