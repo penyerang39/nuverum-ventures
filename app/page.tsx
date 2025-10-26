@@ -174,7 +174,7 @@ export default function Home() {
                   <p className="text-sm text-muted"><strong>Timeline:</strong> 7-10 business days</p>
                 </div>
               </div>
-              <ContactButton />
+              <ContactButton variant="muted" />
             </div>
 
             {/* Package 2 */}
@@ -227,7 +227,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-semibold mb-3">What You Get:</h4>
-                  <ul className="space-y-2 text-muted">
+                  <ul className="space-y-2 text-muted z-2">
                     <li className="flex gap-2">
                       <CheckCircleIcon className="size-5 flex-shrink-0 mt-0.5" />
                       <span>Everything in Package 2, plus:</span>
@@ -258,7 +258,7 @@ export default function Home() {
                   <p className="text-sm text-muted"><strong>Timeline:</strong> 14-21 business days</p>
                 </div>
               </div>
-              <ContactButton />
+              <ContactButton variant="muted" />
             </div>
           </div>
         </div>

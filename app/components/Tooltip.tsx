@@ -28,9 +28,10 @@ export default function Tooltip({ text, className = '' }: TooltipProps) {
     const updatePosition = () => {
       if (showTooltip && buttonRef.current) {
         const rect = buttonRef.current.getBoundingClientRect();
+        // For fixed positioning, use viewport coordinates directly
         setPosition({
-          top: rect.top + window.scrollY,
-          left: rect.left + window.scrollX + rect.width / 2,
+          top: rect.top,
+          left: rect.left + rect.width / 2,
         });
       }
     };
@@ -64,15 +65,14 @@ export default function Tooltip({ text, className = '' }: TooltipProps) {
         <InformationCircleIcon className="size-5 text-muted" />
       </button>
       
-      {/* Portal tooltip to document.body to escape stacking context */}
-      {mounted && showTooltip && createPortal(
+      {/* Portal tooltip to dedicated root to appear above all stacking contexts */}
+      {mounted && showTooltip && document.getElementById('tooltip-root') && createPortal(
         <div 
           style={{
             position: 'fixed',
-            top: position.top - window.scrollY,
-            left: position.left,
+            top: `${position.top}px`,
+            left: `${position.left}px`,
             transform: 'translate(-50%, calc(-100% - 8px))',
-            zIndex: 99999,
             pointerEvents: 'auto',
           }}
           className="w-64 p-3 bg-foreground text-background rounded-lg shadow-xl text-sm leading-relaxed border border-white/20"
@@ -87,12 +87,11 @@ export default function Tooltip({ text, className = '' }: TooltipProps) {
               top: '100%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              zIndex: -1,
             }}
             className="w-3 h-3 bg-foreground rotate-45"
           />
         </div>,
-        document.body
+        document.getElementById('tooltip-root')!
       )}
     </>
   );

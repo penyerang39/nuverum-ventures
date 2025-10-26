@@ -4,13 +4,16 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 export default function LoadingSplash() {
-  const [mounted, setMounted] = useState(false);
   const [shouldShow, setShouldShow] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const startTimeRef = useRef<number>(0);
+  const hasInitialized = useRef(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Prevent double initialization in strict mode
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+    
     startTimeRef.current = Date.now();
     
     // Check if user has seen splash before
@@ -47,8 +50,8 @@ export default function LoadingSplash() {
     };
   }, []);
 
-  // Don't render anything during SSR
-  if (!mounted || !shouldShow) return null;
+  // Hide only after fade out is complete
+  if (!shouldShow) return null;
 
   return (
     <div className={`fixed inset-0 z-[100] flex items-center justify-center w-full h-full bg-black transition-opacity duration-500 ease-out ${

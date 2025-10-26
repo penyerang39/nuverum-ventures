@@ -160,6 +160,8 @@ export default function RootLayout({
         </ModalProvider>
         <AnimationObserver />
         <SpeedInsights />
+        {/* Portal root for tooltips - must be last to appear above all content */}
+        <div id="tooltip-root" style={{ position: 'relative', zIndex: 999999 }} />
       </body>
     </html>
   );

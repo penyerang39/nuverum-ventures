@@ -1,9 +1,18 @@
 'use client'
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function AnimationObserver() {
+  const pathname = usePathname();
+  
   useEffect(() => {
+    // Skip animations on legal pages
+    const isLegalPage = pathname === '/privacy-policy' || pathname === '/terms-of-service';
+    if (isLegalPage) {
+      return;
+    }
+
     // Add class to signal JS is loaded
     document.documentElement.classList.add('js-loaded');
     
@@ -38,7 +47,7 @@ export default function AnimationObserver() {
     }, 100); // 100ms delay for CSS to apply
 
     return () => clearTimeout(timeoutId);
-  }, []);
+  }, [pathname]);
 
   return null;
 }
