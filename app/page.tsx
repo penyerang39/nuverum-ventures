@@ -5,6 +5,7 @@ import ContactButton from "./components/ContactButton";
 import FAQItem from "./components/FAQItem";
 import type { Metadata } from 'next';
 import Iridescence from "@/components/Iridescence";
+import RotatingText from "@/components/RotatingText";
 
 export const metadata: Metadata = {
   title: 'Nuverum Ventures - Expert Fundraising Consultation for Startups',
@@ -34,7 +35,7 @@ export default function Home() {
   return (
     <>
       <section id="home" className="hero" aria-labelledby="hero-heading">
-        <div className="absolute min-h-[100vh] inset-0 -z-10 filter:grayscale[1]">
+        <div className="absolute min-h-[100vh] inset-0 mx-0 px-0 -z-10 filter:grayscale[1]">
         <Iridescence
             color={[1, 1, 1]}
             mouseReact={false}
@@ -43,9 +44,20 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/70" />
         </div>
-        <div className="hero-inner max-md:mb-[20vh] container text-center">
+        <div className="hero-inner max-md:mb-[20vh] container mx-0 px-0 text-center">
           <div className="font-light heading-xl mb-6" data-animate="hero-text">
-            <h1>Expert Fundraising Consultation for Startups</h1>
+            <h1 className="flex flex-wrap items-center justify-center gap-2">Expert <RotatingText
+              texts={['Fundraising', 'Pre-Seed', 'Series A', 'Scaling']}
+              mainClassName="px-2 sm:px-2 md:px-3 mx-3 mx-3 bg-black text-white overflow-hidden py-0.5 sm:py-1 md:py-3 rounded-lg flex-shrink-0 whitespace-nowrap"
+              staggerFrom="last"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={4000}
+            /> <span className="basis-full"></span>Consultation for Startups</h1>
           </div>
           <div className="lg:whitespace-nowrap absolute bottom-20 italic mx-auto mb-8 text-muted/90">
             <p className="text-lg">We help founders prepare to raise capital—strategic guidance, pitch refinement, and investor preparation.</p>
@@ -426,7 +438,7 @@ export default function Home() {
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" className="col w-full h-auto" aria-label="Nuverum Logo">
               <defs>
-                <style>{`.nuverum-black { fill: #000; }`}</style>
+                <style>{`.nuverum-black { fill: #5b646e; }`}</style>
               </defs>
               <g>
                 <path className="nuverum-black" d="M1.75,74.41c0-7.33,4.41-11.16,10.98-11.16s10.98,3.82,10.98,11.16v11.65h-2.07v-11.65c0-5.94-3.51-9.22-8.91-9.22s-8.91,3.28-8.91,9.22v11.65H1.75v-11.65Z"/>                                                            
