@@ -558,3 +558,11 @@ main {
   filter: blur(0);
   transition: opacity 1s ease, filter 1s ease;
 }
+
+/* Fix for uneven border rendering on rounded corners */
+@supports (border-radius: 1px) {
+  [class*="rounded"][class*="border"] {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+}
