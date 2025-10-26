@@ -7,6 +7,7 @@ import Image from 'next/image'
 import ContactModal from './components/ContactModal'
 import AnimatedArrowIcon from './components/AnimatedArrowIcon'
 import { useLoadingState } from './hooks/useLoadingState'
+import Link from 'next/link'
 
 const navigation = [
   { name: 'Services', href: '#packages', current: false },
@@ -39,7 +40,7 @@ export default function Navbar() {
               <div className="relative flex h-15 items-center justify-between">
                 {/* Logo on the left */}
                 <div className="flex items-center h-15">
-                  <a href="/#hero" className="cursor-pointer">
+                  <Link href="/#hero" className="cursor-pointer">
                     <Image
                       src="/logos/SVG/nuverumBlack.svg"
                       alt="Nuverum Logo"
@@ -47,7 +48,7 @@ export default function Navbar() {
                       height={70}
                       className="transition-all duration-300 logo-filter"
                     />
-                  </a>
+                  </Link>
                   {/* Vertical divider */}
                   <div className="ml-4 w-px bg-white self-stretch"></div>
                 </div>
