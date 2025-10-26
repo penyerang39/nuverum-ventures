@@ -39,7 +39,7 @@ export default function Navbar() {
               <div className="relative flex h-15 items-center justify-between">
                 {/* Logo on the left */}
                 <div className="flex items-center h-15">
-                  <a href="#home" className="cursor-pointer">
+                  <a href="/#hero" className="cursor-pointer">
                     <Image
                       src="/logos/SVG/nuverumBlack.svg"
                       alt="Nuverum Logo"

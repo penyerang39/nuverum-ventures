@@ -258,11 +258,13 @@ export default function Home() {
           <div className="grid gap-8 grid-cols-1 md:grid-cols-3" data-animate="cards" data-stagger="150">
             {/* Package 1 */}
             <div className="card flex flex-col">
-              <div className="space-y-4 flex-1">
+              <div className="space-y-4 pb-4 border-b border-white/10 h-32">
                 <div>
                   <h3 className="text-2xl font-semibold mb-2">Pitch Material Evaluation & Redesign</h3>
                   <p className="text-3xl font-bold">$1,000</p>
                 </div>
+              </div>
+              <div className="space-y-4 py-4 h-72">
                 <div>
                   <h4 className="font-semibold mb-3">What You Get:</h4>
                   <ul className="space-y-2 text-muted">
@@ -284,21 +286,23 @@ export default function Home() {
                     </li>
                   </ul>
                 </div>
-                <div className="pt-4 border-t border-white/10">
-                  <p className="text-sm text-muted mb-1"><strong>Best For:</strong> Early-stage startups that need polished, investor-ready materials.</p>
-                  <p className="text-sm text-muted"><strong>Timeline:</strong> 7-10 business days</p>
-                </div>
+              </div>
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-sm text-muted mb-1"><strong>Best For:</strong> Early-stage startups that need polished, investor-ready materials.</p>
+                <p className="text-sm text-muted"><strong>Timeline:</strong> 7-10 business days</p>
               </div>
               <ContactButton variant="muted" packageName="Pitch Material Evaluation & Redesign" />
             </div>
 
             {/* Package 2 */}
             <div className="card flex flex-col">
-              <div className="space-y-4 flex-1">
+              <div className="space-y-4 pb-4 border-b border-white/10 h-32">
                 <div>
                   <h3 className="text-2xl font-semibold mb-2">Pitch + Fundraising Strategy</h3>
                   <p className="text-3xl font-bold">$2,500</p>
                 </div>
+              </div>
+              <div className="space-y-4 py-4 h-72">
                 <div>
                   <h4 className="font-semibold mb-3">What You Get:</h4>
                   <ul className="space-y-2 text-muted">
@@ -324,25 +328,27 @@ export default function Home() {
                     </li>
                   </ul>
                 </div>
-                <div className="pt-4 border-t border-white/10">
-                  <p className="text-sm text-muted mb-1"><strong>Best For:</strong> Founders who need both materials and a clear fundraising roadmap.</p>
-                  <p className="text-sm text-muted"><strong>Timeline:</strong> 10-14 business days</p>
-                </div>
+              </div>
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-sm text-muted mb-1"><strong>Best For:</strong> Founders who need both materials and a clear fundraising roadmap.</p>
+                <p className="text-sm text-muted"><strong>Timeline:</strong> 10-14 business days</p>
               </div>
               <ContactButton packageName="Pitch + Fundraising Strategy" />
             </div>
 
             {/* Package 3 */}
             <div className="card flex flex-col">
-              <div className="space-y-4 flex-1">
+              <div className="space-y-4 pb-4 border-b border-white/10 h-32">
                 <div>
                   <h3 className="text-2xl font-semibold mb-2">Comprehensive Fundraising Prep</h3>
                   <p className="text-3xl font-bold">$3,000 - $5,000</p>
                   <p className="text-sm text-muted mt-1">(based on scope)</p>
                 </div>
+              </div>
+              <div className="space-y-4 py-4 h-72">
                 <div>
                   <h4 className="font-semibold mb-3">What You Get:</h4>
-                  <ul className="space-y-2 text-muted z-2">
+                  <ul className="space-y-2 text-muted">
                     <li className="flex gap-2 text-black">
                       <CheckCircleIcon className="size-5 flex-shrink-0 mt-0.5" />
                       <span>Everything in Package 2, plus:</span>
@@ -367,10 +373,10 @@ export default function Home() {
                     </li>
                   </ul>
                 </div>
-                <div className="pt-4 border-t border-white/10">
-                  <p className="text-sm text-muted mb-1"><strong>Best For:</strong> Startups ready to launch their fundraising campaign with a complete investor pipeline.</p>
-                  <p className="text-sm text-muted"><strong>Timeline:</strong> 14-21 business days</p>
-                </div>
+              </div>
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-sm text-muted mb-1"><strong>Best For:</strong> Startups ready to launch their fundraising campaign with a complete investor pipeline.</p>
+                <p className="text-sm text-muted"><strong>Timeline:</strong> 14-21 business days</p>
               </div>
               <ContactButton variant="muted" packageName="Comprehensive Fundraising Prep" />
             </div>
