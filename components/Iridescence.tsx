@@ -75,8 +75,24 @@ export default function Iridescence({
     let program: Program;
 
     function resize() {
-      const scale = 1;
+      // Optimize for mobile devices and high DPI screens
+      const isMobile = window.innerWidth < 768;
+      const dpr = window.devicePixelRatio || 1;
+      
+      // Scale down resolution on mobile and high DPI to improve performance
+      // Mobile: 0.5x scale (50% resolution)
+      // Desktop with high DPI: limit to 1.5x max
+      const scale = isMobile 
+        ? Math.min(0.5, 1 / dpr) 
+        : Math.min(1, 1.5 / dpr);
+      
+      // Set internal canvas resolution (lower for performance)
       renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
+      
+      // Set CSS display size to fill container (visual size)
+      gl.canvas.style.width = `${ctn.offsetWidth}px`;
+      gl.canvas.style.height = `${ctn.offsetHeight}px`;
+      
       if (program) {
         program.uniforms.uResolution.value = new Color(
           gl.canvas.width,
