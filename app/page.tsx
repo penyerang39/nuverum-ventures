@@ -6,6 +6,7 @@ import FAQItem from "./components/FAQItem";
 import type { Metadata } from 'next';
 import Iridescence from "@/components/Iridescence";
 import RotatingText from "@/components/RotatingText";
+import PartnersStats from "./components/PartnersStats";
 
 export const metadata: Metadata = {
   title: 'Nuverum Ventures - Expert Fundraising Consultation for Startups',
@@ -191,6 +192,104 @@ export default function Home() {
         </div>
       </section>
 
+            {/* Partners */}
+            <section 
+        id="partners" 
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+        aria-labelledby="partners-heading"
+        data-animate="section"
+      >
+        <div className="container">
+          <div className="text-start mb-12">
+            <p id="partners-heading" className="eyebrow mb-3">Our Partners</p>
+            <h2 className="heading-lg">Our Professional Network</h2>
+          </div>
+          
+          <PartnersStats />
+
+          <div className="grid gap-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4" data-animate="cards" data-stagger="150">
+                  <div className="card text-start">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
+                <Image
+                  src="/partners/overkill.svg"
+                  alt="Overkill Capital logo"
+                  width={120}
+                  height={30}
+                  className="h-16 w-auto object-contain"
+                  data-noindex
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Overkill Capital</h4>
+                <p className="text-sm text-muted">Riga, Latvia</p>
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
+                  A dynamic venture capital firm with multiple partners, specializing in early-stage investments across the Baltic region. Known for their hands-on approach and deep understanding of emerging markets.
+                </p>
+              </div>
+            </div>
+
+                  <div className="card text-start">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-start justify-start mb-4">
+                <Image
+                  src="/partners/cherry-cropped.svg"
+                  alt="Cherry VC logo"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto object-contain"
+                  data-noindex
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Cherry VC</h4>
+                <p className="text-sm text-muted">Amsterdam, Netherlands</p>
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
+                  A focused venture capital partner based in Amsterdam, bringing European expertise to global opportunities. Their strategic approach combines local market knowledge with international investment experience.
+                </p>
+              </div>
+            </div>
+
+                  <div className="card text-start">
+              <div className="w-full h-20 py-5 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Image
+                  src="/partners/pointNine.png"
+                  alt="Point Nine Capital logo"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto object-contain"
+                  data-noindex
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Point Nine Capital</h4>
+                <p className="text-sm text-muted">Berlin, Germany</p>
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
+                  A leading European venture capital firm with a single dedicated partner, focusing on B2B SaaS and marketplace investments. Renowned for their technical expertise and founder-friendly approach.
+                </p>
+              </div>
+            </div>
+                  <div className="card text-start">
+              <div className="w-full h-20 p-0 bg-primary/10 rounded-lg flex items-start justify-start mt-4">
+                <Image
+                  src="/partners/bCombinator.png"
+                  alt="B Combinator logo"
+                  width={200}
+                  height={20}
+                  className="h-16 w-auto object-contain"
+                  data-noindex
+                />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">B Combinator</h4>
+                <p className="text-sm text-muted">Barcelona, Spain</p>
+                <p className="text-sm text-muted leading-relaxed" data-nosnippet>
+                        B Combinator is a Barcelona-based venture capital fund investing in transformative technologies and innovative business models, leveraging a global network to unlock exceptional growth opportunities for founders.
+                      </p>
+                    </div>
+                  </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Us - Meet the Team */}
       <section 
         id="about" 
@@ -305,7 +404,7 @@ export default function Home() {
                   <p className="text-sm text-muted"><strong>Timeline:</strong> 7-10 business days</p>
                 </div>
               </div>
-              <ContactButton variant="muted" packageName="Pitch Material Evaluation & Redesign" />
+              <ContactButton packageName="Pitch Material Evaluation & Redesign" />
             </div>
 
             {/* Package 2 */}
@@ -396,7 +495,7 @@ export default function Home() {
                   <p className="text-sm text-muted"><strong>Timeline:</strong> 14-21 business days</p>
                 </div>
               </div>
-              <ContactButton variant="muted" packageName="Comprehensive Fundraising Prep" />
+              <ContactButton packageName="Comprehensive Fundraising Prep" />
             </div>
           </div>
         </div>
