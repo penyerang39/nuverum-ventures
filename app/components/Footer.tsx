@@ -3,6 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
+import { sectionLinks, pageLinks } from '../lib/navigation';
+
+const footerLinks = [
+  ...sectionLinks.map(l => ({ href: l.href, label: l.name })),
+  ...pageLinks.map(l => ({ href: l.href, label: l.name })),
+];
 
 export default function Footer() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -211,20 +217,13 @@ export default function Footer() {
             userSelect: 'none',
           }}
         />
-        <div className="container grid grid-cols-2 md:grid-cols-1 md:flex md:flex-row md:justify-between md:items-end gap-4" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="container grid grid-cols-2 items-end gap-4" style={{ position: 'relative', zIndex: 1 }}>
           <div className="flex flex-col gap-2">
-            <Link
-              href="/privacy-policy"
-              className="text-white text-sm"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms-of-service"
-              className="text-white text-sm"
-            >
-              Terms of Service
-            </Link>
+            {footerLinks.map(({ href, label }) => (
+              <Link key={href} href={href} className="text-white text-sm">
+                {label}
+              </Link>
+            ))}
           </div>
           <div className="flex flex-col items-end gap-2">
             <p className="text-white/70 text-sm text-nowrap">© {new Date().getFullYear()} Nuverum Ventures</p>

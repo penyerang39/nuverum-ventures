@@ -8,13 +8,9 @@ import ContactModal from './components/ContactModal'
 import AnimatedArrowIcon from './components/AnimatedArrowIcon'
 import { useLoadingState } from './hooks/useLoadingState'
 import Link from 'next/link'
+import { sectionLinks } from './lib/navigation'
 
-const navigation = [
-  { name: 'Services', href: '#packages', current: false },
-  { name: 'Our Approach', href: '#how-we-work', current: false },
-  { name: 'About', href: '#about', current: false },
-  { name: 'FAQ', href: '#faq', current: false },
-]
+const navigation = sectionLinks.map(link => ({ ...link, current: false }))
 
 function classNames(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ')
