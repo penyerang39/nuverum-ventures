@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MagnifyingGlassIcon, CheckCircleIcon, UserGroupIcon, ClipboardDocumentCheckIcon, ChartBarSquareIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, CheckCircleIcon, UserGroupIcon, ClipboardDocumentCheckIcon, ChartBarSquareIcon, RocketLaunchIcon, BuildingOfficeIcon, ShieldCheckIcon, ScaleIcon } from "@heroicons/react/24/outline";
 import HeroDiscoverMore from "./components/HeroDiscoverMore";
 import ContactButton from "./components/ContactButton";
 import FAQItem from "./components/FAQItem";
@@ -9,10 +9,12 @@ import RotatingText from "@/components/RotatingText";
 import PartnersStats from "./components/PartnersStats";
 
 export const metadata: Metadata = {
-  title: 'Nuverum Ventures - Expert Fundraising Consultation for Startups',
+  title: 'Nuverum Ventures - Expert VC Relations & Consultation for Startups',
   description: 'We help founders prepare to raise capital with strategic guidance, pitch refinement, and investor preparation. Flat-fee fundraising consultation services.',
   keywords: [
     'fundraising consultation',
+    'VC relations',
+    'finders firm',
     'pitch deck redesign',
     'startup fundraising',
     'investor preparation',
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     'capital raising'
   ],
   openGraph: {
-    title: 'Nuverum Ventures - Expert Fundraising Consultation for Startups',
+    title: 'Nuverum Ventures - Expert VC Relations & Consultation for Startups',
     description: 'We help founders prepare to raise capital with strategic guidance, pitch refinement, and investor preparation. Flat-fee fundraising consultation services.',
     type: 'website',
     url: 'https://nuverum.com',
@@ -48,7 +50,7 @@ export default function Home() {
         <div className="hero-inner max-md:mb-[20vh] container mx-0 px-0 text-center">
           <div className="font-light heading-xl mb-6" data-animate="hero-text">
             <h1 className="flex flex-wrap items-center justify-center gap-2">Expert <RotatingText
-              texts={['Fundraising', 'Pre-Seed', 'Series A', 'Scaling']}
+              texts={['Fundraising', 'VC Relations', 'Pre-Seed', 'Compliance','Series A', 'Scaling']}
               mainClassName="px-2 sm:px-2 md:px-3 mx-3 mx-3 bg-black text-white overflow-hidden py-0.5 sm:py-1 md:py-3 rounded-lg flex-shrink-0 whitespace-nowrap"
               staggerFrom="last"
               initial={{ y: "100%" }}
@@ -68,15 +70,16 @@ export default function Home() {
       </section>
 
       {/* What We Do */}
-      <section 
-        id="what-we-do" 
-        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+      <section
+        id="what-we-do"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent"
         aria-labelledby="what-we-do-heading"
-        data-animate="section"
       >
         <div className="container">
-          <p id="what-we-do-heading" className="eyebrow mb-3">What We Do</p>
-          <h2 className="heading-lg mb-6">We Help Founders Prepare for Fundraising</h2>
+          <div data-animate="heading">
+            <p id="what-we-do-heading" className="eyebrow mb-3">What We Do</p>
+            <h2 className="heading-lg mb-6">We Help Founders Prepare for Fundraising</h2>
+          </div>
           <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
             <div className="lg:max-w-[380px] lg:flex-shrink-0 mb-6 lg:mb-0 space-y-4">
               <p className="text-muted">
@@ -140,14 +143,13 @@ export default function Home() {
       </section>
 
       {/* How We Work */}
-      <section 
-        id="how-we-work" 
-        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+      <section
+        id="how-we-work"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent"
         aria-labelledby="how-we-work-heading"
-        data-animate="section"
       >
         <div className="container">
-          <div className="text-start mb-12">
+          <div className="text-start mb-12" data-animate="heading">
             <p id="how-we-work-heading" className="eyebrow mb-3">Our Approach</p>
             <h2 className="heading-lg">How We Work</h2>
           </div>
@@ -193,14 +195,13 @@ export default function Home() {
       </section>
 
             {/* Partners */}
-            <section 
-        id="partners" 
-        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+            <section
+        id="partners"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent"
         aria-labelledby="partners-heading"
-        data-animate="section"
       >
         <div className="container">
-          <div className="text-start mb-12">
+          <div className="text-start mb-12" data-animate="heading">
             <p id="partners-heading" className="eyebrow mb-3">Our Partners</p>
             <h2 className="heading-lg">Our Professional Network</h2>
           </div>
@@ -290,15 +291,97 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Us - Meet the Team */}
-      <section 
-        id="about" 
-        className="section bg-background" 
-        aria-labelledby="about-heading"
-        data-animate="section"
+      {/* Compliance & Registration */}
+      <section
+        id="compliance"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent"
+        aria-labelledby="compliance-heading"
       >
         <div className="container">
-          <div className="text-start mb-12">
+          <div data-animate="heading">
+            <p id="compliance-heading" className="eyebrow mb-3">Compliance &amp; Registration</p>
+            <h2 className="heading-lg mb-6">Get Compliance-Ready from Day One</h2>
+          </div>
+          <div className="flex flex-col lg:flex-row lg:gap-8 lg:items-start">
+            <div className="lg:max-w-[380px] lg:flex-shrink-0 mb-6 lg:mb-0 space-y-4">
+              <p className="text-muted" data-nosnippet>
+                Raising private capital comes with significant legal obligations. Pre-seed and seed-stage startups often lack the internal expertise to navigate SEC exemptions, state blue sky laws, and investor verification requirements — leaving them exposed to costly compliance failures before their first close.
+              </p>
+              <p className="text-muted" data-nosnippet>
+                Through our partnership with Finalis, founders gain direct access to a licensed FINRA broker-dealer infrastructure. This means your Reg D offering can be structured, filed, and managed with the same compliance backbone institutional sponsors rely on — without the overhead of building it yourself.
+              </p>
+              <div className="flex items-center justify-center gap-3 py-3 px-6 rounded-full border border-[--border] bg-[--surface]">
+                <span className="text-xs font-medium tracking-wider uppercase text-muted whitespace-nowrap">In partnership with</span>
+                <Image
+                  src='/partners/finalis.svg'
+                  alt='Finalis'
+                  width={143}
+                  height={24}
+                  className='h-5 w-auto'
+                />
+              </div>
+            </div>
+            <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:flex-1" data-animate="cards" data-stagger="200">
+              <div className="card">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="card-icon-inline" aria-hidden>
+                    <ClipboardDocumentCheckIcon className="size-full" aria-hidden />
+                  </div>
+                  <div className="card-title">SEC Rule 506(b) Filings</div>
+                </div>
+                <p className="card-body">
+                  Prepare and file Form D with the SEC for Reg D private placements — covering up to 35 non-accredited and unlimited accredited investors.
+                </p>
+              </div>
+
+              <div className="card">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="card-icon-inline" aria-hidden>
+                    <BuildingOfficeIcon className="size-full" aria-hidden />
+                  </div>
+                  <div className="card-title">Business Formation</div>
+                </div>
+                <p className="card-body">
+                  Delaware C-Corp and LLC formation, registered agent setup, EIN acquisition, and cap table structuring for fundraising readiness.
+                </p>
+              </div>
+
+              <div className="card">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="card-icon-inline" aria-hidden>
+                    <ShieldCheckIcon className="size-full" aria-hidden />
+                  </div>
+                  <div className="card-title">AML &amp; Investor Verification</div>
+                </div>
+                <p className="card-body">
+                  Anti-money laundering procedures, accredited investor verification (income/net worth), and KYC compliance for exempt offerings.
+                </p>
+              </div>
+
+              <div className="card">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="card-icon-inline" aria-hidden>
+                    <ScaleIcon className="size-full" aria-hidden />
+                  </div>
+                  <div className="card-title">Blue Sky &amp; FINRA Compliance</div>
+                </div>
+                <p className="card-body">
+                  State-level blue sky law filings, notice filings in each investor's state, and ongoing broker-dealer regulatory compliance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us - Meet the Team */}
+      <section
+        id="about"
+        className="section bg-background"
+        aria-labelledby="about-heading"
+      >
+        <div className="container">
+          <div className="text-start mb-12" data-animate="heading">
             <p id="about-heading" className="eyebrow mb-3">About Us</p>
             <h2 className="heading-lg">Meet the Team</h2>
           </div>
@@ -318,7 +401,7 @@ export default function Home() {
               <div className="text-start">
                 <h3 className="text-2xl font-semibold mb-3 text-center md:text-start">Daniel</h3>
                 <p className="text-muted text-start leading-relaxed">
-                  Daniel is a growth-focused entrepreneur who launched his first business at age 14. With experience founding agencies in online course building, email marketing, and AI automation, he now helps startups prepare for fundraising through strategic consultation and pitch refinement.
+                  Daniel is a growth-focused entrepreneur who launched his first business at age 14. With experience founding agencies in online course building, email marketing, and AI automation, Daniel now helps startups prepare for fundraising through strategic consultation and pitch refinement.
                 </p>
               </div>
             </div>
@@ -354,22 +437,21 @@ export default function Home() {
         </div>
       </section>
             {/* Our Packages */}
-            <section 
-        id="packages" 
-        className="section bg-background" 
+            <section
+        id="packages"
+        className="section bg-background"
         aria-labelledby="packages-heading"
-        data-animate="section"
       >
         <div className="container">
-          <div className="text-start mb-12">
+          <div className="text-start mb-12" data-animate="heading">
             <p id="packages-heading" className="eyebrow mb-3">Our Packages</p>
             <h2 className="heading-lg">Choose Your Package</h2>
           </div>
           
-          <div className="grid gap-8 grid-cols-1 md:grid-cols-3" data-animate="cards" data-stagger="150">
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_1fr_auto]" data-animate="cards" data-stagger="150">
             {/* Package 1 */}
-            <div className="card flex flex-col">
-              <div className="space-y-4 pb-4 border-b border-white/10 h-32">
+            <div className="card flex flex-col md:grid md:grid-rows-subgrid md:row-span-3 md:gap-y-0">
+              <div className="space-y-4 pb-4 border-b border-white/10">
                 <div>
                   <h3 className="text-2xl font-semibold mb-2">Pitch Material Evaluation & Redesign</h3>
                   <p className="text-3xl font-bold">$1,000</p>
@@ -408,8 +490,8 @@ export default function Home() {
             </div>
 
             {/* Package 2 */}
-            <div className="card flex flex-col">
-              <div className="space-y-4 pb-4 border-b border-white/10 h-32">
+            <div className="card flex flex-col md:grid md:grid-rows-subgrid md:row-span-3 md:gap-y-0">
+              <div className="space-y-4 pb-4 border-b border-white/10">
                 <div>
                   <h3 className="text-2xl font-semibold mb-2">Pitch + Fundraising Strategy</h3>
                   <p className="text-3xl font-bold">$2,500</p>
@@ -452,8 +534,8 @@ export default function Home() {
             </div>
 
             {/* Package 3 */}
-            <div className="card flex flex-col">
-              <div className="space-y-4 pb-4 border-b border-white/10 h-32">
+            <div className="card flex flex-col md:grid md:grid-rows-subgrid md:row-span-3 md:gap-y-0">
+              <div className="space-y-4 pb-4 border-b border-white/10">
                 <div>
                   <h3 className="text-2xl font-semibold mb-2">Comprehensive Fundraising Prep</h3>
                   <p className="text-3xl font-bold">$3,000 - $5,000</p>
@@ -502,14 +584,13 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section 
-        id="faq" 
-        className="section bg-gradient-to-b from-white/[0.02] to-transparent" 
+      <section
+        id="faq"
+        className="section bg-gradient-to-b from-white/[0.02] to-transparent"
         aria-labelledby="faq-heading"
-        data-animate="section"
       >
         <div className="container">
-          <div className="text-start items-center mb-12">
+          <div className="text-start items-center mb-12" data-animate="heading">
             <p id="faq-heading" className="eyebrow mb-3">FAQ</p>
             <h2 className="heading-lg">Frequently Asked Questions</h2>
           </div>
@@ -523,7 +604,7 @@ export default function Home() {
               <FAQItem 
                 index={1}
                 question="Do you provide investor introductions?"
-                answer="Investor introductions are an optional courtesy service included in our Comprehensive Fundraising Prep package. However, our primary value is in the consultation, research, and strategy we provide—introductions are supplementary."
+                answer="Investor introductions and networking activities are an optional courtesy service included in our Comprehensive Fundraising Prep package. However, our primary value is in the consultation, research, and strategy we provide—introductions are supplementary."
               />
               <FAQItem 
                 index={2}
@@ -533,7 +614,7 @@ export default function Home() {
               <FAQItem 
                 index={3}
                 question="Do you work on a success-fee or equity basis?"
-                answer="We only work on a flat-fee consulting basis. We do not accept success fees, equity, or outcome-based compensation arrangements."
+                answer="We work on a success-fee first basis with a 3-5% equity commission based on project size and complexity."
               />
               <FAQItem 
                 index={4}
@@ -541,7 +622,7 @@ export default function Home() {
                 answer="We recommend scheduling a complimentary 15-minute consultation call to discuss your specific situation, goals, and requirements. This allows us to recommend the package that best aligns with your fundraising stage and objectives."
               />
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" className="col w-full h-auto" aria-label="Nuverum Logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" className="col w-full h-auto max-md:hidden" aria-label="Nuverum Logo">
               <defs>
                 <style>{`.nuverum-black { fill: #5b646e; }`}</style>
               </defs>

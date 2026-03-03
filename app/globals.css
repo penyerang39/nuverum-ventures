@@ -131,16 +131,26 @@ main {
   border-bottom: none;
 }
 
-/* Grid cards with conditional borders - only show borders between adjacent cards */
+/* Grid cards with conditional borders */
 .grid .card {
   border-right: none;
   border-left: none;
 }
 
-/* Add right border to cards that have a sibling to their right */
+/* Mobile: bottom border between stacked cards */
 .grid .card:not(:last-child) {
-  border-right: 1px solid var(--border);
-  margin-right: -1px; /* Pull the border into the gap */
+  border-bottom: 1px solid var(--border);
+  margin-bottom: -1px;
+}
+
+/* md+: switch to right border for column dividers */
+@media (min-width: 768px) {
+  .grid .card:not(:last-child) {
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    margin-bottom: 0;
+    margin-right: -1px;
+  }
 }
 
 .card-no-padding {
@@ -152,15 +162,23 @@ main {
   border-bottom: none;
 }
 
-/* Grid cards with conditional borders - only show borders between adjacent cards */
+/* Grid cards with conditional borders */
 .grid .card-no-padding {
   border-right: none;
   border-left: none;
 }
 
-/* Add right border to cards that have a sibling to their right */
+/* Mobile: bottom border between stacked cards */
 .grid .card-no-padding:not(:last-child) {
-  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* md+: switch to right border for column dividers */
+@media (min-width: 768px) {
+  .grid .card-no-padding:not(:last-child) {
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+  }
 }
 
 .card-title {
@@ -571,5 +589,35 @@ main {
   [class*="rounded"][class*="border"] {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+  }
+}
+
+/* HEADING SCROLL-DRIVEN ANIMATION (scroll-linked reveal) */
+@keyframes heading-scroll-in {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Base: IntersectionObserver fallback — all browsers including Safari */
+.js-loaded [data-animate="heading"]:not(.animate-visible) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js-loaded [data-animate="heading"].animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhancement: scroll-driven scrub for Chrome 115+ / Firefox 110+ */
+@supports (animation-timeline: view()) {
+  [data-animate="heading"] {
+    animation-name: heading-scroll-in;
+    animation-duration: 1ms; /* nominal; scroll controls actual timing */
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+    animation-timeline: view();
+    animation-range: cover 0% cover 35%;
+    transition: none;
   }
 }

@@ -42,3 +42,7 @@ next-env.d.ts
 
 # Branding Guide
 /guide
+
+# Claude
+/CLAUDE.md 
+.claude 

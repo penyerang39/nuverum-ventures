@@ -27,9 +27,11 @@ export const metadata: Metadata = {
     default: "Nuverum Ventures",
     template: "%s | Nuverum Ventures"
   },
-  description: "Strategic venture capital introductory firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.",
+  description: "Strategic venture capital relations & consultancy firm for innovative companies.  We invite forward-thinking entrepreneurs into our network of venture capitalists to fuel growth and innovation.",
   keywords: [
     "venture capital",
+    "finders firm",
+    "VC relations",
     "investment",
     "startup funding",
     "strategic investment",
